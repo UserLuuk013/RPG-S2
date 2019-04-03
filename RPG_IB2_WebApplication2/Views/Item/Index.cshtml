@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Item Page";
+}
+
+<p class="font-weight-bold">Item Information</p>
+<br />
+<br />
+@foreach (var item in Model.Items)
+{
+<div class="bg-info">
+    <div>
+        <div>ID: @item.Id</div>
+    </div>
+    <div>
+        <div>Naam: @item.Naam</div>
+    </div>
+    <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.Id">Item details</a></div>
+    <div><a asp-controller="Item" asp-action="UpdateItem" asp-route-id="@item.Id">Edit</a></div>
+    <div><a asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a></div>
+    @if (User.IsInRole("Admin"))
+    {
+
+    }
+</div>
+    <br />
+}
+<br />
+<br />
+<div>
+    <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
+</div>
+@if (User.IsInRole("Admin"))
+{
+    
+}
