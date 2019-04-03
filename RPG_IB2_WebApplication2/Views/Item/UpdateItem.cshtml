@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Item";
+}
+<p class="font-weight-bold">Update item</p>
+<br />
+<br />
+@model ItemDetailViewModel
+<form asp-controller="Item" asp-action="UpdateItem" method="post">
+    Naam:  <input asp-for="Naam" /> <br />
+    <input asp-for="Id" type="hidden" />
+    <button type="submit">Update</button>
+</form>
+

@@ -34,9 +34,34 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             return Id;
         }
+        public bool UpdateItem(Item item)
+        {
+            try
+            {
+                SqlCommand myCommand = SetCommandProcedure("UpdateItem");
+                myCommand.Parameters.AddWithValue("@IDItem", item.ID);
+                myCommand.Parameters.AddWithValue("@Naam", item.Naam);
+                myCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception x)
+            {
+                return false;
+            }
+        }
         public bool VerwijderItem(Item item)
         {
-            return false;
+            try
+            {
+                SqlCommand myCommand = SetCommandProcedure("DeleteItem");
+                myCommand.Parameters.AddWithValue("@IDItem", item.ID);
+                myCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception x)
+            {
+                return false;
+            }
         }
         public bool UpgradeWapens(int wapenDamage)
         {
@@ -46,7 +71,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                 {
                     SqlCommand myCommand = SetCommandProcedure("UpgradeWapens");
                     myCommand.Parameters.AddWithValue("@WapenDamage", wapenDamage);
-                    myCommand.Parameters.AddWithValue("IDItem", i);
+                    myCommand.Parameters.AddWithValue("@IDItem", i);
                     myCommand.ExecuteNonQuery();
                 }
                 return true;
@@ -56,6 +81,47 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                 return false;
             }
             
+        }
+        public Item GetItemById(int id)
+        {
+            SqlCommand myCommand = SetCommandProcedure("GetItemById");
+            myCommand.Parameters.AddWithValue("@IDItem", id);
+            Item item = new Item();
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
+                    item.Naam = Convert.ToString(myReader["Naam"]);
+                    item.HP = Convert.ToInt32(myReader["HP"]);
+                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    item.Type = Convert.ToString(myReader["Type"]);
+                }
+            }
+            return item;
+        }
+        public List<Item> GetAllItems()
+        {
+            List<Item> items = new List<Item>();
+
+            SqlCommand myCommand = SetCommandProcedure("GetAllItems");
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    Item item = new Item();
+
+                    item.Naam = Convert.ToString(myReader["Naam"]);
+                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    item.HP = Convert.ToInt32(myReader["HP"]);
+                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
+                    item.Type = Convert.ToString(myReader["Type"]);
+
+
+                    items.Add(item);
+                }
+            }
+            return items;
         }
     }
 }

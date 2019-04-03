@@ -10,7 +10,10 @@ namespace RPG_IB2.Datalayer.Interfaces
     interface IItemContext
     {
         int VoegItemToe(Item item);
+        bool UpdateItem(Item item);
         bool VerwijderItem(Item item);
         bool UpgradeWapens(int wapenDamage);
+        Item GetItemById(int id);
+        List<Item> GetAllItems();
     }
 }

@@ -28,7 +28,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult Index()
         {
-            List<Item> items = shoprepo.GetShopItems();
+            List<Item> items = itemrepo.GetAllItems();
             ItemViewModel vm = new ItemViewModel()
             {
                 Items = new List<ItemDetailViewModel>()
@@ -39,6 +39,11 @@ namespace RPG_IB2_WebApplication2.Controllers
                 vm.Items.Add(cvt.ViewModelFromItem(i));
             }
 
+            return View(vm);
+        }
+        public IActionResult ItemDetail(int id)
+        {
+            ItemDetailViewModel vm = cvt.ViewModelFromItem(itemrepo.GetItemById(id));
             return View(vm);
         }
 
@@ -54,6 +59,26 @@ namespace RPG_IB2_WebApplication2.Controllers
             Item i = cvt.ViewModelToItem(vm);
             int id = itemrepo.VoegItemToe(i);
             return RedirectToAction("ItemDetail", new { id = id });
+        }
+        [HttpGet]
+        public IActionResult UpdateItem(int id)
+        {
+            Item i = itemrepo.GetItemById(id);
+            ItemDetailViewModel vm = cvt.ViewModelFromItem(i);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateItem(ItemDetailViewModel vm)
+        {
+            Item i = cvt.ViewModelToItem(vm);
+            itemrepo.UpdateItem(i);
+            return RedirectToAction("ItemDetail", new { id = i.ID });
+        }
+        public IActionResult DeleteItem(Item item)
+        {
+            itemrepo.VerwijderItem(item);
+            return RedirectToAction("Index");
         }
     }
 }

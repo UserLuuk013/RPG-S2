@@ -19,6 +19,10 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VoegItemToe(item);
         }
+        public bool UpdateItem(Item item)
+        {
+            return context.UpdateItem(item);
+        }
         public bool VerwijderItem(Item item)
         {
             return context.VerwijderItem(item);
@@ -26,6 +30,14 @@ namespace RPG_IB2.Datalayer.Repositories
         public bool UpgradeWapens(int wapenDamage)
         {
             return context.UpgradeWapens(wapenDamage);
+        }
+        public Item GetItemById(int id)
+        {
+            return context.GetItemById(id);
+        }
+        public List<Item> GetAllItems()
+        {
+            return context.GetAllItems();
         }
     }
 }
