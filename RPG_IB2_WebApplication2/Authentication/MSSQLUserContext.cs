@@ -113,14 +113,14 @@ namespace RPG_IB2_WebApplication2.Authentication
                 using (var connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("SELECT ID-Account, Gebruikersnaam, Email FROM [Account] WHERE ID-Account=@ID-Account", connection);
+                    SqlCommand sqlCommand = new SqlCommand("SELECT IdAccount, Gebruikersnaam, Email FROM [Account] WHERE IdAccount=@id", connection);
                     sqlCommand.Parameters.AddWithValue("@id", userId);
                     using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                     {
                         User user = default(User);
                         if (sqlDataReader.Read())
                         {
-                            user = new User(Convert.ToInt32(sqlDataReader["ID-Account"].ToString()), sqlDataReader["Gebruikersnaam"].ToString(), sqlDataReader["Email"].ToString());
+                            user = new User(Convert.ToInt32(sqlDataReader["IdAccount"].ToString()), sqlDataReader["Gebruikersnaam"].ToString(), sqlDataReader["Email"].ToString());
 
                         }
                         return Task.FromResult(user);
