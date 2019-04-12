@@ -15,11 +15,10 @@
         <div>Naam: @item.Naam</div>
     </div>
     <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.Id">Item details</a></div>
-    <div><a asp-controller="Item" asp-action="UpdateItem" asp-route-id="@item.Id">Edit</a></div>
-    <div><a asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a></div>
     @if (User.IsInRole("Admin"))
     {
-
+        <div><a asp-controller="Item" asp-action="UpdateItem" asp-route-id="@item.Id">Edit</a></div>
+        <div><a asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a></div>
     }
 </div>
     <br />

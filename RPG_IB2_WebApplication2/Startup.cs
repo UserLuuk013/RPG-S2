@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RPG_IB2.Models;
+using RPG_IB2_WebApplication2.Authentication;
+using RPG_IB2_WebApplication2.Models;
 
 namespace RPG_IB2_WebApplication2
 {
@@ -24,13 +28,18 @@ namespace RPG_IB2_WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            */
 
+            services.AddTransient<IUserStore<User>, MSSQLUserContext>();
+            services.AddTransient<IRoleStore<Role>, MSSQLRoleContext>();
+            services.AddIdentity<User, Role>().AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -51,6 +60,8 @@ namespace RPG_IB2_WebApplication2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
