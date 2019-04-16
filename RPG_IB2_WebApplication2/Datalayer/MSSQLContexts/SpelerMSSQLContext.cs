@@ -23,28 +23,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         {
             return false;
         }
-        public List<Item> GetPlayerItems()
-        {
-            List<Item> items = new List<Item>();
-
-            SqlCommand myCommand = SetCommandProcedure("GetPlayerItems");
-            using (SqlDataReader myReader = ExecuteReader(myCommand))
-            {
-                while (myReader.Read())
-                {
-                    Item item = new Item();
-
-                    item.Naam = Convert.ToString(myReader["Naam"]);
-                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    item.HP = Convert.ToInt32(myReader["HP"]);
-                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
-                    item.Type = Convert.ToString(myReader["Type"]);
-
-                    items.Add(item);
-                }
-            }
-            return items;
-        }
         public Speler GetSpeler(int spelerId)
         {
             SqlCommand myCommand = SetCommandProcedure("GetSpeler");
@@ -54,6 +32,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
+                    speler.ID = Convert.ToInt32(myReader["ID-Account"]);
                     speler.Naam = Convert.ToString(myReader["Naam"]);
                     speler.HP = Convert.ToInt32(myReader["HP"]);
                     speler.XP = Convert.ToInt32(myReader["XP"]);

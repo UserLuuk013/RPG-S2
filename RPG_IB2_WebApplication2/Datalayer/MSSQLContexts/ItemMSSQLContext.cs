@@ -123,5 +123,51 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             return items;
         }
+        public List<Item> GetPlayerItemsById(int spelerId)
+        {
+            List<Item> items = new List<Item>();
+
+            SqlCommand myCommand = SetCommandProcedure("GetPlayerItemsById");
+            myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    Item item = new Item();
+
+                    item.Naam = Convert.ToString(myReader["Naam"]);
+                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    item.HP = Convert.ToInt32(myReader["HP"]);
+                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
+                    item.Type = Convert.ToString(myReader["Type"]);
+
+                    items.Add(item);
+                }
+            }
+            return items;
+        }
+        public List<Item> GetCPUItemsById(int cpuId)
+        {
+            List<Item> items = new List<Item>();
+
+            SqlCommand myCommand = SetCommandProcedure("GetCPUItemsById");
+            myCommand.Parameters.AddWithValue("@IDCPU", cpuId);
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    Item item = new Item();
+
+                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
+                    item.Naam = Convert.ToString(myReader["Naam"]);
+                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    item.HP = Convert.ToInt32(myReader["HP"]);
+                    item.Type = Convert.ToString(myReader["Type"]);
+
+                    items.Add(item);
+                }
+            }
+            return items;
+        }
     }
 }

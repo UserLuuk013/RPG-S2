@@ -39,5 +39,13 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.GetAllItems();
         }
+        public List<Item> GetPlayerItemsById(int spelerId)
+        {
+            return context.GetPlayerItemsById(spelerId);
+        }
+        public List<Item> GetCPUItemsById(int cpuId)
+        {
+            return context.GetCPUItemsById(cpuId);
+        }
     }
 }

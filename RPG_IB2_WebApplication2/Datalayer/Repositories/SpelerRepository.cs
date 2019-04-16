@@ -23,10 +23,6 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VerwijderSpeler(speler);
         }
-        public List<Item> GetPlayerItems()
-        {
-            return context.GetPlayerItems();
-        }
         public Speler GetSpeler(int spelerId)
         {
             return context.GetSpeler(spelerId);

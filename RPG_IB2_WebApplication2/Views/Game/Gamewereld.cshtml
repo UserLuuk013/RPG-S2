@@ -1,6 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Gamewereld";
 }
+<p class="font-weight-bold" style="font-size:50px">Gamewereld</p>
+<br />
+<br />
+<p style="font-size:20px">
+    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
+    @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
+    XP: @Model.Speler.XP &nbsp; &nbsp; &nbsp;
+    Geld: @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
+    Instellingen &nbsp; &nbsp; &nbsp;
+    Spelbeschrijving &nbsp; &nbsp; &nbsp;
+    Karakter &nbsp; &nbsp; &nbsp;
+    Shop &nbsp; &nbsp; &nbsp;
+</p>
 
-<p class="font-weight-bold">Gamewereld</p>
+<br />
 <img src="~/images/Map.jpg" alt="Gamewereld Map1" />
+<br />
+@foreach (var item in Model.CPUs)
+{
+    <div class="bg-info">
+        <div>
+            <p>Naam: @item.Naam</p>
+            <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" />
+        </div>
+        <div><a asp-controller="Game" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
+    </div>
+}

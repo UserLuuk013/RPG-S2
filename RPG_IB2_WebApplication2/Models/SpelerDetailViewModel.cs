@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using RPG_IB2.Models;
-using RPG_IB2_WebApplication2.Models;
 
-namespace RPG_IB2
+namespace RPG_IB2_WebApplication2.Models
 {
-    public class Speler
+    public class SpelerDetailViewModel
     {
         public int ID { get; set; }
         public string Naam { get; set; }
         public int HP { get; set; }
         public int XP { get; set; }
         public int Geld { get; set; }
-        public Item Wapen { get; set; }
-        public Item Potion { get; set; }
-        public Personage Personage { get; set; }
+        public ItemDetailViewModel Wapen { get; set; }
+        public ItemDetailViewModel Potion { get; set; }
+        public PersonageDetailViewModel Personage { get; set; }
     }
 }

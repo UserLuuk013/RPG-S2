@@ -50,7 +50,19 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
         }
         public Personage GetPersonageById(int id)
         {
+            SqlCommand myCommand = SetCommandProcedure("GetPersonageById");
+            myCommand.Parameters.AddWithValue("@IDPersonage", id);
             Personage personage = new Personage();
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+                    personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.Foto = Convert.ToString(myReader["Foto"]);
+                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+                }
+            }
             return personage;
         }
         public bool SelecteerPersonage(int id)
@@ -67,6 +79,23 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 return false;
             }
+        }
+        public Personage GetPersonageBySpelerId(int spelerId)
+        {
+            SqlCommand myCommand = SetCommandProcedure("GetPersonageBySpelerId");
+            myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
+            Personage personage = new Personage();
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+                    personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.Foto = Convert.ToString(myReader["Foto"]);
+                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+                }
+            }
+            return personage;
         }
     }
 }

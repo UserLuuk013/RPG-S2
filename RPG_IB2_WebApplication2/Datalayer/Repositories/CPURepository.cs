@@ -22,5 +22,13 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VerwijderCPU(cpu);
         }
+        public CPU GetCPUById(int id)
+        {
+            return context.GetCPUById(id);
+        }
+        public List<CPU> GetAllCPUs()
+        {
+            return context.GetAllCPUs();
+        }
     }
 }

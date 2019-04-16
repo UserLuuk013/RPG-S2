@@ -15,5 +15,7 @@ namespace RPG_IB2.Datalayer.Interfaces
         bool UpgradeWapens(int wapenDamage);
         Item GetItemById(int id);
         List<Item> GetAllItems();
+        List<Item> GetPlayerItemsById(int spelerId);
+        List<Item> GetCPUItemsById(int cpuId);
     }
 }

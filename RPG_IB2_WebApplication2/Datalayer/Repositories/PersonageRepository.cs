@@ -38,5 +38,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.SelecteerPersonage(id);
         }
+        public Personage GetPersonageBySpelerId(int spelerId)
+        {
+            return context.GetPersonageBySpelerId(spelerId);
+        }
     }
 }
