@@ -80,5 +80,23 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                 return false;
             }
         }
+        public Karakter GetKarakterById(int idKarakter)
+        {
+            SqlCommand myCommand = SetCommandProcedure("GetKarakterById");
+            myCommand.Parameters.AddWithValue("@IDKarakter", idKarakter);
+            Karakter karakter = new Karakter();
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    karakter.IDKarakter = Convert.ToInt32(myReader["ID-Karakter"]);
+                    karakter.Naam = Convert.ToString(myReader["Naam"]);
+                    karakter.HP = Convert.ToInt32(myReader["HP"]);
+                    karakter.Damage = Convert.ToInt32(myReader["Damage"]);
+                    karakter.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                }
+            }
+            return karakter;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace RPG_IB2.Datalayer
 
         public DataConnection() //Nieuwe connectie wordt aangemaakt a.d.h.v. connectionstring.
         {
-            conn = new SqlConnection("Server = mssql.fhict.local; Database = dbi409381; User Id = dbi409381; Password = Badminton1828");
+            conn = new SqlConnection("Server = mssql.fhict.local; Database = dbi409381; User Id = dbi409381; Password = UserLuuk013");
         }
 
         public SqlConnection OpenConn() //Connectie wordt geopend op het moment dat deze nog gesloten is.

@@ -7,20 +7,20 @@
 <br />
 @foreach (var item in Model.Items)
 {
-<div class="bg-info">
-    <div>
-        <div>ID: @item.Id</div>
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.Id</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.Id">Item details</a></div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div><a asp-controller="Item" asp-action="UpdateItem" asp-route-id="@item.Id">Edit</a></div>
+            <div><a asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a></div>
+        }
     </div>
-    <div>
-        <div>Naam: @item.Naam</div>
-    </div>
-    <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.Id">Item details</a></div>
-    @if (User.IsInRole("Admin"))
-    {
-        <div><a asp-controller="Item" asp-action="UpdateItem" asp-route-id="@item.Id">Edit</a></div>
-        <div><a asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a></div>
-    }
-</div>
     <br />
 }
 <br />
@@ -30,5 +30,6 @@
 </div>
 @if (User.IsInRole("Admin"))
 {
-    
+
 }
+

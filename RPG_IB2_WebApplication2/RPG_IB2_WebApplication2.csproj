@@ -12,7 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Game\Gevechtwereld.cshtml">
+    <Content Update="Views\Game\KarakterUpgrades.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Gevecht\UpdateGevecht.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Gevecht\Gevechtwereld.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Game\Gamewereld.cshtml">
@@ -31,6 +37,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Item\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Game\Shop.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

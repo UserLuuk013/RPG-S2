@@ -1,6 +1,7 @@
 ﻿using RPG_IB2;
 using RPG_IB2.Datalayer.MSSQLContexts;
 using RPG_IB2.Datalayer.Repositories;
+using RPG_IB2.Models;
 using RPG_IB2_WebApplication2.Datalayer.MSSQLContexts;
 using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using System;
@@ -51,6 +52,22 @@ namespace RPG_IB2_WebApplication2.Models
             gevecht.CPU = VulCPU(cpu);
             gevecht.SpelerAanZet = true;
             return gevecht;
+        }
+        public Shop VulShop(List<Item> playeritems, List<Item> shopitems, Speler speler)
+        {
+            Shop shop = new Shop();
+            shop.PlayerItems = playeritems;
+            shop.ShopItems = shopitems;
+            shop.Geld = speler.Geld;
+            return shop;
+        }
+        public KarakterUpgrade VulKarakterUpgrade(Karakter spelerkarakter, List<Karakter> shopkarakters, Speler speler)
+        {
+            KarakterUpgrade karakterupgrade = new KarakterUpgrade();
+            karakterupgrade.XP = speler.XP;
+            karakterupgrade.SpelerKarakter = spelerkarakter;
+            karakterupgrade.ShopKarakters = shopkarakters;
+            return karakterupgrade;
         }
     }
 }

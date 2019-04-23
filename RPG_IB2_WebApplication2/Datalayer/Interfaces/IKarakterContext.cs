@@ -14,5 +14,6 @@ namespace RPG_IB2.Datalayer.Interfaces
         Karakter GetSpelerKarakter(int idSpeler);
         List<Karakter> GetAllKarakters(int idSpeler);
         bool UpgradeKarakter(int idKarakter, int xp, int hp);
+        Karakter GetKarakterById(int idKarakter);
     }
 }

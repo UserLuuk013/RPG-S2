@@ -21,22 +21,36 @@ namespace RPG_IB2_WebApplication2.Controllers
         IPersonageContext personagecontext;
         ISpelerContext spelercontext;
         ICPUContext cpucontext;
+        IShopContext shopcontext;
+        IItemContext itemcontext;
+        IKarakterContext karaktercontext;
         PersonageRepository personagerepo;
         SpelerRepository spelerrepo;
         CPURepository cpurepo;
+        ShopRepository shoprepo;
+        ItemRepository itemrepo;
+        KarakterRepository karakterrepo;
         PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         SpelerViewModelConverter spelercvt = new SpelerViewModelConverter();
         GameViewModelConverter gamecvt = new GameViewModelConverter();
         GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
+        ShopViewModelConverter shopcvt = new ShopViewModelConverter();
+        KarakterUpgradeViewModelConverter karakterupgradecvt = new KarakterUpgradeViewModelConverter();
         EquipDomein equipDomein;
         public GameController()
         {
             personagecontext = new PersonageMSSQLContext();
             spelercontext = new SpelerMSSQLContext();
             cpucontext = new CPUMSSQLContext();
+            shopcontext = new ShopMSSQLContext();
+            itemcontext = new ItemMSSQLContext();
+            karaktercontext = new KarakterMSSQLContext();
             personagerepo = new PersonageRepository(personagecontext);
             spelerrepo = new SpelerRepository(spelercontext);
             cpurepo = new CPURepository(cpucontext);
+            shoprepo = new ShopRepository(shopcontext);
+            itemrepo = new ItemRepository(itemcontext);
+            karakterrepo = new KarakterRepository(karaktercontext);
             equipDomein = new EquipDomein();
         }
         public IActionResult Index()
@@ -69,20 +83,25 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult Gevechtwereld(int id)
         {
-            Speler speler = spelerrepo.GetSpeler(1);
-            CPU cpu = cpurepo.GetCPUById(id);
-            Gevecht gevecht = equipDomein.VulGevecht(speler, cpu);
-            gevecht.SpelerAanZet = true;
-            GevechtDetailViewModel vm = gevechtcvt.ViewModelFromGevecht(gevecht);
-            return View(vm);
+            return RedirectToAction("Gevechtwereld", "Gevecht", id);
         }
         public IActionResult Shop()
         {
-            return View();
+            Speler speler = spelerrepo.GetSpeler(1);
+            List<Item> playeritems = itemrepo.GetPlayerItemsById(speler.ID);
+            List<Item> shopitems = shoprepo.GetShopItems();
+            Shop shop = equipDomein.VulShop(playeritems, shopitems, speler);
+            ShopDetailViewModel vm = shopcvt.ViewModelFromShop(shop);
+            return View(vm);
         }
         public IActionResult KarakterUpgrades()
         {
-            return View();
+            Speler speler = spelerrepo.GetSpeler(1);
+            Karakter spelerkarakter = karakterrepo.GetSpelerKarakter(speler.ID);
+            List<Karakter> shopkarakters = karakterrepo.GetAllKarakters(speler.ID);
+            KarakterUpgrade karakterupgrade = equipDomein.VulKarakterUpgrade(spelerkarakter, shopkarakters, speler);
+            KarakterUpgradeDetailViewModel vm = karakterupgradecvt.ViewModelFromKarakterUpgrade(karakterupgrade);
+            return View(vm);
         }
     }
 }

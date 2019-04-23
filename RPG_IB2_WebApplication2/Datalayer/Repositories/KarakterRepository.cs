@@ -35,5 +35,9 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.UpgradeKarakter(idKarakter, xp, hp);
         }
+        public Karakter GetKarakterById(int idKarakter)
+        {
+            return context.GetKarakterById(idKarakter);
+        }
     }
 }

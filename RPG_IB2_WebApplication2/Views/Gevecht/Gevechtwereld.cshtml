@@ -27,5 +27,9 @@
     <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" />
     @Model.CPU.Naam &nbsp; &nbsp; &nbsp;
     @Model.CPU.HP &nbsp; &nbsp; &nbsp;
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Volgende beurt" class="btn btn-default" asp-action="VolgendeBeurt" asp-controller="Gevecht" />
+    </div>
 </p>
 }

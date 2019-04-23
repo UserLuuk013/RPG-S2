@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+
+<p class="font-weight-bold">Shop</p>
+<br />
+<br />
+<p style="font-size:20px">
+    Speler Items
+    <br />
+    Geld speler: @Model.Geld
+</p>
+@foreach (var item in Model.PlayerItems)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">Item details</a></div>
+        <div><a asp-controller="Shop" asp-action="VerkoopItem" asp-route-id="@item.ID">Verkoop Item</a></div>
+    </div>
+    <br />
+}
+<br />
+<br />
+<p style="font-size:20px">
+    Shop Items
+</p>
+@foreach (var item in Model.ShopItems)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">Item details</a></div>
+        <div><a asp-controller="Shop" asp-action="KoopItem" asp-route-id="@item.ID">Koop Item</a></div>
+    </div>
+    <br />
+}
+<br />
+<br />
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
+    </div>
+}
