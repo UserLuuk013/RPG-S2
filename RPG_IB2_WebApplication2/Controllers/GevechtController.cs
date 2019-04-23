@@ -8,6 +8,8 @@ using RPG_IB2.Datalayer.MSSQLContexts;
 using RPG_IB2.Datalayer.Repositories;
 using RPG_IB2_WebApplication2.Converters;
 using RPG_IB2_WebApplication2.Models;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace RPG_IB2_WebApplication2.Controllers
 {
@@ -57,10 +59,12 @@ namespace RPG_IB2_WebApplication2.Controllers
             if (vm.SpelerAanZet == true)
             {
                 vm.CPU.HP -= vm.Speler.Wapen.HP;
+                HttpContext.Session.SetInt32("HP-CPU", vm.CPU.HP);
             }
             else
             {
                 vm.Speler.HP -= vm.CPU.Wapen.HP;
+                HttpContext.Session.SetInt32("HP-Speler", vm.Speler.HP);
             }
             return RedirectToAction("ControlerenGevecht", "Gevecht");
         }
@@ -73,6 +77,7 @@ namespace RPG_IB2_WebApplication2.Controllers
                 if (rndsuperaanval == 1)
                 {
                     vm.CPU.HP -= vm.Speler.Wapen.HP * 2;
+                    HttpContext.Session.SetInt32("HP-CPU", vm.CPU.HP);
                     superAanval = 1;
                 }
                 else
@@ -85,6 +90,7 @@ namespace RPG_IB2_WebApplication2.Controllers
                 if (rndsuperaanval == 1)
                 {
                     vm.Speler.HP -= vm.CPU.Wapen.HP * 2;
+                    HttpContext.Session.SetInt32("HP-Speler", vm.Speler.HP);
                     superAanval = 1;
                 }
                 else
@@ -99,23 +105,25 @@ namespace RPG_IB2_WebApplication2.Controllers
             if (vm.SpelerAanZet == true && potionSpelerGebruikt == false)
             {
                 vm.Speler.HP += vm.Speler.Potion.HP;
+                HttpContext.Session.SetInt32("HP-Speler", vm.Speler.HP);
                 potionSpelerGebruikt = true;
             }
-            else if (vm.SpelerAanZet == false)
+            else if (vm.SpelerAanZet == false && potionCPUGebruikt == false)
             {
                 vm.CPU.HP += vm.CPU.Potion.HP;
+                HttpContext.Session.SetInt32("HP-Speler", vm.CPU.HP);
                 potionCPUGebruikt = true;
             }
             return RedirectToAction("ControlerenGevecht", "Gevecht");
         }
         public IActionResult ControlerenGevecht()
         {
-            if (vm.Speler.HP <= 0)
+            if (HttpContext.Session.GetInt32("HP-Speler") <= 0)
             {
                 spelerLevend = false;
                 return RedirectToAction("GevechtBeëindigd", "Gevecht");
             }
-            else if (vm.CPU.HP <= 0)
+            else if (HttpContext.Session.GetInt32("HP-CPU") <= 0)
             {
                 cpuLevend = false;
                 return RedirectToAction("GevechtBeëindigd", "Gevecht");
@@ -150,7 +158,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult GevechtKeuzeCPU()
         {
-            if (vm.CPU.HP <= 5 && potionCPUGebruikt == false)
+            if (HttpContext.Session.GetInt32("HP-CPU") <= 5 && potionCPUGebruikt == false)
             {
                 return RedirectToAction("Verdediging", "Gevecht");
             }
@@ -161,7 +169,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult AanvalKeuzeCPU()
         {
-            if (vm.CPU.HP >= 10)
+            if (HttpContext.Session.GetInt32("HP-CPU") >= 10)
             {
                 return RedirectToAction("Superaanval", "Gevecht");
             }

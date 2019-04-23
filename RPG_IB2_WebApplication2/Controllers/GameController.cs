@@ -18,44 +18,30 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GameController : Controller
     {
-        IPersonageContext personagecontext;
-        ISpelerContext spelercontext;
-        ICPUContext cpucontext;
-        IShopContext shopcontext;
-        IItemContext itemcontext;
-        IKarakterContext karaktercontext;
         PersonageRepository personagerepo;
         SpelerRepository spelerrepo;
         CPURepository cpurepo;
         ShopRepository shoprepo;
         ItemRepository itemrepo;
-        KarakterRepository karakterrepo;
         PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         SpelerViewModelConverter spelercvt = new SpelerViewModelConverter();
         GameViewModelConverter gamecvt = new GameViewModelConverter();
         GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
         ShopViewModelConverter shopcvt = new ShopViewModelConverter();
-        KarakterUpgradeViewModelConverter karakterupgradecvt = new KarakterUpgradeViewModelConverter();
+        PersonageShopViewModelConverter personageshopcvt = new PersonageShopViewModelConverter();
         EquipDomein equipDomein;
         public GameController()
         {
-            personagecontext = new PersonageMSSQLContext();
-            spelercontext = new SpelerMSSQLContext();
-            cpucontext = new CPUMSSQLContext();
-            shopcontext = new ShopMSSQLContext();
-            itemcontext = new ItemMSSQLContext();
-            karaktercontext = new KarakterMSSQLContext();
-            personagerepo = new PersonageRepository(personagecontext);
-            spelerrepo = new SpelerRepository(spelercontext);
-            cpurepo = new CPURepository(cpucontext);
-            shoprepo = new ShopRepository(shopcontext);
-            itemrepo = new ItemRepository(itemcontext);
-            karakterrepo = new KarakterRepository(karaktercontext);
+            personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+            spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+            cpurepo = new CPURepository(new CPUMSSQLContext());
+            shoprepo = new ShopRepository(new ShopMSSQLContext());
+            itemrepo = new ItemRepository(new ItemMSSQLContext());
             equipDomein = new EquipDomein();
         }
         public IActionResult Index()
         {
-            List<Personage> personages = personagerepo.GetAllPersonages();
+            List<Personage> personages = personagerepo.GetAllStartPersonages();
             PersonageViewModel vm = new PersonageViewModel()
             {
                 Personages = new List<PersonageDetailViewModel>()
@@ -94,13 +80,13 @@ namespace RPG_IB2_WebApplication2.Controllers
             ShopDetailViewModel vm = shopcvt.ViewModelFromShop(shop);
             return View(vm);
         }
-        public IActionResult KarakterUpgrades()
+        public IActionResult PersonageShop()
         {
             Speler speler = spelerrepo.GetSpeler(1);
-            Karakter spelerkarakter = karakterrepo.GetSpelerKarakter(speler.ID);
-            List<Karakter> shopkarakters = karakterrepo.GetAllKarakters(speler.ID);
-            KarakterUpgrade karakterupgrade = equipDomein.VulKarakterUpgrade(spelerkarakter, shopkarakters, speler);
-            KarakterUpgradeDetailViewModel vm = karakterupgradecvt.ViewModelFromKarakterUpgrade(karakterupgrade);
+            Personage spelerpersonage = personagerepo.GetPersonageBySpelerId(speler.ID);
+            List<Personage> shoppersonages = personagerepo.GetPersonagesBySpelerId(speler.ID);
+            PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, shoppersonages, speler);
+            PersonageShopDetailViewModel vm = personageshopcvt.ViewModelFromPersonageShop(personageshop);
             return View(vm);
         }
     }

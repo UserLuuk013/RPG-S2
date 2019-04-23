@@ -40,6 +40,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
 
                     personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
                     personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.HP = Convert.ToInt32(myReader["HP"]);
+                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
+                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
                     personage.Foto = Convert.ToString(myReader["Foto"]);
                     personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
 
@@ -59,6 +62,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
                 {
                     personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
                     personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.HP = Convert.ToInt32(myReader["HP"]);
+                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
+                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
                     personage.Foto = Convert.ToString(myReader["Foto"]);
                     personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
                 }
@@ -91,11 +97,63 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
                 {
                     personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
                     personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.HP = Convert.ToInt32(myReader["HP"]);
+                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
+                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
                     personage.Foto = Convert.ToString(myReader["Foto"]);
                     personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
                 }
             }
             return personage;
+        }
+        public List<Personage> GetPersonagesBySpelerId(int spelerId)
+        {
+            List<Personage> personages = new List<Personage>();
+
+            SqlCommand myCommand = SetCommandProcedure("GetPersonagesBySpelerId");
+            myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    Personage personage = new Personage();
+
+                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+                    personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.HP = Convert.ToInt32(myReader["HP"]);
+                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
+                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    personage.Foto = Convert.ToString(myReader["Foto"]);
+                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+
+                    personages.Add(personage);
+                }
+            }
+            return personages;
+        }
+        public List<Personage> GetAllStartPersonages()
+        {
+            List<Personage> personages = new List<Personage>();
+
+            SqlCommand myCommand = SetCommandProcedure("GetAllStartPersonages");
+            using (SqlDataReader myReader = ExecuteReader(myCommand))
+            {
+                while (myReader.Read())
+                {
+                    Personage personage = new Personage();
+
+                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+                    personage.Naam = Convert.ToString(myReader["Naam"]);
+                    personage.HP = Convert.ToInt32(myReader["HP"]);
+                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
+                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    personage.Foto = Convert.ToString(myReader["Foto"]);
+                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+
+                    personages.Add(personage);
+                }
+            }
+            return personages;
         }
     }
 }

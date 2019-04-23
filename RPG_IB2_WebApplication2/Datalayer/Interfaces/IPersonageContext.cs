@@ -15,5 +15,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.Interfaces
         Personage GetPersonageById(int id);
         bool SelecteerPersonage(int id);
         Personage GetPersonageBySpelerId(int spelerId);
+        List<Personage> GetPersonagesBySpelerId(int spelerId);
+        List<Personage> GetAllStartPersonages();
     }
 }

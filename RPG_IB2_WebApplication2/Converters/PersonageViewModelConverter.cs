@@ -14,6 +14,9 @@ namespace RPG_IB2_WebApplication2.Converters
             {
                 ID = vm.ID,
                 Naam = vm.Naam,
+                HP = vm.HP,
+                Damage = vm.Damage,
+                Prijs = vm.Prijs,
                 Foto = vm.Foto,
                 AlternateText = vm.AlternateText
             };
@@ -25,6 +28,9 @@ namespace RPG_IB2_WebApplication2.Converters
             {
                 ID = p.ID,
                 Naam = p.Naam,
+                HP = p.HP,
+                Damage = p.Damage,
+                Prijs = p.Prijs,
                 Foto = p.Foto,
                 AlternateText = p.AlternateText
             };

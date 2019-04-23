@@ -42,5 +42,13 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetPersonageBySpelerId(spelerId);
         }
+        public List<Personage> GetPersonagesBySpelerId(int spelerId)
+        {
+            return context.GetPersonagesBySpelerId(spelerId);
+        }
+        public List<Personage> GetAllStartPersonages()
+        {
+            return context.GetAllStartPersonages();
+        }
     }
 }

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "PersonageShop";
+}
+
+<p class="font-weight-bold">PersonageShop</p>
+<br />
+<br />
+<p style="font-size:20px">
+    Speler Personage
+    <br />
+    XP speler: @Model.XP
+</p>
+<div class="bg-info">
+    <div>
+        <div>ID: @Model.SpelerPersonage.ID</div>
+    </div>
+    <div>
+        <div>Naam: @Model.SpelerPersonage.Naam</div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<p style="font-size:20px">
+    Shop Personages
+</p>
+@foreach (var item in Model.ShopPersonages)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Karakter" asp-action="KarakterDetail" asp-route-id="@item.ID">Personage details</a></div>
+        <div><a asp-controller="Karakter" asp-action="UpgradeKarakter" asp-route-id="@item.ID">Upgrade Personage</a></div>
+    </div>
+    <br />
+}
+<br />
+<br />
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
+    </div>
+}

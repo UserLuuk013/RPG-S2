@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2_WebApplication2.Models
 {
-    public class KarakterViewModel
+    public class PersonageShopViewModel
     {
-        public List<KarakterDetailViewModel> Karakters = new List<KarakterDetailViewModel>();
+        public List<PersonageShopDetailViewModel> PersonageShops = new List<PersonageShopDetailViewModel>();
     }
 }
