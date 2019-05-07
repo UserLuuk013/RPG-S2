@@ -71,23 +71,9 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             return RedirectToAction("Gevechtwereld", "Gevecht", id);
         }
-        public IActionResult Shop()
-        {
-            Speler speler = spelerrepo.GetSpeler(1);
-            List<Item> playeritems = itemrepo.GetPlayerItemsById(speler.ID);
-            List<Item> shopitems = shoprepo.GetShopItems();
-            Shop shop = equipDomein.VulShop(playeritems, shopitems, speler);
-            ShopDetailViewModel vm = shopcvt.ViewModelFromShop(shop);
-            return View(vm);
-        }
         public IActionResult PersonageShop()
         {
-            Speler speler = spelerrepo.GetSpeler(1);
-            Personage spelerpersonage = personagerepo.GetPersonageBySpelerId(speler.ID);
-            List<Personage> shoppersonages = personagerepo.GetPersonagesBySpelerId(speler.ID);
-            PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, shoppersonages, speler);
-            PersonageShopDetailViewModel vm = personageshopcvt.ViewModelFromPersonageShop(personageshop);
-            return View(vm);
+            return View();
         }
     }
 }

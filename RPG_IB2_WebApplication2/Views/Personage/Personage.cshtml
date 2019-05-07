@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Personage";
+}
+
+<p class="font-weight-bold">Personage</p>
+<br />
+<br />
+<p style="font-size:20px">
+    Speler Personage
+    <br />
+    XP speler: @Model.XP
+</p>
+<div class="bg-info">
+    <div>
+        <div>ID: @Model.SpelerPersonage.ID</div>
+    </div>
+    <div>
+        <div>Naam: @Model.SpelerPersonage.Naam</div>
+    </div>
+    <img src="data:image/png;base64, @Model.SpelerPersonage.Foto" alt="@Model.SpelerPersonage.AlternateText" />
+</div>
+<br />
+<br />
+<br />
+<p style="font-size:20px">
+    Volgende Upgrade
+</p>
+@foreach (var item in Model.ShopPersonages)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
+        <div><a asp-controller="Personage" asp-action="PersonageDetail" asp-route-id="@item.ID">Personage details</a></div>
+        <form asp-action="UpgradePersonage" asp-route-id="@item.ID">
+            <div class="form-group">
+                <input type="submit" value="UpgradePersonage" class="btn btn-default" onclick="confirm('Weet je zeker dat je jouw Personage wilt upgraden?')" />
+            </div>
+        </form>
+    </div>
+    <br />
+}
+<br />
+<br />
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
+    </div>
+}
+@if (ViewBag.XP != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.XP");
+        };
+    </script>
+}

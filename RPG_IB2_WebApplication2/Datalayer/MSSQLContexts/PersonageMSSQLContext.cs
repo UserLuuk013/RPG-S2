@@ -155,5 +155,21 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             }
             return personages;
         }
+        public bool UpgradePersonage(int personageId, int spelerXP)
+        {
+            try
+            {
+                SqlCommand myCommand = SetCommandProcedure("UpgradePersonage");
+                myCommand.Parameters.AddWithValue("@IDPersonage", personageId);
+                myCommand.Parameters.AddWithValue("@XP", spelerXP);
+                myCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x);
+                return false;
+            }
+        }
     }
 }

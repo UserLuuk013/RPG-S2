@@ -50,5 +50,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetAllStartPersonages();
         }
+        public bool UpgradePersonage(int personageId, int spelerXP)
+        {
+            return context.UpgradePersonage(personageId, spelerXP);
+        }
     }
 }

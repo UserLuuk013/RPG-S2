@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+
+<p class="font-weight-bold">Shop</p>
+<br />
+<br />
+<body>
+</body>
+<p style="font-size:20px">
+    Speler Items
+    <br />
+    Geld speler: @Model.Geld
+</p>
+@foreach (var item in Model.PlayerItems)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">Item details</a></div>
+        <form asp-action="VerkoopItem" asp-route-id="@item.ID">
+            <div class="form-group">
+                <input type="submit" value="VerkoopItem" class="btn btn-default" onclick="confirm('Weet je zeker dat je het item wilt verkopen?')" />
+            </div>
+        </form>
+    </div>
+    <br />
+}
+<br />
+<br />
+<p style="font-size:20px">
+    Shop Items
+</p>
+@foreach (var item in Model.ShopItems)
+{
+    <div class="bg-info">
+        <div>
+            <div>ID: @item.ID</div>
+        </div>
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <div><a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">Item details</a></div>
+        <form asp-action="KoopItem" asp-route-id="@item.ID">
+            <div class="form-group">
+                <input type="submit" value="KoopItem" class="btn btn-default" onclick="confirm('Weet je zeker dat je het item wilt kopen?')" />
+            </div>
+        </form>
+    </div>
+    <br />
+}
+<br />
+<br />
+
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
+    </div>
+}
+
+@if (ViewBag.Geld != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Geld");
+        };
+    </script>
+}
+
+@*<script>
+    function bevestigAankoop() {
+            var x = confirm("Weet je zeker dat je het item wilt kopen?")
+            if (x == true) {
+                var itemID = @ViewBag.ItemID
+                @Html.ActionLink("KoopItem", "Shop"), new { id = itemID }
+            }
+            else {
+                @Html.ActionLink("Shop", "Shop")
+            }
+        }
+</script>*@

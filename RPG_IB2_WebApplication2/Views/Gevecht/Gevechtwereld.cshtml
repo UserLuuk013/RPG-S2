@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RPG_IB2_WebApplication2.Models.GevechtDetailViewModel
+@{
     ViewData["Title"] = "Gevechtwereld";
 }
 <p class="font-weight-bold" style="font-size:50px">Gevechtwereld</p>
@@ -20,9 +21,12 @@
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
     @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
     @Model.Speler.HP &nbsp; &nbsp; &nbsp;
+    @if (Model.SpelerAanZet == true)
+    {
         <div><a asp-controller="Gevecht" asp-action="Aanval">Aanval</a></div>
         <div><a asp-controller="Gevecht" asp-action="Superaanval">Superaanval</a></div>
         <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
+    }
     <br />
     <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" />
     @Model.CPU.Naam &nbsp; &nbsp; &nbsp;
@@ -31,5 +35,27 @@
     <div class="form-group">
         <input type="submit" value="Volgende beurt" class="btn btn-default" asp-action="VolgendeBeurt" asp-controller="Gevecht" />
     </div>
+    <div><a asp-controller="Gevecht" asp-action="VolgendeBeurt">Volgende beurt</a></div>
 </p>
+}
+@if (ViewBag.SuperAanval != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Superaanval");
+        };
+    </script>
+}
+@if  (ViewBag.Beloningen != null)
+{
+    <script>
+        function Beloningen() {
+            if (confirm("@ViewBag.Beloningen")) {
+                window.location.href = 'https://localhost:5001/Game/Gamewereld'
+            }
+            else {
+                window.location.href = 'https://localhost:5001/Game/Gamewereld'
+            }
+        }
+    </script>
 }

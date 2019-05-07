@@ -20,9 +20,9 @@
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
     @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
     @Model.Speler.HP &nbsp; &nbsp; &nbsp;
-        <div><a asp-controller="Gevecht" asp-action="Aanval">Aanval</a></div>
-        <div><a asp-controller="Gevecht" asp-action="Superaanval">Superaanval</a></div>
-        <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
+    <div><a asp-controller="Gevecht" asp-action="Aanval">Aanval</a></div>
+    <div><a asp-controller="Gevecht" asp-action="Superaanval">Superaanval</a></div>
+    <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
     <br />
     <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" />
     @Model.CPU.Naam &nbsp; &nbsp; &nbsp;
@@ -31,5 +31,6 @@
     <div class="form-group">
         <input type="submit" value="Volgende beurt" class="btn btn-default" asp-action="VolgendeBeurt" asp-controller="Gevecht" />
     </div>
+    <div><a asp-controller="Gevecht" asp-action="VolgendeBeurt">Volgende beurt</a></div>
 </p>
 }

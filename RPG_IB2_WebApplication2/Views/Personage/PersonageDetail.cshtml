@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Personage";
+}
+<p class="font-weight-bold">Personage Details</p>
+<br />
+<br />
+<div>
+    <div>
+        <div>ID: @Model.ID</div>
+        <img src="data:image/png;base64, @Model.Foto" alt="@Model.AlternateText" />
+    </div>
+    <br />
+    <div>
+        <div>Naam: @Model.Naam</div>
+    </div>
+    <br />
+    <div>
+        <div>HP: @Model.HP</div>
+    </div>
+    <br />
+    <div>
+        <div>Extra Damage: @Model.Damage</div>
+    </div>
+    <br />
+    <div>
+        <div>Prijs: @Model.Prijs</div>
+    </div>
+</div>
+

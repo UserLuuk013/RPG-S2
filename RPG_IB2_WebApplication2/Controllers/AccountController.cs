@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using RPG_IB2_WebApplication2.Models;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace RPG_IB2_WebApplication2.Controllers
 {
@@ -65,6 +67,8 @@ namespace RPG_IB2_WebApplication2.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    Task<User> user = _userManager.FindByEmailAsync(model.Email);
+                    HttpContext.Session.SetInt32("CurrentUserID", user.Result.Id);
                     if (returnUrl == null)
                         returnUrl = "Home";
                     return RedirectToAction("Index",returnUrl);

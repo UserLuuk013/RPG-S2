@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Game\PersonageShop.cshtml">
+    <Content Update="Views\Personage\PersonageDetail.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Personage\Personage.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Gevecht\UpdateGevecht.cshtml">
@@ -40,7 +43,7 @@
     <Content Update="Views\Item\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Game\Shop.cshtml">
+    <Content Update="Views\Shop\Shop.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
