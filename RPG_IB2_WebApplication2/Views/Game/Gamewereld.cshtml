@@ -25,6 +25,6 @@
             <p>Naam: @item.Naam</p>
             <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" />
         </div>
-        <div><a asp-controller="Game" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
+        <div><a asp-controller="Gevecht" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
     </div>
 }

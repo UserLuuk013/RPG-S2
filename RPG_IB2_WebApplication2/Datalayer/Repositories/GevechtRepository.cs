@@ -22,9 +22,9 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VerwijderGevecht(gevecht);
         }
-        public bool GevechtBeëindigd(int xp, int geld)
+        public bool GevechtBeëindigd(int xp, int geld, int userId)
         {
-            return context.GevechtBeëindigd(xp, geld);
+            return context.GevechtBeëindigd(xp, geld, userId);
         }
     }
 }

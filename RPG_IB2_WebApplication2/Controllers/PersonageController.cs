@@ -16,22 +16,19 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class PersonageController : Controller
     {
-        SpelerRepository spelerrepo;
-        PersonageRepository personagerepo;
+        SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
         EquipDomein equipDomein;
-        PersonageShopViewModelConverter personageshopcvt;
-        PersonageViewModelConverter personagecvt;
+        PersonageShopViewModelConverter personageshopcvt = new PersonageShopViewModelConverter();
+        PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         public PersonageController()
         {
-            spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-            personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-            personageshopcvt = new PersonageShopViewModelConverter();
-            personagecvt = new PersonageViewModelConverter();
             equipDomein = new EquipDomein();
         }
         public IActionResult Personage()
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             Personage spelerpersonage = personagerepo.GetPersonageBySpelerId(speler.ID);
             List<Personage> shoppersonages = personagerepo.GetPersonagesBySpelerId(speler.ID);
             PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, shoppersonages, speler);
@@ -46,7 +43,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult UpgradePersonage(int id)
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             Personage personage = personagerepo.GetPersonageById(id);
             if (speler.XP < personage.Prijs)
             {
@@ -55,7 +53,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             else
             {
                 speler.XP -= personage.Prijs;
-                personagerepo.UpgradePersonage(personage.ID, speler.XP);
+                personagerepo.UpgradePersonage(personage.ID, speler.XP, userId);
             }
             return RedirectToAction("Personage");
         }

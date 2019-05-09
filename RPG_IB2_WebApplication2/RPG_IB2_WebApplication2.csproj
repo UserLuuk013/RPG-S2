@@ -19,9 +19,6 @@
     <Content Update="Views\Personage\Personage.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Gevecht\UpdateGevecht.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Views\Gevecht\Gevechtwereld.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

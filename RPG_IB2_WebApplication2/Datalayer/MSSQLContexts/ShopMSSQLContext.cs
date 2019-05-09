@@ -46,7 +46,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             return items;
         }
-        public bool KoopItem(int idItem, string type, int geld)
+        public bool KoopItem(int idItem, string type, int geld, int userId)
         {
             if (type == "Wapen ")
             {
@@ -55,11 +55,13 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     SqlCommand myCommand = SetCommandProcedure("KoopWapen");
                     myCommand.Parameters.AddWithValue("@IDItem", idItem);
                     myCommand.Parameters.AddWithValue("@Geld", geld);
+                    myCommand.Parameters.AddWithValue("@IDAccount", userId);
                     myCommand.ExecuteNonQuery();
                     return true;
                 }
                 catch (Exception x)
                 {
+                    Console.WriteLine(x);
                     return false;
                 }
             }
@@ -70,16 +72,19 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     SqlCommand myCommand = SetCommandProcedure("KoopPotion");
                     myCommand.Parameters.AddWithValue("@IDItem", idItem);
                     myCommand.Parameters.AddWithValue("@Geld", geld);
+                    myCommand.Parameters.AddWithValue("@IDAccount", userId);
                     myCommand.ExecuteNonQuery();
                     return true;
                 }
                 catch (Exception x)
                 {
+                    Console.WriteLine(x);
                     return false;
                 }
             }
+            
         }
-        public bool VerkoopItem(int idItem, string type, int geld)
+        public bool VerkoopItem(int idItem, string type, int geld, int userId)
         {
             if (type == "Wapen ")
             {
@@ -88,11 +93,13 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     SqlCommand myCommand = SetCommandProcedure("VerkoopWapen");
                     myCommand.Parameters.AddWithValue("@IDItem", idItem);
                     myCommand.Parameters.AddWithValue("@Geld", geld);
+                    myCommand.Parameters.AddWithValue("@IDAccount", userId);
                     myCommand.ExecuteNonQuery();
                     return true;
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     return false;
                 }
             }
@@ -100,14 +107,16 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 try
                 {
-                    SqlCommand myCommand = SetCommandProcedure("VerkoopWapen");
+                    SqlCommand myCommand = SetCommandProcedure("VerkoopPotion");
                     myCommand.Parameters.AddWithValue("@IDItem", idItem);
                     myCommand.Parameters.AddWithValue("@Geld", geld);
+                    myCommand.Parameters.AddWithValue("@IDAccount", userId);
                     myCommand.ExecuteNonQuery();
                     return true;
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     return false;
                 }
             }

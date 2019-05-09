@@ -27,13 +27,13 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.GetShopItems();
         }
-        public bool KoopItem(int idItem, string type, int geld)
+        public bool KoopItem(int idItem, string type, int geld, int userId)
         {
-            return context.KoopItem(idItem, type, geld);
+            return context.KoopItem(idItem, type, geld, userId);
         }
-        public bool VerkoopItem(int idItem, string type, int geld)
+        public bool VerkoopItem(int idItem, string type, int geld, int userId)
         {
-            return context.VerkoopItem(idItem, type, geld);
+            return context.VerkoopItem(idItem, type, geld, userId);
         }
     }
 }

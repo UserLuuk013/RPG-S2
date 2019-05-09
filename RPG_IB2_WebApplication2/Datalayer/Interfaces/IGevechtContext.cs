@@ -10,6 +10,6 @@ namespace RPG_IB2.Datalayer.Interfaces
     {
         bool VoegGevechtToe(Gevecht gevecht);
         bool VerwijderGevecht(Gevecht gevecht);
-        bool GevechtBeëindigd(int xp, int geld);
+        bool GevechtBeëindigd(int xp, int geld, int userId);
     }
 }

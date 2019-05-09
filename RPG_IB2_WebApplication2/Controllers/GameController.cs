@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RPG_IB2;
 using RPG_IB2.Datalayer.Interfaces;
@@ -18,11 +19,11 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GameController : Controller
     {
-        PersonageRepository personagerepo;
-        SpelerRepository spelerrepo;
-        CPURepository cpurepo;
-        ShopRepository shoprepo;
-        ItemRepository itemrepo;
+        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+        CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
+        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
         PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         SpelerViewModelConverter spelercvt = new SpelerViewModelConverter();
         GameViewModelConverter gamecvt = new GameViewModelConverter();
@@ -32,11 +33,6 @@ namespace RPG_IB2_WebApplication2.Controllers
         EquipDomein equipDomein;
         public GameController()
         {
-            personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-            spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-            cpurepo = new CPURepository(new CPUMSSQLContext());
-            shoprepo = new ShopRepository(new ShopMSSQLContext());
-            itemrepo = new ItemRepository(new ItemMSSQLContext());
             equipDomein = new EquipDomein();
         }
         public IActionResult Index()
@@ -56,12 +52,18 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult StartGame(int id)
         {
-            personagerepo.SelecteerPersonage(id);
+            if (HttpContext.Session.GetInt32("personageId") == null)
+            {
+                HttpContext.Session.SetInt32("personageId", id);
+            }
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            personagerepo.SelecteerPersonage((int)HttpContext.Session.GetInt32("personageId"), userId);
             return RedirectToAction("Gamewereld", "Game");
         }
         public IActionResult Gamewereld()
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             List<CPU> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);

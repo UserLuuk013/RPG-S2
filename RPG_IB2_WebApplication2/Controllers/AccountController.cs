@@ -67,8 +67,10 @@ namespace RPG_IB2_WebApplication2.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    Task<User> user = _userManager.FindByEmailAsync(model.Email);
-                    HttpContext.Session.SetInt32("CurrentUserID", user.Result.Id);
+                    //Task<User> user = _userManager.FindByEmailAsync(model.Email);
+                    //HttpContext.Session.SetInt32("CurrentUserID", user.Result.Id);
+                    HttpContext.Session.SetString("CurrentUser", JsonConvert.SerializeObject(_userManager.FindByEmailAsync(model.Email)));
+                    HttpContext.Session.SetInt32("CurrentUserID", _userManager.FindByEmailAsync(model.Email).Result.Id);
                     if (returnUrl == null)
                         returnUrl = "Home";
                     return RedirectToAction("Index",returnUrl);

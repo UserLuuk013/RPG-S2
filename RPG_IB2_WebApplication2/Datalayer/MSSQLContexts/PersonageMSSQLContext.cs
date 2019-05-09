@@ -71,18 +71,19 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             }
             return personage;
         }
-        public bool SelecteerPersonage(int id)
+        public bool SelecteerPersonage(int id, int userId)
         {
             try
             {
                 SqlCommand myCommand = SetCommandProcedure("SelecteerPersonage");
                 myCommand.Parameters.AddWithValue("@IDPersonage", id);
-                myCommand.Parameters.AddWithValue("@IDAccount", 1);
+                myCommand.Parameters.AddWithValue("@IDAccount", userId);
                 myCommand.ExecuteNonQuery();
                 return true;
             }
             catch (Exception x)
             {
+                Console.WriteLine(x);
                 return false;
             }
         }
@@ -155,13 +156,14 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             }
             return personages;
         }
-        public bool UpgradePersonage(int personageId, int spelerXP)
+        public bool UpgradePersonage(int personageId, int spelerXP, int userId)
         {
             try
             {
                 SqlCommand myCommand = SetCommandProcedure("UpgradePersonage");
                 myCommand.Parameters.AddWithValue("@IDPersonage", personageId);
                 myCommand.Parameters.AddWithValue("@XP", spelerXP);
+                myCommand.Parameters.AddWithValue("@IDAccount", userId);
                 myCommand.ExecuteNonQuery();
                 return true;
             }

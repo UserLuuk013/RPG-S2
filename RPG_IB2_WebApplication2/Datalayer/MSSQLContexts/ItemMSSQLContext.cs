@@ -46,6 +46,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             catch (Exception x)
             {
+                Console.WriteLine(x);
                 return false;
             }
         }
@@ -60,6 +61,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             catch (Exception x)
             {
+                Console.WriteLine(x);
                 return false;
             }
         }
@@ -78,6 +80,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             catch (Exception x)
             {
+                Console.WriteLine(x);
                 return false;
             }
             

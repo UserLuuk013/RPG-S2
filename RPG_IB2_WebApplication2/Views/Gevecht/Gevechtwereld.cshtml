@@ -25,19 +25,22 @@
     {
         <div><a asp-controller="Gevecht" asp-action="Aanval">Aanval</a></div>
         <div><a asp-controller="Gevecht" asp-action="Superaanval">Superaanval</a></div>
-        <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
+        if (Model.PotionSpelerGebruikt == false)
+        {
+            <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
+        }
     }
     <br />
     <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" />
     @Model.CPU.Naam &nbsp; &nbsp; &nbsp;
     @Model.CPU.HP &nbsp; &nbsp; &nbsp;
     <br />
-    <div class="form-group">
-        <input type="submit" value="Volgende beurt" class="btn btn-default" asp-action="VolgendeBeurt" asp-controller="Gevecht" />
-    </div>
-    <div><a asp-controller="Gevecht" asp-action="VolgendeBeurt">Volgende beurt</a></div>
+    @if (Model.SpelerAanZet == false)
+    {
+        <div><a asp-controller="Gevecht" asp-action="GevechtKeuzeCPU">Volgende beurt</a></div>
+    }
 </p>
-}
+
 @if (ViewBag.SuperAanval != null)
 {
     <script type="text/javascript">
@@ -46,16 +49,13 @@
         };
     </script>
 }
-@if  (ViewBag.Beloningen != null)
+@if (ViewBag.Beloningen != null)
 {
-    <script>
-        function Beloningen() {
-            if (confirm("@ViewBag.Beloningen")) {
-                window.location.href = 'https://localhost:5001/Game/Gamewereld'
-            }
-            else {
-                window.location.href = 'https://localhost:5001/Game/Gamewereld'
-            }
-        }
-    </script>
+    <form asp-controller="Game" asp-action="StartGame">
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Beloningen");
+            };
+        </script>
+    </form>
 }

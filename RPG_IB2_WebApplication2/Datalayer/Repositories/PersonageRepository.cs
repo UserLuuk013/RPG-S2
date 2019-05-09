@@ -34,9 +34,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetPersonageById(id);
         }
-        public bool SelecteerPersonage(int id)
+        public bool SelecteerPersonage(int id, int userId)
         {
-            return context.SelecteerPersonage(id);
+            return context.SelecteerPersonage(id, userId);
         }
         public Personage GetPersonageBySpelerId(int spelerId)
         {
@@ -50,9 +50,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetAllStartPersonages();
         }
-        public bool UpgradePersonage(int personageId, int spelerXP)
+        public bool UpgradePersonage(int personageId, int spelerXP, int userId)
         {
-            return context.UpgradePersonage(personageId, spelerXP);
+            return context.UpgradePersonage(personageId, spelerXP, userId);
         }
     }
 }

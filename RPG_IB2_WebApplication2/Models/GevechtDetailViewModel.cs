@@ -16,5 +16,6 @@ namespace RPG_IB2_WebApplication2.Models
         public string Winnaar { get; set; }
         public bool Voltooid { get; set; }
         public bool SpelerAanZet { get; set; }
+        public bool PotionSpelerGebruikt { get; set; }
     }
 }

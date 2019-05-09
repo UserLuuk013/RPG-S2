@@ -21,6 +21,10 @@ namespace RPG_IB2_WebApplication2.Models
             this.Email = email;
             this.Password = password;
         }
+        public User()
+        {
+
+        }
         public int Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }

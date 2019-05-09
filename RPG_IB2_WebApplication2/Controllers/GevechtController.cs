@@ -10,12 +10,14 @@ using RPG_IB2_WebApplication2.Converters;
 using RPG_IB2_WebApplication2.Models;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using RPG_IB2_WebApplication2.Datalayer.Repositories;
+using RPG_IB2_WebApplication2.Datalayer.MSSQLContexts;
 
 namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GevechtController : Controller
     {
-        private int superAanval = 0;
         private int spelerHP;
         private int cpuHP;
         private bool spelerLevend = true;
@@ -27,41 +29,39 @@ namespace RPG_IB2_WebApplication2.Controllers
         GevechtRepository gevechtrepo = new GevechtRepository(new GevechtMSSQLContext());
         SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
         CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
         GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
         private GevechtDetailViewModel vm;
         public GevechtController()
         {
             equipDomein = new EquipDomein();
-
-            //int userId = (int)HttpContext.Session.GetInt32("CurrentUserID");
-            Speler speler = spelerrepo.GetSpeler(1);
-            CPU cpu = cpurepo.GetCPUById(1);
-            Gevecht gevecht = equipDomein.VulGevecht(speler, cpu);
-            vm = gevechtcvt.ViewModelFromGevecht(gevecht);
-            vm.SpelerAanZet = true;
-
-            spelerHP = vm.Speler.HP;
-            cpuHP = vm.CPU.HP;
         }
         public IActionResult Gevechtwereld(int id)
         {
-            if (HttpContext.Session.GetInt32("spelerHP") == null && HttpContext.Session.GetInt32("HP-CPU") == null && HttpContext.Session.GetString("SpelerAanZet") == null
-                && HttpContext.Session.GetString("potionSpelerGebruikt") == null && HttpContext.Session.GetString("potionCPUGebruikt") == null && HttpContext.Session.GetString("spelerLevend") == null
-                && HttpContext.Session.GetString("cpuLevend") == null && HttpContext.Session.GetString("cpuId") == null)
+            //User CurrentUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("CurrentUser"));
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+
+            if (HttpContext.Session.GetInt32("StartGame") == null || HttpContext.Session.GetInt32("StartGame") == 0)
             {
-                HttpContext.Session.SetInt32("spelerHP", spelerHP);
-                HttpContext.Session.SetInt32("cpuHP", cpuHP);
-                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(vm.SpelerAanZet));
-                HttpContext.Session.SetString("potionSpelerGebruikt", Convert.ToString(potionSpelerGebruikt));
-                HttpContext.Session.SetString("potionCPUGebruikt", Convert.ToString(potionCPUGebruikt));
-                HttpContext.Session.SetString("spelerLevend", Convert.ToString(spelerLevend));
-                HttpContext.Session.SetString("cpuLevend", Convert.ToString(cpuLevend));
-                HttpContext.Session.SetInt32("cpuId", id);
+                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(spelerrepo.GetSpeler(userId)));
+                HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(cpurepo.GetCPUById(id)));
+                HttpContext.Session.SetString("Personage", JsonConvert.SerializeObject(personagerepo.GetPersonageBySpelerId(userId)));
+                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(true));
+                HttpContext.Session.SetString("potionSpelerGebruikt", Convert.ToString(false));
+                HttpContext.Session.SetString("potionCPUGebruikt", Convert.ToString(false));
+                HttpContext.Session.SetString("spelerLevend", Convert.ToString(true));
+                HttpContext.Session.SetString("cpuLevend", Convert.ToString(true));
+                HttpContext.Session.SetInt32("StartGame", 1);
             }
-            //vm.CPU = cpurepo.GetCPUById(Convert.ToInt32(HttpContext.Session.GetInt32("cpuId")));
-            vm.Speler.HP = Convert.ToInt32(HttpContext.Session.GetInt32("spelerHP"));
-            vm.CPU.HP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
+            
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Gevecht gevecht = equipDomein.VulGevecht(speler, cpu);
+            HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(gevecht.Speler));
+            HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(gevecht.CPU));
+            vm = gevechtcvt.ViewModelFromGevecht(gevecht);
             vm.SpelerAanZet = Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet"));
+            vm.PotionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
 
             if (HttpContext.Session.GetInt32("superAanval") == 1)
             {
@@ -76,127 +76,124 @@ namespace RPG_IB2_WebApplication2.Controllers
             {
                 HttpContext.Session.SetInt32("superAanval", 0);
             }
+            if (HttpContext.Session.GetString("Beloningen") != null)
+            {
+                ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
+            }
             return View(vm);
         }
         public IActionResult VolgendeBeurt()
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
             {
-                vm.SpelerAanZet = false;
-                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(vm.SpelerAanZet));
-                return RedirectToAction("GevechtKeuzeCPU");
+                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(false));
+                return RedirectToAction("Gevechtwereld");
             }
             else
             {
-                vm.SpelerAanZet = true;
-                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(vm.SpelerAanZet));
-                return RedirectToAction("ControlerenGevecht");
+                HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(true));
+                return RedirectToAction("Gevechtwereld");
             }
         }
         public IActionResult Aanval()
         {
-            spelerHP = Convert.ToInt32(HttpContext.Session.GetInt32("spelerHP"));
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Personage personage = JsonConvert.DeserializeObject<Personage>(HttpContext.Session.GetString("Personage"));
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
             {
-                cpuHP -= vm.Speler.Wapen.HP;
-                HttpContext.Session.SetInt32("cpuHP", cpuHP);
+                cpu.HP -= speler.Wapen.HP + personage.Damage;
+                HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(cpu));
                 return RedirectToAction("ControlerenGevecht");
             }
             else
             {
-                spelerHP -= vm.CPU.Wapen.HP;
-                HttpContext.Session.SetInt32("spelerHP", spelerHP);
-                return RedirectToAction("VolgendeBeurt");
+                speler.HP -= cpu.Wapen.HP;
+                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(speler));
+                return RedirectToAction("ControlerenGevecht");
             }
         }
         public IActionResult Superaanval()
         {
             Random rnd = new Random();
             int rndsuperaanval = rnd.Next(1, 5);
-            spelerHP = Convert.ToInt32(HttpContext.Session.GetInt32("spelerHP"));
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
-            vm.SpelerAanZet = Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet"));
-            if (vm.SpelerAanZet)
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Personage personage = JsonConvert.DeserializeObject<Personage>(HttpContext.Session.GetString("Personage"));
+            if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
             {
                 if (rndsuperaanval == 1)
                 {
-                    cpuHP -= vm.Speler.Wapen.HP * 2;
+                    cpu.HP -= speler.Wapen.HP * 2 + personage.Damage;
                     HttpContext.Session.SetInt32("superAanval", 1);
                 }
                 else
                 {
                     HttpContext.Session.SetInt32("superAanval", 2);
                 }
-                HttpContext.Session.SetInt32("cpuHP", cpuHP);
+                HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(cpu));
                 return RedirectToAction("ControlerenGevecht");
             }
             else
             {
                 if (rndsuperaanval == 1)
                 {
-                    spelerHP -= vm.CPU.Wapen.HP * 2;
+                    speler.HP -= cpu.Wapen.HP * 2;
                     HttpContext.Session.SetInt32("superAanval", 1);
                 }
                 else
                 {
                     HttpContext.Session.SetInt32("superAanval", 2);
                 }
-                HttpContext.Session.SetInt32("spelerHP", spelerHP);
-                return RedirectToAction("VolgendeBeurt");
+                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(speler));
+                return RedirectToAction("ControlerenGevecht");
             }
         }
         public IActionResult Verdediging()
         {
-            spelerHP = Convert.ToInt32(HttpContext.Session.GetInt32("spelerHP"));
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
             potionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
             potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
-            vm.SpelerAanZet = Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet"));
-            if (vm.SpelerAanZet && potionSpelerGebruikt == false)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")) && potionSpelerGebruikt == false)
             {
-                spelerHP += vm.Speler.Potion.HP;
-                potionSpelerGebruikt = true;
-                HttpContext.Session.SetInt32("spelerHP", spelerHP);
-                HttpContext.Session.SetString("potionSpelerGebruikt", Convert.ToString(potionSpelerGebruikt));
+                speler.HP += speler.Potion.HP;
+                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(speler));
+                HttpContext.Session.SetString("potionSpelerGebruikt", Convert.ToString(true));
                 return RedirectToAction("ControlerenGevecht");
             }
-            else if (vm.SpelerAanZet == false && potionCPUGebruikt == false)
+            else if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")) == false && potionCPUGebruikt == false)
             {
-                cpuHP += vm.CPU.Potion.HP;
-                potionCPUGebruikt = true;
-                HttpContext.Session.SetInt32("cpuHP", cpuHP);
-                HttpContext.Session.SetString("potionCPUGebruikt", Convert.ToString(potionCPUGebruikt));
-                return RedirectToAction("VolgendeBeurt");
+                cpu.HP += cpu.Potion.HP;
+                HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(cpu));
+                HttpContext.Session.SetString("potionCPUGebruikt", Convert.ToString(true));
+                return RedirectToAction("ControlerenGevecht");
             }
             return RedirectToAction("ControlerenGevecht");
         }
         public IActionResult ControlerenGevecht()
         {
-            spelerHP = Convert.ToInt32(HttpContext.Session.GetInt32("spelerHP"));
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
-            if (spelerHP <= 0)
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            if (speler.HP <= 0)
             {
-                spelerLevend = false;
-                HttpContext.Session.SetString("spelerLevend", Convert.ToString(spelerLevend));
+                HttpContext.Session.SetString("spelerLevend", Convert.ToString(false));
                 return RedirectToAction("GevechtBeëindigd");
             }
-            else if (cpuHP <= 0)
+            else if (cpu.HP <= 0)
             {
-                cpuLevend = false;
-                HttpContext.Session.SetString("cpuLevend", Convert.ToString(cpuLevend));
+                HttpContext.Session.SetString("cpuLevend", Convert.ToString(false));
                 return RedirectToAction("GevechtBeëindigd");
             }
             else
             {
-                return RedirectToAction("Gevechtwereld");
+                return RedirectToAction("VolgendeBeurt");
             }
             
         }
         public IActionResult GevechtBeëindigd()
         {
-            gevechtBeëindigd = true;
-            HttpContext.Session.SetString("gevechtBeëindigd", Convert.ToString(gevechtBeëindigd));
+            HttpContext.Session.SetString("gevechtBeëindigd", Convert.ToString(true));
             return RedirectToAction("Beloningen");
 
         }
@@ -204,27 +201,28 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             spelerLevend = Convert.ToBoolean(HttpContext.Session.GetString("spelerLevend"));
             cpuLevend = Convert.ToBoolean(HttpContext.Session.GetString("cpuLevend"));
+            Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
             if (spelerLevend == true && cpuLevend == false)
             {
-                vm.Speler.Geld += 100;
-                vm.Speler.XP += 50;
-                gevechtrepo.GevechtBeëindigd(vm.Speler.XP, vm.Speler.Geld);
-                ViewBag.Beloningen = "GEWONNEN! Je hebt " + 100 + " geld en " + 50 + " XP verdiend!";
+                speler.Geld += 100;
+                speler.XP += 50;
+                gevechtrepo.GevechtBeëindigd(speler.XP, speler.Geld, speler.ID);
+                HttpContext.Session.SetString("Beloningen", "GEWONNEN! Je hebt " + 100 + " geld en " + 50 + " XP verdiend!");
             }
             else if (spelerLevend == false && cpuLevend == true)
             {
-                vm.Speler.Geld += 50;
-                vm.Speler.XP += 25;
-                gevechtrepo.GevechtBeëindigd(vm.Speler.XP, vm.Speler.Geld);
-                ViewBag.Beloningen = "VERLOREN! Je hebt " + 50 + " geld en " + 25 + " XP verdiend!";
+                speler.Geld += 50;
+                speler.XP += 25;
+                gevechtrepo.GevechtBeëindigd(speler.XP, speler.Geld, speler.ID);
+                HttpContext.Session.SetString("Beloningen", "Verloren! Je hebt " + 50 + " geld en " + 25 + " XP verdiend!");
             }
-            return RedirectToAction("Gamewereld", "Game");
+            return RedirectToAction("Gevechtwereld");
         }
         public IActionResult GevechtKeuzeCPU()
         {
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
             potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
-            if (cpuHP <= 5 && potionCPUGebruikt == false)
+            if (cpu.HP <= 5 && potionCPUGebruikt == false)
             {
                 return RedirectToAction("Verdediging");
             }
@@ -235,8 +233,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult AanvalKeuzeCPU()
         {
-            cpuHP = Convert.ToInt32(HttpContext.Session.GetInt32("cpuHP"));
-            if (cpuHP >= 10)
+            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            if (cpu.HP >= 10)
             {
                 return RedirectToAction("Superaanval");
             }
@@ -244,10 +242,6 @@ namespace RPG_IB2_WebApplication2.Controllers
             {
                 return RedirectToAction("Aanval");
             }
-        }
-        public IActionResult UpdateGevecht()
-        {
-            return View(vm);
         }
     }
 }

@@ -16,22 +16,13 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class ShopController : Controller
     {
-        IShopContext shopcontext;
-        ISpelerContext spelercontext;
-        IItemContext itemcontext;
-        ShopRepository shoprepo;
-        SpelerRepository spelerrepo;
-        ItemRepository itemrepo;
+        ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
+        SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
         EquipDomein equipDomein;
         ShopViewModelConverter shopcvt = new ShopViewModelConverter();
         public ShopController()
         {
-            shopcontext = new ShopMSSQLContext();
-            spelercontext = new SpelerMSSQLContext();
-            itemcontext = new ItemMSSQLContext();
-            shoprepo = new ShopRepository(shopcontext);
-            spelerrepo = new SpelerRepository(spelercontext);
-            itemrepo = new ItemRepository(itemcontext);
             equipDomein = new EquipDomein();
         }
         //public IActionResult Index()
@@ -40,7 +31,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         //}
         public IActionResult Shop()
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             List<Item> playeritems = itemrepo.GetPlayerItemsById(speler.ID);
             List<Item> shopitems = shoprepo.GetShopItems();
             Shop shop = equipDomein.VulShop(playeritems, shopitems, speler);
@@ -55,7 +47,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult KoopItem(int id)
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             Item item = itemrepo.GetItemById(id);
             if (speler.Geld < item.Prijs)
             {
@@ -64,16 +57,17 @@ namespace RPG_IB2_WebApplication2.Controllers
             else
             {
                 speler.Geld -= item.Prijs;
-                shoprepo.KoopItem(item.ID, item.Type, speler.Geld);
+                shoprepo.KoopItem(item.ID, item.Type, speler.Geld, speler.ID);
             }
             return RedirectToAction("Shop");
         }
         public IActionResult VerkoopItem(int id)
         {
-            Speler speler = spelerrepo.GetSpeler(1);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Speler speler = spelerrepo.GetSpeler(userId);
             Item item = itemrepo.GetItemById(id);
             speler.Geld += item.Prijs;
-            shoprepo.VerkoopItem(item.ID, item.Type, speler.Geld);
+            shoprepo.VerkoopItem(item.ID, item.Type, speler.Geld, speler.ID);
             return RedirectToAction("Shop");
         }
     }
