@@ -18,8 +18,6 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GevechtController : Controller
     {
-        private int spelerHP;
-        private int cpuHP;
         private bool spelerLevend = true;
         private bool cpuLevend = true;
         private bool potionSpelerGebruikt = false;

@@ -24,13 +24,13 @@ namespace RPG_IB2.Controller
         {
             return repo.GetShopItems();
         }
-        public bool KoopItem(int idItem, string type, int geld)
+        public bool KoopItem(int idItem, string type, int geld, int userId)
         {
-            return repo.KoopItem(idItem, type, geld);
+            return repo.KoopItem(idItem, type, geld, userId);
         }
-        public bool VerkoopItem(int idItem, string type, int geld)
+        public bool VerkoopItem(int idItem, string type, int geld, int userId)
         {
-            return repo.VerkoopItem(idItem, type, geld);
+            return repo.VerkoopItem(idItem, type, geld, userId);
         }
     }
 }
