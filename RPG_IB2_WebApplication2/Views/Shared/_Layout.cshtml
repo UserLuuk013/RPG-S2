@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - RPG_IB2_WebApplication2</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-superhero.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -47,7 +47,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Item" asp-action="Index">Item</a></li>
-                        <li><a asp-area="" asp-controller="Game" asp-action="Index">Game</a></li>
+                        <li><a asp-area="" asp-controller="Game" asp-action="GameMenu">Game</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
                     }
                     else
@@ -84,10 +84,10 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; 2019 - RPG_IB2_WebApplication2</p>
-        </footer>
+        </footer>*@
     </div>
 
     <environment include="Development">

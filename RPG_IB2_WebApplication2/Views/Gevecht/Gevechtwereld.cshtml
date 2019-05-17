@@ -2,42 +2,43 @@
 @{
     ViewData["Title"] = "Gevechtwereld";
 }
-<p class="font-weight-bold" style="font-size:50px">Gevechtwereld</p>
-<br />
-<br />
+<p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
+@*<br />*@
 <p style="font-size:20px">
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
     @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
     XP: @Model.Speler.XP &nbsp; &nbsp; &nbsp;
     Geld: @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
-    Instellingen &nbsp; &nbsp; &nbsp;
+    @*Instellingen &nbsp; &nbsp; &nbsp;
     Spelbeschrijving &nbsp; &nbsp; &nbsp;
     Karakter &nbsp; &nbsp; &nbsp;
-    Shop &nbsp; &nbsp; &nbsp;
+    Shop &nbsp; &nbsp; &nbsp;*@
 </p>
 
-<br />
-<p style="font-size:20px">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
-    @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
-    @Model.Speler.HP &nbsp; &nbsp; &nbsp;
+<p style="font-size:20px; left:100px; top:250px">
+    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" width="150" height="175"/>
+    @Model.Speler.Naam &nbsp;
+    @Model.Speler.HP 
+</p>
+
+<p style="font-size:20px; position:absolute; left:500px; top:250px">
+    <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" width="150" height="175"/>
+    @Model.CPU.Naam &nbsp;
+    @Model.CPU.HP
+</p>
+<p style="font-size:20px; left:100px; top:600px">
     @if (Model.SpelerAanZet == true)
     {
-        <div><a asp-controller="Gevecht" asp-action="Aanval">Aanval</a></div>
-        <div><a asp-controller="Gevecht" asp-action="Superaanval">Superaanval</a></div>
-        if (Model.PotionSpelerGebruikt == false)
+        <img src="~/images/AanvalRPG.png" alt="AanvalRPG" onclick="Aanval()" />
+        <img src="~/images/SuperaanvalRPG.png" alt="SuperaanvalRPG" onclick="Superaanval()" />
+        @if (Model.PotionSpelerGebruikt == false)
         {
-            <div><a asp-controller="Gevecht" asp-action="Verdediging">Verdediging</a></div>
+            <img src="~/images/VerdedigingRPG.png" alt="VerdedigingRPG" onclick="Verdediging()" />
         }
     }
-    <br />
-    <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" />
-    @Model.CPU.Naam &nbsp; &nbsp; &nbsp;
-    @Model.CPU.HP &nbsp; &nbsp; &nbsp;
-    <br />
-    @if (Model.SpelerAanZet == false)
+    else
     {
-        <div><a asp-controller="Gevecht" asp-action="GevechtKeuzeCPU">Volgende beurt</a></div>
+        <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" />
     }
 </p>
 
@@ -53,9 +54,24 @@
 {
     <form asp-controller="Game" asp-action="StartGame">
         <script type="text/javascript">
-            window.onload = function () {
+            window.closed = function () {
                 alert("@ViewBag.Beloningen");
             };
         </script>
     </form>
 }
+
+    <script>
+        function Aanval() {
+            window.location.href = "/Gevecht/Aanval"
+        }
+        function Superaanval() {
+            window.location.href = "/Gevecht/Superaanval"
+        }
+        function Verdediging() {
+            window.location.href = "/Gevecht/Verdediging"
+        }
+        function VolgendeBeurt() {
+            window.location.href = "/Gevecht/GevechtKeuzeCPU"
+        }
+    </script>

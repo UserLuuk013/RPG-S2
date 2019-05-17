@@ -41,5 +41,20 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             return speler;
         }
+        public bool NieuwSpel(int spelerId)
+        {
+            try
+            {
+                SqlCommand myCommand = SetCommandProcedure("NieuwSpel");
+                myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
+                myCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x);
+                return false;
+            }
+        }
     }
 }

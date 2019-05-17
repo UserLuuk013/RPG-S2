@@ -12,5 +12,6 @@ namespace RPG_IB2.Datalayer.Interfaces
         bool VoegSpelerToe(Speler speler);
         bool VerwijderSpeler(Speler speler);
         Speler GetSpeler(int spelerId);
+        bool NieuwSpel(int spelerId);
     }
 }

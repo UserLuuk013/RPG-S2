@@ -35,7 +35,11 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             equipDomein = new EquipDomein();
         }
-        public IActionResult Index()
+        public IActionResult GameMenu()
+        {
+            return View();
+        }
+        public IActionResult NewGame()
         {
             List<Personage> personages = personagerepo.GetAllStartPersonages();
             PersonageViewModel vm = new PersonageViewModel()
@@ -48,6 +52,8 @@ namespace RPG_IB2_WebApplication2.Controllers
                 vm.Personages.Add(personagecvt.ViewModelFromPersonage(p));
             }
 
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            spelerrepo.NieuwSpel(userId);
             return View(vm);
         }
         public IActionResult StartGame(int id)
@@ -67,6 +73,11 @@ namespace RPG_IB2_WebApplication2.Controllers
             List<CPU> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);
+            if (HttpContext.Session.GetString("Beloningen") != null)
+            {
+                ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
+                HttpContext.Session.SetString("Beloningen", "");
+            }
             return View(vm);
         }
         public IActionResult Gevechtwereld(int id)

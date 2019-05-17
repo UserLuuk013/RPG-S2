@@ -2,21 +2,17 @@
     ViewData["Title"] = "Gamewereld";
 }
 <p class="font-weight-bold" style="font-size:50px">Gamewereld</p>
-<br />
-<br />
 <p style="font-size:20px">
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
     @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
-    XP: @Model.Speler.XP &nbsp; &nbsp; &nbsp;
-    Geld: @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
+    <img src="~/images/XPRPG.png" alt="XPRPG" /> @Model.Speler.XP &nbsp; &nbsp; &nbsp;
+    <img src="~/images/GeldRPG.png" alt="GeldRPG" /> @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
     Instellingen &nbsp; &nbsp; &nbsp;
     Spelbeschrijving &nbsp; &nbsp; &nbsp;
-    <div><a asp-controller="Personage" asp-action="Personage">Personage</a></div> &nbsp; &nbsp; &nbsp;
-    <div><a asp-controller="Shop" asp-action="Shop">Shop</a></div> &nbsp; &nbsp; &nbsp;
+    <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" />
+    <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()"/>
 </p>
-
-<br />
-<img src="~/images/Map.jpg" alt="Gamewereld Map1" />
+<img src="~/images/Map.jpg" alt="Gamewereld Map1" height="500" width="750"/>
 <br />
 @foreach (var item in Model.CPUs)
 {
@@ -28,3 +24,19 @@
         <div><a asp-controller="Gevecht" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
     </div>
 }
+@if (ViewBag.Beloningen != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Beloningen");
+        };
+    </script>
+}
+<script>
+    function Personage() {
+        window.location.href = "/Personage/Personage"
+    }
+    function Shop() {
+        window.location.href = "/Shop/Shop"
+    }
+</script>

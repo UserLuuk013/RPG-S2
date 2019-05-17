@@ -78,6 +78,11 @@ namespace RPG_IB2_WebApplication2.Controllers
             {
                 ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
             }
+            if (Convert.ToBoolean(HttpContext.Session.GetString("gevechtBeëindigd")) == true)
+            {
+                HttpContext.Session.SetInt32("StartGame", 0);
+                HttpContext.Session.SetString("gevechtBeëindigd", Convert.ToString(false));
+            }
             return View(vm);
         }
         public IActionResult VolgendeBeurt()
@@ -193,7 +198,6 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             HttpContext.Session.SetString("gevechtBeëindigd", Convert.ToString(true));
             return RedirectToAction("Beloningen");
-
         }
         public IActionResult Beloningen()
         {
@@ -214,7 +218,7 @@ namespace RPG_IB2_WebApplication2.Controllers
                 gevechtrepo.GevechtBeëindigd(speler.XP, speler.Geld, speler.ID);
                 HttpContext.Session.SetString("Beloningen", "Verloren! Je hebt " + 50 + " geld en " + 25 + " XP verdiend!");
             }
-            return RedirectToAction("Gevechtwereld");
+            return RedirectToAction("Gamewereld", "Game");
         }
         public IActionResult GevechtKeuzeCPU()
         {

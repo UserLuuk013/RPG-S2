@@ -27,5 +27,9 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.GetSpeler(spelerId);
         }
+        public bool NieuwSpel(int spelerId)
+        {
+            return context.NieuwSpel(spelerId);
+        }
     }
 }

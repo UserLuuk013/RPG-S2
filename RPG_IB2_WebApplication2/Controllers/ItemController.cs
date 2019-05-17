@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RPG_IB2.Datalayer.Interfaces;
 using RPG_IB2.Datalayer.MSSQLContexts;
 using RPG_IB2.Datalayer.Repositories;
 using RPG_IB2.Models;
 using RPG_IB2_WebApplication2.Converters;
+using RPG_IB2_WebApplication2.Datalayer.MSSQLContexts;
+using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using RPG_IB2_WebApplication2.Models;
 
 namespace RPG_IB2_WebApplication2.Controllers
 {
     public class ItemController : Controller
     {
-        IShopContext shopcontext;
-        IItemContext itemcontext;
-        ShopRepository shoprepo;
-        ItemRepository itemrepo;
+        ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
+        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
+        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
         ItemViewModelConverter cvt = new ItemViewModelConverter();
         public ItemController()
         {
-            shopcontext = new ShopMSSQLContext();
-            shoprepo = new ShopRepository(shopcontext);
-            itemcontext = new ItemMSSQLContext();
-            itemrepo = new ItemRepository(itemcontext);
+
         }
         public IActionResult Index()
         {
@@ -44,6 +44,12 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult ItemDetail(int id)
         {
             ItemDetailViewModel vm = cvt.ViewModelFromItem(itemrepo.GetItemById(id));
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Personage personage = personagerepo.GetPersonageBySpelerId(userId);
+            if (vm.Type == "Wapen ")
+            {
+                vm.HP += personage.Damage;
+            }
             return View(vm);
         }
 
