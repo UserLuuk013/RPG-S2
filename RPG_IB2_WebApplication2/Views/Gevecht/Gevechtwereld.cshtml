@@ -4,41 +4,38 @@
 }
 <p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
 @*<br />*@
-<p style="font-size:20px">
+<p class="spelerGegevens">
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
-    @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
-    XP: @Model.Speler.XP &nbsp; &nbsp; &nbsp;
-    Geld: @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
-    @*Instellingen &nbsp; &nbsp; &nbsp;
-    Spelbeschrijving &nbsp; &nbsp; &nbsp;
-    Karakter &nbsp; &nbsp; &nbsp;
-    Shop &nbsp; &nbsp; &nbsp;*@
+    @Model.Speler.Naam
+    @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" />
+    @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" />
 </p>
 
-<p style="font-size:20px; left:100px; top:250px">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" width="150" height="175"/>
+<p class="spelerGevecht">
+    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" class="imageGevecht" />
     @Model.Speler.Naam &nbsp;
     @Model.Speler.HP 
 </p>
 
-<p style="font-size:20px; position:absolute; left:500px; top:250px">
-    <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" width="150" height="175"/>
+<p class="cpuGevecht">
+    <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" class="imageGevecht" />
     @Model.CPU.Naam &nbsp;
     @Model.CPU.HP
 </p>
-<p style="font-size:20px; left:100px; top:600px">
+
+<p class="buttonsGevecht">
     @if (Model.SpelerAanZet == true)
     {
-        <img src="~/images/AanvalRPG.png" alt="AanvalRPG" onclick="Aanval()" />
-        <img src="~/images/SuperaanvalRPG.png" alt="SuperaanvalRPG" onclick="Superaanval()" />
+        <img src="~/images/AanvalRPG.png" alt="AanvalRPG" onclick="Aanval()" class="buttonsRPGZoom"/>
+        <img src="~/images/SuperaanvalRPG.png" alt="SuperaanvalRPG" onclick="Superaanval()" class="buttonsRPGZoom"/>
         @if (Model.PotionSpelerGebruikt == false)
         {
-            <img src="~/images/VerdedigingRPG.png" alt="VerdedigingRPG" onclick="Verdediging()" />
+            <img src="~/images/VerdedigingRPG.png" alt="VerdedigingRPG" onclick="Verdediging()" class="buttonsRPGZoom"/>
         }
     }
     else
     {
-        <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" />
+        <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" class="buttonsRPGZoom"/>
     }
 </p>
 
@@ -50,6 +47,7 @@
         };
     </script>
 }
+
 @if (ViewBag.Beloningen != null)
 {
     <form asp-controller="Game" asp-action="StartGame">

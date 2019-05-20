@@ -2,18 +2,20 @@
     ViewData["Title"] = "Gamewereld";
 }
 <p class="font-weight-bold" style="font-size:50px">Gamewereld</p>
-<p style="font-size:20px">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
-    @Model.Speler.Naam &nbsp; &nbsp; &nbsp;
-    <img src="~/images/XPRPG.png" alt="XPRPG" /> @Model.Speler.XP &nbsp; &nbsp; &nbsp;
-    <img src="~/images/GeldRPG.png" alt="GeldRPG" /> @Model.Speler.Geld &nbsp; &nbsp; &nbsp;
-    Instellingen &nbsp; &nbsp; &nbsp;
-    Spelbeschrijving &nbsp; &nbsp; &nbsp;
-    <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" />
-    <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()"/>
+<p class="spelerGegevens">
+    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" title="@Model.Speler.Personage.Naam"/>
+    @Model.Speler.Naam
+    @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP"/>
+    @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" title="Geld"/>
+    <img src="~/images/InstellingenRPG.png" alt="InstellingenRPG" class="buttonsRPGZoom" title="Instellingen"/>
+    <img src="~/images/SpelbeschrijvingRPG.png" alt="SpelbeschrijvingRPG" class="buttonsRPGZoom" title="Spelbeschrijving"/>
+    <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" class="buttonsRPGZoom" title="Shop"/>
+    <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()" class="buttonsRPGZoom" title="Personage"/>
 </p>
+
 <img src="~/images/Map.jpg" alt="Gamewereld Map1" height="500" width="750"/>
 <br />
+
 @foreach (var item in Model.CPUs)
 {
     <div class="bg-info">
@@ -24,6 +26,7 @@
         <div><a asp-controller="Gevecht" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
     </div>
 }
+
 @if (ViewBag.Beloningen != null)
 {
     <script type="text/javascript">
@@ -32,6 +35,7 @@
         };
     </script>
 }
+
 <script>
     function Personage() {
         window.location.href = "/Personage/Personage"

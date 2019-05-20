@@ -64,7 +64,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             }
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             personagerepo.SelecteerPersonage((int)HttpContext.Session.GetInt32("personageId"), userId);
-            return RedirectToAction("Gamewereld", "Game");
+            return RedirectToAction("Gamewereld");
         }
         public IActionResult Gamewereld()
         {
@@ -77,7 +77,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             {
                 ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
                 HttpContext.Session.SetString("Beloningen", "");
-            }
+            } 
             return View(vm);
         }
         public IActionResult Gevechtwereld(int id)

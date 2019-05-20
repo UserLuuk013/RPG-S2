@@ -93,12 +93,12 @@ namespace RPG_IB2_WebApplication2.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                User user = new User(-1, model.Email, model.Email);
+                User user = new User(-1, model.Username, model.Email);
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    HttpContext.Session.SetInt32("CurrentUserID", _userManager.FindByEmailAsync(model.Email).Result.Id);
                     return RedirectToAction(returnUrl);
                 }
                 ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);

@@ -35,3 +35,45 @@ body {
         display: none;
     }
 }
+
+/* Gevechtwereld */
+.spelerGevecht {
+    font-size: 20px;
+    left: 100px;
+    top: 250px;
+}
+
+.cpuGevecht {
+    font-size: 20px;
+    position: absolute;
+    left: 500px;
+    top: 250px;
+}
+
+.buttonsGevecht {
+    font-size: 20px;
+    left: 100px;
+    top: 600px;
+}
+
+.imageGevecht {
+    width: 150px;
+    height: 175px;
+}
+
+/* Algemeen */
+.spelerGegevens {
+    font-size: 20px;
+    word-spacing: 25px;
+}
+
+.buttonsRPGZoom {
+    padding: 10px;
+    transition: transform .2s;
+}
+
+.buttonsRPGZoom:hover {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
