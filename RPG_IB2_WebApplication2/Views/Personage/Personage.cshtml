@@ -13,9 +13,7 @@
     </div>
     <img src="data:image/png;base64, @Model.SpelerPersonage.Foto" alt="@Model.SpelerPersonage.AlternateText" />
     <div>
-        <a asp-action="PersonageDetail" asp-route-id="@Model.SpelerPersonage.ID">
-            <input type="submit" value="Personage Details" class="btn btn-default" />
-        </a>
+        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @Model.SpelerPersonage.ID)" class="buttonsRPGZoom" title="Details" />
     </div>
 </div>
 <br />
@@ -24,25 +22,20 @@
 </p>
 @foreach (var item in Model.ShopPersonages)
 {
-<div class="bg-info">
-    <div>
-        <div>Naam: @item.Naam</div>
+    <div class="bg-info">
+        <div>
+            <div>Naam: @item.Naam</div>
+        </div>
+        <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
+        <div>
+            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
+            <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @item.ID)" class="buttonsRPGZoom" title="Upgrade" />
+        </div>
     </div>
-    <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
-    <div>
-        <a asp-action="PersonageDetail" asp-route-id="@item.ID">
-            <input type="submit" value="Personage Details" class="btn btn-default" />
-        </a>
-        <a asp-action="UpgradePersonage" asp-route-id="@item.ID">
-            <input type="submit" value="UpgradePersonage" class="btn btn-default" onclick="confirm('Weet je zeker dat je jouw Personage wilt upgraden?')" />
-        </a>
-    </div>
-</div>
 }
 <br />
-<a asp-controller="Game" asp-action="Gamewereld">
-    <input type="submit" value="Back" class="btn btn-default" />
-</a>
+<img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
+
 @if (User.IsInRole("Admin"))
 {
 
@@ -55,3 +48,27 @@
         };
     </script>
 }
+
+<script>
+    function Terug() {
+        window.location.href = "/Game/Gamewereld"
+    }
+    function Detail(x) {
+        if (x == undefined) {
+            x = 0;
+        }
+        window.location.href = "/Personage/PersonageDetail/" + x;
+    }
+    function Upgrade(y) {
+        if (y == undefined) {
+            y = 0;
+        }
+        var r = confirm('Weet je zeker dat je jouw Personage wilt upgraden?');
+        if (r) {
+            window.location.href = "/Personage/UpgradePersonage/" + y;
+        }
+        else {
+            window.location.href = "/Personage/Personage"
+        }
+    }
+</script>

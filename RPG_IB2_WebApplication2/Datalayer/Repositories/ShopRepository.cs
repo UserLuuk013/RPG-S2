@@ -23,9 +23,9 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VerwijderShop(shop);
         }
-        public List<Item> GetShopItems()
+        public List<Item> GetShopItems(int userId)
         {
-            return context.GetShopItems();
+            return context.GetShopItems(userId);
         }
         public bool KoopItem(int idItem, string type, int geld, int userId)
         {

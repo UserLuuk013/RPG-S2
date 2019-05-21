@@ -120,9 +120,11 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             Random rnd = new Random();
             int rndsuperaanval = rnd.Next(1, 5);
+
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
             CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
             Personage personage = JsonConvert.DeserializeObject<Personage>(HttpContext.Session.GetString("Personage"));
+
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
             {
                 if (rndsuperaanval == 1)

@@ -23,11 +23,12 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         {
             return false;
         }
-        public List<Item> GetShopItems()
+        public List<Item> GetShopItems(int userId)
         {
             List<Item> items = new List<Item>();
 
             SqlCommand myCommand = SetCommandProcedure("GetShopItems");
+            myCommand.Parameters.AddWithValue("@IDAccount", userId);
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {
                 while (myReader.Read())

@@ -25,16 +25,12 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             equipDomein = new EquipDomein();
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
         public IActionResult Shop()
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpeler(userId);
             List<Item> playeritems = itemrepo.GetPlayerItemsById(speler.ID);
-            List<Item> shopitems = shoprepo.GetShopItems();
+            List<Item> shopitems = shoprepo.GetShopItems(speler.ID);
             Shop shop = equipDomein.VulShop(playeritems, shopitems, speler);
             ShopDetailViewModel vm = shopcvt.ViewModelFromShop(shop);
 

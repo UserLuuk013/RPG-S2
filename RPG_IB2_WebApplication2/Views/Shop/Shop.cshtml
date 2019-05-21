@@ -18,14 +18,10 @@
     <div>
         <div>Naam: @item.Naam</div>
     </div>
-    <a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">
-        <input type="submit" value="Item Details" class="btn btn-default" />
-    </a>
+    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
     @if (item.ID != 1 && item.ID != 7)
     {
-        <a asp-action="VerkoopItem" asp-route-id="@item.ID">
-            <input type="submit" value="VerkoopItem" class="btn btn-default" onclick="confirm('Weet je zeker dat je het item wilt verkopen?')" />
-        </a>
+        <img src="~/images/ShopRPG.png" alt="VerkoopItemRPG" onclick="VerkoopItem(z = @item.ID)" class="buttonsRPGZoom" title="VerkoopItem" />
     }
 </div>
     <br />
@@ -40,19 +36,13 @@
         <div>
             <div>Naam: @item.Naam</div>
         </div>
-        <a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ID">
-            <input type="submit" value="Item Details" class="btn btn-default" />
-        </a>
-        <a asp-action="KoopItem" asp-route-id="@item.ID">
-            <input type="submit" value="KoopItem" class="btn btn-default" onclick="confirm('Weet je zeker dat je het item wilt kopen?')" />
-        </a>
+        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
+        <img src="~/images/ShopRPG.png" alt="KoopItemRPG" onclick="KoopItem(y = @item.ID)" class="buttonsRPGZoom" title="KoopItem" />
     </div>
     <br />
 }
 <br />
-<a asp-controller="Game" asp-action="Gamewereld">
-    <input type="submit" value="Back" class="btn btn-default" />
-</a>
+<img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
 
 @*@if (User.IsInRole("Admin"))
 {
@@ -69,3 +59,39 @@
         };
     </script>
 }
+
+<script>
+    function Terug() {
+        window.location.href = "/Game/Gamewereld"
+    }
+    function Detail(x) {
+        if (x == undefined) {
+            x = 0;
+        }
+        window.location.href = "/Item/ItemDetail/" + x;
+    }
+    function KoopItem(y) {
+        if (y == undefined) {
+            y = 0;
+        }
+        var r = confirm('Weet je zeker dat je het item wilt kopen?');
+        if (r) {
+            window.location.href = "/Shop/KoopItem/" + y;
+        }
+        else {
+            window.location.href = "/Shop/Shop"
+        }
+    }
+    function VerkoopItem(z) {
+        if (z == undefined) {
+            z = 0;
+        }
+        var s = confirm('Weet je zeker dat je het item wilt verkopen?');
+        if (s) {
+            window.location.href = "/Shop/VerkoopItem/" + z;
+        }
+        else {
+            window.location.href = "/Shop/Shop"
+        }
+    }
+</script>
