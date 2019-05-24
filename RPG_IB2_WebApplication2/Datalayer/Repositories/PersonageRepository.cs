@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2_WebApplication2.Datalayer.Repositories
 {
-    class PersonageRepository
+    public class PersonageRepository
     {
         private IPersonageContext context;
         public PersonageRepository(IPersonageContext context)

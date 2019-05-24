@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2_WebApplication2.Datalayer.Interfaces
 {
-    interface IPersonageContext
+    public interface IPersonageContext
     {
         int VoegPersonageToe(Personage personage);
         bool UpdatePersonage(Personage personage);

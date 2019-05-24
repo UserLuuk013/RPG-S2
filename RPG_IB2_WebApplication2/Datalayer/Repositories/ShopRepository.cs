@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2.Datalayer.Repositories
 {
-    class ShopRepository
+    public class ShopRepository
     {
         private IShopContext context;
         public ShopRepository(IShopContext context)

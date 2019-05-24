@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2.Datalayer.Interfaces
 {
-    interface IShopContext
+    public interface IShopContext
     {
         bool VoegShopToe(Shop shop);
         bool VerwijderShop(Shop shop);
