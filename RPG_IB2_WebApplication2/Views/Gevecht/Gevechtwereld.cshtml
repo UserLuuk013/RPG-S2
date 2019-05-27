@@ -2,43 +2,44 @@
 @{
     ViewData["Title"] = "Gevechtwereld";
 }
+<body>
+    <p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
+    @*<br />*@
+    <p class="spelerGegevens">
+        <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
+        @Model.Speler.Naam
+        @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" />
+        @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" />
+    </p>
 
-<p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
-@*<br />*@
-<p class="spelerGegevens">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
-    @Model.Speler.Naam
-    @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" />
-    @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" />
-</p>
+    <p class="spelerGevecht">
+        <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" class="imageGevecht" />
+        @Model.Speler.Naam &nbsp;
+        @Model.Speler.HP
+    </p>
 
-<p class="spelerGevecht">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" class="imageGevecht" />
-    @Model.Speler.Naam &nbsp;
-    @Model.Speler.HP 
-</p>
+    <p class="cpuGevecht">
+        <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" class="imageGevecht" />
+        @Model.CPU.Naam &nbsp;
+        @Model.CPU.HP
+    </p>
 
-<p class="cpuGevecht">
-    <img src="data:image/png;base64, @Model.CPU.Foto" alt="@Model.CPU.Naam" class="imageGevecht" />
-    @Model.CPU.Naam &nbsp;
-    @Model.CPU.HP
-</p>
-
-<p class="buttonsGevecht">
-    @if (Model.SpelerAanZet == true)
-    {
-        <img src="~/images/AanvalRPG.png" alt="AanvalRPG" onclick="Aanval()" class="buttonsRPGZoom"/>
-        <img src="~/images/SuperaanvalRPG.png" alt="SuperaanvalRPG" onclick="Superaanval()" class="buttonsRPGZoom"/>
-        @if (Model.PotionSpelerGebruikt == false)
+    <p class="buttonsGevecht">
+        @if (Model.SpelerAanZet == true)
         {
-            <img src="~/images/VerdedigingRPG.png" alt="VerdedigingRPG" onclick="Verdediging()" class="buttonsRPGZoom"/>
+            <img src="~/images/AanvalRPG.png" alt="AanvalRPG" onclick="Aanval()" class="buttonsRPGZoom" />
+            <img src="~/images/SuperaanvalRPG.png" alt="SuperaanvalRPG" onclick="Superaanval()" class="buttonsRPGZoom" />
+            @if (Model.PotionSpelerGebruikt == false)
+            {
+                <img src="~/images/VerdedigingRPG.png" alt="VerdedigingRPG" onclick="Verdediging()" class="buttonsRPGZoom" />
+            }
         }
-    }
-    else
-    {
-        <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" class="buttonsRPGZoom"/>
-    }
-</p>
+        else
+        {
+            <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" class="buttonsRPGZoom" />
+        }
+    </p>
+</body>
 
 @if (ViewBag.SuperAanval != null)
 {
