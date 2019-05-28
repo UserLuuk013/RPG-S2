@@ -7,6 +7,17 @@ namespace RPG_IB2_WebApplication2.Models
 {
     public class GevechtViewModel
     {
-        public List<GevechtDetailViewModel> Gevechten = new List<GevechtDetailViewModel>();
+        private List<GevechtDetailViewModel> gevechten = new List<GevechtDetailViewModel>();
+        public List<GevechtDetailViewModel> Gevechten
+        {
+            get
+            {
+                return this.gevechten;
+            }
+            set
+            {
+                this.gevechten = value;
+            }
+        }
     }
 }

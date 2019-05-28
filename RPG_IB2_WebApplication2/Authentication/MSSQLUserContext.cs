@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2_WebApplication2.Authentication
 {
-    public class MSSQLUserContext : IUserStore<User>, IUserPasswordStore<User>, IUserEmailStore<User>, IUserRoleStore<User>
+    public class MSSQLUserContext : IUserPasswordStore<User>, IUserEmailStore<User>, IUserRoleStore<User>
     {
         private readonly string _connectionString;
         public MSSQLUserContext(IConfiguration configuration)
@@ -44,9 +44,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                     return Task.FromResult<IdentityResult>(IdentityResult.Success);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
         }
@@ -128,8 +128,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 throw;
             }
         }
@@ -156,9 +157,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
         }
@@ -213,9 +214,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
         }
@@ -266,9 +267,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
 

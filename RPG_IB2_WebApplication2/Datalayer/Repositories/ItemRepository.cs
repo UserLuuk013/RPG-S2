@@ -10,7 +10,7 @@ namespace RPG_IB2.Datalayer.Repositories
 {
     class ItemRepository
     {
-        private IItemContext context;
+        private readonly IItemContext context;
         public ItemRepository(IItemContext context)
         {
             this.context = context;

@@ -9,7 +9,7 @@ namespace RPG_IB2.Datalayer.Repositories
 {
     class CPURepository
     {
-        private ICPUContext context;
+        private readonly ICPUContext context;
         public CPURepository(ICPUContext context)
         {
             this.context = context;

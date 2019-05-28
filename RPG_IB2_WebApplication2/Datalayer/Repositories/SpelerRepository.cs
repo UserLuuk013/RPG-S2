@@ -10,7 +10,7 @@ namespace RPG_IB2.Datalayer.Repositories
 {
     class SpelerRepository
     {
-        private ISpelerContext context;
+        private readonly ISpelerContext context;
         public SpelerRepository(ISpelerContext context)
         {
             this.context = context;

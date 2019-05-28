@@ -29,7 +29,7 @@ namespace RPG_IB2_WebApplication2.Authentication
 
         public void Dispose()
         {
-
+            //nothing to do.
         }
 
         public Task<Role> FindByIdAsync(string roleId, CancellationToken cancellationToken)
@@ -58,9 +58,9 @@ namespace RPG_IB2_WebApplication2.Authentication
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
         }

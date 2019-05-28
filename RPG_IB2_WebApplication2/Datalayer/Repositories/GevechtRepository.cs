@@ -9,7 +9,7 @@ namespace RPG_IB2.Datalayer.Repositories
 {
     class GevechtRepository
     {
-        private IGevechtContext context;
+        private readonly IGevechtContext context;
         public GevechtRepository(IGevechtContext context)
         {
             this.context = context;

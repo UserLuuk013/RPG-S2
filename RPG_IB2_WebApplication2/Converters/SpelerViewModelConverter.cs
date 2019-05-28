@@ -9,8 +9,8 @@ namespace RPG_IB2_WebApplication2.Converters
 {
     public class SpelerViewModelConverter
     {
-        ItemViewModelConverter itemcvt = new ItemViewModelConverter();
-        PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
+        private readonly ItemViewModelConverter itemcvt = new ItemViewModelConverter();
+        private readonly PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         public Speler ViewModelToSpeler(SpelerDetailViewModel vm)
         {
             Speler s = new Speler()

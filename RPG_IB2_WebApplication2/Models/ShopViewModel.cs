@@ -7,6 +7,17 @@ namespace RPG_IB2_WebApplication2.Models
 {
     public class ShopViewModel
     {
-        public List<ShopDetailViewModel> Shops = new List<ShopDetailViewModel>();
+        private List<ShopDetailViewModel> shops = new List<ShopDetailViewModel>();
+        public List<ShopDetailViewModel> Shops
+        {
+            get
+            {
+                return this.shops;
+            }
+            set
+            {
+                this.shops = value;
+            }
+        }
     }
 }

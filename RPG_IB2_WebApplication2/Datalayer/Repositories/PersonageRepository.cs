@@ -9,7 +9,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
 {
     public class PersonageRepository
     {
-        private IPersonageContext context;
+        private readonly IPersonageContext context;
         public PersonageRepository(IPersonageContext context)
         {
             this.context = context;

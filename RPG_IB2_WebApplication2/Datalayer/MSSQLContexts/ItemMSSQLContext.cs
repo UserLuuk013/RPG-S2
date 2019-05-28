@@ -23,7 +23,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             myCommand.Parameters.AddWithValue("@HP", 10);
             myCommand.Parameters.AddWithValue("@Prijs", 2000);
             myCommand.Parameters.AddWithValue("@Type", "Wapen");
-            //myCommand.ExecuteNonQuery();
 
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {

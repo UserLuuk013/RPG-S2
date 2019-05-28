@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RPG_IB2;
-//so there i was bbq sauce on my titties
 using RPG_IB2.Datalayer.Interfaces;
 using RPG_IB2.Datalayer.MSSQLContexts;
 using RPG_IB2.Datalayer.Repositories;
@@ -20,18 +19,12 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GameController : Controller
     {
-        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-        SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
-        ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
-        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
-        PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
-        SpelerViewModelConverter spelercvt = new SpelerViewModelConverter();
-        GameViewModelConverter gamecvt = new GameViewModelConverter();
-        GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
-        ShopViewModelConverter shopcvt = new ShopViewModelConverter();
-        PersonageShopViewModelConverter personageshopcvt = new PersonageShopViewModelConverter();
-        EquipDomein equipDomein;
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+        private readonly CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        private readonly PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
+        private readonly GameViewModelConverter gamecvt = new GameViewModelConverter();
+        private readonly EquipDomein equipDomein;
         public GameController()
         {
             equipDomein = new EquipDomein();

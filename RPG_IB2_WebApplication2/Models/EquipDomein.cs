@@ -13,9 +13,8 @@ namespace RPG_IB2_WebApplication2.Models
 {
     public class EquipDomein
     {
-        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
-        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-        CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        private readonly ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
         public Speler VulSpeler(Speler speler)
         {
             speler.Wapen = itemrepo.GetPlayerItemsById(speler.ID)[0];

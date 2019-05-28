@@ -28,29 +28,13 @@ namespace RPG_IB2_WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                 This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-            */
-
             services.AddTransient<IUserStore<User>, MSSQLUserContext>();
             services.AddTransient<IRoleStore<Role>, MSSQLRoleContext>();
             services.AddIdentity<User, Role>().AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDistributedMemoryCache();
-            services.AddSession(/*options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = true;
-            }*/);
+            services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

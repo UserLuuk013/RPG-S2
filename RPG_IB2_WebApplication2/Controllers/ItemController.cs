@@ -18,10 +18,9 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class ItemController : Controller
     {
-        ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
-        ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
-        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-        ItemViewModelConverter cvt = new ItemViewModelConverter();
+        private readonly ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        private readonly ItemViewModelConverter cvt = new ItemViewModelConverter();
         public ItemController()
         {
 

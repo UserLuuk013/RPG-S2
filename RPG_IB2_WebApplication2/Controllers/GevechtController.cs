@@ -18,25 +18,18 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GevechtController : Controller
     {
-        private bool spelerLevend = true;
-        private bool cpuLevend = true;
-        private bool potionSpelerGebruikt = false;
-        private bool potionCPUGebruikt = false;
-        private bool gevechtBeëindigd = false;
-        EquipDomein equipDomein;
-        GevechtRepository gevechtrepo = new GevechtRepository(new GevechtMSSQLContext());
-        SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
-        PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-        GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
-        private GevechtDetailViewModel vm;
+        private readonly EquipDomein equipDomein;
+        private readonly GevechtRepository gevechtrepo = new GevechtRepository(new GevechtMSSQLContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
+        private readonly CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        private readonly GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
         public GevechtController()
         {
             equipDomein = new EquipDomein();
         }
         public IActionResult Gevechtwereld(int id)
         {
-            //User CurrentUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("CurrentUser"));
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
 
             if (HttpContext.Session.GetInt32("StartGame") == null || HttpContext.Session.GetInt32("StartGame") == 0)
@@ -57,7 +50,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             Gevecht gevecht = equipDomein.VulGevecht(speler, cpu);
             HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(gevecht.Speler));
             HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(gevecht.CPU));
-            vm = gevechtcvt.ViewModelFromGevecht(gevecht);
+            GevechtDetailViewModel vm = gevechtcvt.ViewModelFromGevecht(gevecht);
             vm.SpelerAanZet = Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet"));
             vm.PotionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
 
@@ -158,8 +151,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
             CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
-            potionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
-            potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
+            bool potionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
+            bool potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")) && potionSpelerGebruikt == false)
             {
                 speler.HP += speler.Potion.HP;
@@ -203,8 +196,8 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult Beloningen()
         {
-            spelerLevend = Convert.ToBoolean(HttpContext.Session.GetString("spelerLevend"));
-            cpuLevend = Convert.ToBoolean(HttpContext.Session.GetString("cpuLevend"));
+            bool spelerLevend = Convert.ToBoolean(HttpContext.Session.GetString("spelerLevend"));
+            bool cpuLevend = Convert.ToBoolean(HttpContext.Session.GetString("cpuLevend"));
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
             if (spelerLevend == true && cpuLevend == false)
             {
@@ -225,7 +218,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult GevechtKeuzeCPU()
         {
             CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
-            potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
+            bool potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
             if (cpu.HP <= 5 && potionCPUGebruikt == false)
             {
                 return RedirectToAction("Verdediging");

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-//using System.Windows.Forms;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace RPG_IB2.Datalayer
 {
     class DataConnection
     {
-        private SqlConnection conn;
+        private readonly SqlConnection conn;
 
         public DataConnection() //Nieuwe connectie wordt aangemaakt a.d.h.v. connectionstring.
         {
@@ -36,7 +35,6 @@ namespace RPG_IB2.Datalayer
             catch (Exception x)
             {
                 Console.WriteLine("Couldn't connect to datbase: " + x);
-                //MessageBox.Show("Couldn't connect to database: " + x);
                 throw;
             }
             return conn;
@@ -88,14 +86,6 @@ namespace RPG_IB2.Datalayer
                 throw;
             }
         }
-
-        //public DataTable data(SqlCommand sqlCommand)
-        //{
-            //SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
-            //DataTable tbl1 = new DataTable();
-            //adapter.Fill(tbl1);
-            //return tbl1;
-        //}
 
         public SqlDataReader ExecuteReader(SqlCommand myCommand) //De Reader wordt geëxecute.
         {

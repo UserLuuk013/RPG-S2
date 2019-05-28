@@ -16,9 +16,15 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
                 {
                     return true;
                 }
-
+                else
+                {
+                    return false;
+                }
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
         public bool Registreren(User user)
         {
