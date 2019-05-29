@@ -39,26 +39,34 @@ body {
 /* Gevechtwereld */
 .spelerGevecht {
     font-size: 20px;
-    left: 100px;
-    top: 250px;
+    position: absolute;
+    left: 150px;
+    top: 325px;
 }
 
 .cpuGevecht {
     font-size: 20px;
     position: absolute;
     left: 500px;
-    top: 250px;
+    top: 275px;
 }
 
 .buttonsGevecht {
     font-size: 20px;
-    left: 100px;
-    top: 600px;
+    position: absolute;
+    left: 120px;
+    top: 510px;
 }
 
 .imageGevecht {
     width: 150px;
     height: 175px;
+}
+
+#bgGevecht {
+    background-image: url(../images/WOODS.jpg);
+    height: 500px;
+    width: 750px;
 }
 
 /* Algemeen */

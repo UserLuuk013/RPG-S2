@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "Gevechtwereld";
 }
-<body>
-    <p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
-    @*<br />*@
+<p class="font-weight-bold" style="font-size:30px">Gevechtwereld</p>
+@*<br />*@
+<div id="bgGevecht">
     <p class="spelerGegevens">
         <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" />
         @Model.Speler.Naam
@@ -39,8 +39,7 @@
             <img src="~/images/VolgendeBeurtRPG.png" alt="VolgendeBeurtRPG" onclick="VolgendeBeurt()" class="buttonsRPGZoom" />
         }
     </p>
-</body>
-
+</div>
 @if (ViewBag.SuperAanval != null)
 {
     <script type="text/javascript">
@@ -50,28 +49,17 @@
     </script>
 }
 
-@if (ViewBag.Beloningen != null)
-{
-    <form asp-controller="Game" asp-action="StartGame">
-        <script type="text/javascript">
-            window.closed = function () {
-                alert("@ViewBag.Beloningen");
-            };
-        </script>
-    </form>
-}
-
-    <script>
-        function Aanval() {
-            window.location.href = "/Gevecht/Aanval"
-        }
-        function Superaanval() {
-            window.location.href = "/Gevecht/Superaanval"
-        }
-        function Verdediging() {
-            window.location.href = "/Gevecht/Verdediging"
-        }
-        function VolgendeBeurt() {
-            window.location.href = "/Gevecht/GevechtKeuzeCPU"
-        }
-    </script>
+<script>
+    function Aanval() {
+        window.location.href = "/Gevecht/Aanval"
+    }
+    function Superaanval() {
+        window.location.href = "/Gevecht/Superaanval"
+    }
+    function Verdediging() {
+        window.location.href = "/Gevecht/Verdediging"
+    }
+    function VolgendeBeurt() {
+        window.location.href = "/Gevecht/GevechtKeuzeCPU"
+    }
+</script>

@@ -1,12 +1,10 @@
-﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RPG_IB2.Datalayer.Repositories;
-using RPG_IB2_WebApplication2;
 using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using RPG_IB2_WebApplication2.Datalayer.TestContexts;
 using RPG_IB2_WebApplication2.Models;
 
-namespace UnitTests_RPG_WebApplication
+namespace UnitTests_RPG
 {
     [TestClass]
     public class UnitTest1
