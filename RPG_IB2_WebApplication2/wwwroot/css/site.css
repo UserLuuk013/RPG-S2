@@ -36,6 +36,45 @@ body {
     }
 }
 
+/* Gamewereld */
+.gameTegenstander1 {
+    position: absolute;
+    left: 150px;
+    top: 325px;
+    width: 50px;
+    height: 40px;
+}
+
+.gameTegenstander2 {
+    position: absolute;
+    left: 150px;
+    top: 400px;
+}
+
+.gameTegenstander3 {
+    position: absolute;
+    left: 150px;
+    top: 500px;
+}
+
+.gameTegenstander4 {
+    position: absolute;
+    left: 150px;
+    top: 600px;
+}
+
+.gameTegenstander5 {
+    position: absolute;
+    left: 150px;
+    top: 700px;
+}
+
+#bgGamewereld {
+    background-image: url(~/images/Map.jpg);
+    height: 500px;
+    width: 750px;
+}
+
 /* Gevechtwereld */
 .spelerGevecht {
     font-size: 20px;
@@ -67,6 +106,12 @@ body {
     background-image: url(../images/WOODS.jpg);
     height: 500px;
     width: 750px;
+}
+
+/* Shop */
+.itemDetails{
+    left: 200px;
+    top: 100px;
 }
 
 /* Algemeen */

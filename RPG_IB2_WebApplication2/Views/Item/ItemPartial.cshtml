@@ -1,0 +1,53 @@
+﻿@model RPG_IB2_WebApplication2.Models.ItemDetailViewModel
+@{
+    Layout = null;
+}
+
+<div class="col-md-6">
+    <h2>@Model.Naam</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    <Label> ID </Label>
+                </td>
+                <td>
+                    @Model.Id
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <Label> Naam </Label>
+                </td>
+                <td>
+                    @Model.Naam
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <Label> Prijs </Label>
+                </td>
+                <td>
+                    @Model.Prijs
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <Label> HP </Label>
+                </td>
+                <td>
+                    @Model.HP
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <Label> Type </Label>
+                </td>
+                <td>
+                    @Model.Type
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

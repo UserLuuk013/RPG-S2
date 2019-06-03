@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RPG_IB2.Datalayer.Repositories;
+using RPG_IB2_WebApplication2.Controllers;
 using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using RPG_IB2_WebApplication2.Datalayer.TestContexts;
 using RPG_IB2_WebApplication2.Models;
@@ -20,6 +21,9 @@ namespace UnitTests_RPG
             accountTestContext = new AccountTestContext();
         }
         //TestCases 01 en 02
+        //Deze TestMethod test of het gevecht nog steeds bezig is of al voorbij is. Als de HP van Speler
+        //of van CPU gelijk of lager is dan 0 is het gevecht voorbij. Als dit niet het geval is, is het
+        //gevecht nog steeds bezig.
         [TestMethod]
         public void TestMethod1()
         {
@@ -27,13 +31,18 @@ namespace UnitTests_RPG
         }
 
         //TestCases 03 en 04
+        //Deze TestMethod test de hoeveelheid XP op basis van het resultaat van het gevecht. Als de Speler
+        //het gevecht wint is het aantal XP maximaal. Als dit niet het geval is, is het aantal XP minimaal.
         [TestMethod]
         public void TestMethod2()
         {
-
+            //Niet van toepassing
         }
 
         //TestCases 05 en 06
+        //Deze TestMethod test de hoeveelheid geld op basis van het resultaat van het gevecht. Als de Speler
+        //het gevecht wint is de hoeveelheid geld maximaal. Als dit niet het geval is, is de hoeveelheid geld
+        //minimaal.
         [TestMethod]
         public void TestMethod3()
         {
@@ -41,6 +50,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 07, 08 en 09
+        //Deze TestMethod test of er aan de vereisten wordt voldaan om een item te kopen. Als er een item is
+        //geselecteerd en er is voldoende geld aanwezig voor de aankoop is de aankoop voltooid. Als een van
+        //deze vereisten ontbreekt of beide niet aanwezig zijn mislukt de aankoop.
         [TestMethod]
         public void TestMethod4()
         {
@@ -49,6 +61,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 10 en 11
+        //Deze TestMethod test of de Speler voldoende XP heeft voor een upgrade van het personage. Als de Speler
+        //voldoende XP heeft voor een volgende upgrade is de upgrade voltooid. Als dit niet het geval is
+        //mislukt de upgrade.
         [TestMethod]
         public void TestMethod5()
         {
@@ -57,6 +72,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 12 en 13
+        //Deze TestMethod test of de Speler een item heeft geselecteerd om te verkopen. Als de Speler een item
+        //heeft geselecteerd om te verkopen is de verkoop van het geselecteerde item gelukt. Als dit niet het
+        //geval is, is de verkoop van het item mislukt.
         [TestMethod]
         public void TestMethod6()
         {
@@ -65,6 +83,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 14 en 15
+        //Deze TestMethod test of de Speler een personage heeft geselecteerd om mee te spelen. Als de Speler een
+        //personage heeft geselecteerd om mee te mee te spelen wordt het spel gestart. Als dit niet het geval is
+        //wordt het spel niet gestart.
         [TestMethod]
         public void TestMethod7()
         {
@@ -73,6 +94,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 16 en 17
+        //Deze TestMethod test of de Speler de vereiste gegevens heeft ingevuld om een account mee aan te maken.
+        //Als de Speler de vereiste en juiste gegevens heeft ingevoerd om een account mee aan te maken is het
+        //registreren voltooid. Als dit niet het geval is, is het registreren mislukt.
         [TestMethod]
         public void TestMethod8()
         {
@@ -82,6 +106,8 @@ namespace UnitTests_RPG
         }
 
         //TestCases 18, 19 en 20
+        //Deze TestMethod test of de Speler de vereiste en juiste gegevens heeft ingevuld om mee in te loggen.
+        //Als dit het geval is, is het inloggen voltooid. Als dit niet het geval is, is het inloggen mislukt.
         [TestMethod]
         public void TestMethod9()
         {
@@ -98,6 +124,9 @@ namespace UnitTests_RPG
         }
 
         //TestCases 23 en 24
+        //Deze TestMethod test of de Speler een personage heeft geselecteerd om mee te spelen. Als de Speler een
+        //personage heeft geselecteerd om mee te mee te spelen wordt het spel gestart. Als dit niet het geval is
+        //wordt het spel niet gestart.
         [TestMethod]
         public void TestMethod11()
         {

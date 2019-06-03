@@ -11,7 +11,7 @@ namespace RPG_IB2.Datalayer
 {
     class DataConnection
     {
-        private readonly SqlConnection conn;
+        private SqlConnection conn;
 
         public DataConnection() //Nieuwe connectie wordt aangemaakt a.d.h.v. connectionstring.
         {
@@ -57,7 +57,7 @@ namespace RPG_IB2.Datalayer
         {
             try
             {
-                SqlConnection conn = OpenConn();
+                conn = OpenConn();
                 SqlCommand myCommand = new SqlCommand(procedure, conn);
                 myCommand.CommandType = CommandType.StoredProcedure;
                 return myCommand;
@@ -74,7 +74,7 @@ namespace RPG_IB2.Datalayer
         {
             try
             {
-                SqlConnection conn = OpenConn();
+                conn = OpenConn();
                 SqlCommand myCommand = new SqlCommand(query, conn);
                 myCommand.CommandType = CommandType.Text;
                 return myCommand;

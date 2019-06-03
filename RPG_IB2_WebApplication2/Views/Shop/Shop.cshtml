@@ -1,55 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Shop";
 }
-<body>
-</body>
-<p style="font-size:30px">
-    Shop
-</p>
-<p style="font-size:20px">
-    Geld speler: @Model.Geld
-    <br />
-    Speler Items
+<div class="row">
+    <div class="col-md-6">
+        <p style="font-size:30px">
+            Shop
+        </p>
+        <p style="font-size:20px">
+            Geld: @Model.Geld
+            <br />
+            Speler Items
 
-</p>
-@foreach (var item in Model.PlayerItems)
-{
-<div class="bg-info">
-    <div>
-        <div>Naam: @item.Naam</div>
+        </p>
+        @foreach (var item in Model.PlayerItems)
+        {
+            <div>
+                <div>@item.Naam</div>
+            </div>
+            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
+            @if (item.ID != 1 && item.ID != 7)
+            {
+                <img src="~/images/ShopRPG.png" alt="VerkoopItemRPG" onclick="VerkoopItem(z = @item.ID)" class="buttonsRPGZoom" title="VerkoopItem" />
+            }
+            <br />
+        }
+        <br />
+        <p style="font-size:20px">
+            Shop Items
+        </p>
+        @foreach (var item in Model.ShopItems)
+        {
+            <div>
+                <div>@item.Naam</div>
+            </div>
+            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
+            <img src="~/images/ShopRPG.png" alt="KoopItemRPG" onclick="KoopItem(y = @item.ID)" class="buttonsRPGZoom" title="KoopItem" />
+            <br />
+        }
+        <br />
+        <img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
     </div>
-    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
-    @if (item.ID != 1 && item.ID != 7)
-    {
-        <img src="~/images/ShopRPG.png" alt="VerkoopItemRPG" onclick="VerkoopItem(z = @item.ID)" class="buttonsRPGZoom" title="VerkoopItem" />
-    }
+    <div class="col-md-6">
+        <div id="changespace" />
+    </div>
 </div>
-    <br />
-}
-<br />
-<p style="font-size:20px">
-    Shop Items
-</p>
-@foreach (var item in Model.ShopItems)
-{
-    <div class="bg-info">
-        <div>
-            <div>Naam: @item.Naam</div>
-        </div>
-        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
-        <img src="~/images/ShopRPG.png" alt="KoopItemRPG" onclick="KoopItem(y = @item.ID)" class="buttonsRPGZoom" title="KoopItem" />
-    </div>
-    <br />
-}
-<br />
-<img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
-
-@*@if (User.IsInRole("Admin"))
-{
-    <div>
-        <a asp-controller="Item" asp-action="CreateItem">Create new item</a>
-    </div>
-}*@
 
 @if (ViewBag.Geld != null)
 {
@@ -62,13 +56,7 @@
 
 <script>
     function Terug() {
-        window.location.href = "/Game/Gamewereld"
-    }
-    function Detail(x) {
-        if (x == undefined) {
-            x = 0;
-        }
-        window.location.href = "/Item/ItemDetail/" + x;
+        window.location.href = "/Game/Gamewereld";
     }
     function KoopItem(y) {
         if (y == undefined) {
@@ -79,7 +67,7 @@
             window.location.href = "/Shop/KoopItem/" + y;
         }
         else {
-            window.location.href = "/Shop/Shop"
+            window.location.href = "/Shop/Shop";
         }
     }
     function VerkoopItem(z) {
@@ -91,7 +79,7 @@
             window.location.href = "/Shop/VerkoopItem/" + z;
         }
         else {
-            window.location.href = "/Shop/Shop"
+            window.location.href = "/Shop/Shop";
         }
     }
 </script>

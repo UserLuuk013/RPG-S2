@@ -33,20 +33,20 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a asp-area="" asp-controller="AuthDemo" asp-action="AuthenticatedOnly">Authenticated page</a></li>
+                        @*<li><a asp-area="" asp-controller="AuthDemo" asp-action="AuthenticatedOnly">Authenticated page</a></li>*@
                     }
                     @if (User.IsInRole("Member"))
                     {
-                        <li><a asp-area="" asp-controller="AuthDemo" asp-action="MemberOnly">Member page</a></li>
+                        @*<li><a asp-area="" asp-controller="AuthDemo" asp-action="MemberOnly">Member page</a></li>*@
                     }
                     @if (User.IsInRole("Admin"))
                     {
-                        <li><a asp-area="" asp-controller="AuthDemo" asp-action="AdminOnly">Admin page</a></li>
-                        <li><a asp-area="" asp-controller="UploadFiles" asp-action="Index">Upload files</a></li>
+                        @*<li><a asp-area="" asp-controller="AuthDemo" asp-action="AdminOnly">Admin page</a></li>
+                        <li><a asp-area="" asp-controller="UploadFiles" asp-action="Index">Upload files</a></li>*@
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a asp-area="" asp-controller="Item" asp-action="Index">Item</a></li>
+                        @*<li><a asp-area="" asp-controller="Item" asp-action="Index">Item</a></li>*@
                         <li><a asp-area="" asp-controller="Game" asp-action="GameMenu">Game</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
                     }

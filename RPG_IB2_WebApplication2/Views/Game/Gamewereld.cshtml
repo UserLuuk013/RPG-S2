@@ -13,34 +13,37 @@
     <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()" class="buttonsRPGZoom" title="Personage"/>
 </p>
 
-<img src="~/images/Map.jpg" alt="Gamewereld Map1" height="500" width="750"/>
-<br />
+<div id="bgGamewereld">
 
-@foreach (var item in Model.CPUs)
-{
-    <div class="bg-info">
-        <div>
-            <p>Naam: @item.Naam</p>
-            <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" />
+    @foreach (var item in Model.CPUs)
+    {
+        <div class="gameTegenstander" + @item.ID>
+            <div>
+                <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" onclick="Gevecht(x = @item.ID)" title="@item.Naam" />
+            </div>
         </div>
-        <div><a asp-controller="Gevecht" asp-action="Gevechtwereld" asp-route-id="@item.ID">StartGevecht</a></div>
-    </div>
-}
-
-@if (ViewBag.Beloningen != null)
-{
-    <script type="text/javascript">
+    }
+</div>
+    @if (ViewBag.Beloningen != null)
+    {
+        <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Beloningen");
         };
-    </script>
-}
+        </script>
+    }
 
-<script>
-    function Personage() {
-        window.location.href = "/Personage/Personage"
-    }
-    function Shop() {
-        window.location.href = "/Shop/Shop"
-    }
-</script>
+    <script>
+        function Gevecht(x) {
+            if (x == undefined) {
+                x = 0;
+            }
+            window.location.href = "/Gevecht/Gevechtwereld/" + x;
+        }
+        function Personage() {
+            window.location.href = "/Personage/Personage"
+        }
+        function Shop() {
+            window.location.href = "/Shop/Shop"
+        }
+    </script>

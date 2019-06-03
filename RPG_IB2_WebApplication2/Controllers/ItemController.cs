@@ -85,5 +85,13 @@ namespace RPG_IB2_WebApplication2.Controllers
             itemrepo.VerwijderItem(item);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult GetItemByID(int itemID)
+        {
+            Item item = itemrepo.GetItemById(itemID);
+            ItemDetailViewModel vm = cvt.ViewModelFromItem(item);
+            return View("ItemPartial", vm);
+        }
     }
 }
