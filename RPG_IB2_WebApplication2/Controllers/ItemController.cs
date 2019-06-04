@@ -90,7 +90,13 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult GetItemByID(int itemID)
         {
             Item item = itemrepo.GetItemById(itemID);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Personage personage = personagerepo.GetPersonageBySpelerId(userId);
             ItemDetailViewModel vm = cvt.ViewModelFromItem(item);
+            if (item.Type == "Wapen ")
+            {
+                vm.HP += personage.Damage;
+            }
             return View("ItemPartial", vm);
         }
     }

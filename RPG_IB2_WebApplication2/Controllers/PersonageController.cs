@@ -62,5 +62,13 @@ namespace RPG_IB2_WebApplication2.Controllers
             PersonageDetailViewModel vm = personagecvt.ViewModelFromPersonage(personagerepo.GetPersonageById(id));
             return View(vm);
         }
+
+        [HttpGet]
+        public IActionResult GetPersonageByID(int personageID)
+        {
+            Personage personage = personagerepo.GetPersonageById(personageID);
+            PersonageDetailViewModel vm = personagecvt.ViewModelFromPersonage(personage);
+            return View("PersonagePartial", vm);
+        }
     }
 }

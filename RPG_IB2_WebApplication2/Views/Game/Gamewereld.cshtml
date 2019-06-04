@@ -6,7 +6,7 @@
     <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" title="@Model.Speler.Personage.Naam"/>
     @Model.Speler.Naam
     @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP"/>
-    @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" title="Geld"/>
+    @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" title="Geld" />
     <img src="~/images/InstellingenRPG.png" alt="InstellingenRPG" class="buttonsRPGZoom" title="Instellingen"/>
     <img src="~/images/SpelbeschrijvingRPG.png" alt="SpelbeschrijvingRPG" class="buttonsRPGZoom" title="Spelbeschrijving"/>
     <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" class="buttonsRPGZoom" title="Shop"/>
@@ -14,15 +14,21 @@
 </p>
 
 <div id="bgGamewereld">
-
-    @foreach (var item in Model.CPUs)
-    {
-        <div class="gameTegenstander" + @item.ID>
-            <div>
-                <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" onclick="Gevecht(x = @item.ID)" title="@item.Naam" />
-            </div>
-        </div>
-    }
+    <p class="gameTegenstander1">
+        <img src="data:image/png;base64, @Model.CPUs[0].Foto" alt="@Model.CPUs[0].Naam" onclick="Gevecht(x = @Model.CPUs[0].ID)" title="@Model.CPUs[0].Naam" class="gameCPUs" />
+    </p>
+    <p class="gameTegenstander2">
+        <img src="data:image/png;base64, @Model.CPUs[1].Foto" alt="@Model.CPUs[1].Naam" onclick="Gevecht(x = @Model.CPUs[1].ID)" title="@Model.CPUs[1].Naam" class="gameCPUs" />
+    </p>
+    <p class="gameTegenstander3">
+        <img src="data:image/png;base64, @Model.CPUs[2].Foto" alt="@Model.CPUs[2].Naam" onclick="Gevecht(x = @Model.CPUs[2].ID)" title="@Model.CPUs[2].Naam" class="gameCPUs" />
+    </p>
+    <p class="gameTegenstander4">
+        <img src="data:image/png;base64, @Model.CPUs[3].Foto" alt="@Model.CPUs[3].Naam" onclick="Gevecht(x = @Model.CPUs[3].ID)" title="@Model.CPUs[3].Naam" class="gameCPUs" />
+    </p>
+    <p class="gameTegenstander5">
+        <img src="data:image/png;base64, @Model.CPUs[4].Foto" alt="@Model.CPUs[4].Naam" onclick="Gevecht(x = @Model.CPUs[4].ID)" title="@Model.CPUs[4].Naam" class="gameCPUs" />
+    </p>
 </div>
     @if (ViewBag.Beloningen != null)
     {

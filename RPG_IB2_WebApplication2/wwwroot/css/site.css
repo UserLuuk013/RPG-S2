@@ -37,42 +37,46 @@ body {
 }
 
 /* Gamewereld */
+.gameCPUs {
+    max-width: 80px;
+    height: auto;
+}
+
 .gameTegenstander1 {
     position: absolute;
-    left: 150px;
-    top: 325px;
-    width: 50px;
-    height: 40px;
+    top: 920px;
+    left: 680px;
 }
 
 .gameTegenstander2 {
+    top: 650px;
+    left: 920px;
     position: absolute;
-    left: 150px;
-    top: 400px;
 }
 
 .gameTegenstander3 {
+    top: 360px;
+    left: 855px;
     position: absolute;
-    left: 150px;
-    top: 500px;
 }
 
 .gameTegenstander4 {
+    top: 365px;
+    left: 490px;
     position: absolute;
-    left: 150px;
-    top: 600px;
 }
 
 .gameTegenstander5 {
+    top: 440px;
+    left: 135px;
     position: absolute;
-    left: 150px;
-    top: 700px;
 }
 
 #bgGamewereld {
-    background-image: url(~/images/Map.jpg);
-    height: 500px;
-    width: 750px;
+    background-image: url(../images/Map.jpg);
+    background-repeat:no-repeat;
+    width: 1100px;
+    height: 800px;
 }
 
 /* Gevechtwereld */
@@ -110,8 +114,11 @@ body {
 
 /* Shop */
 .itemDetails{
-    left: 200px;
-    top: 100px;
+    font-size: 100px;
+}
+
+.partialDetails{
+    font-size: 30px;
 }
 
 /* Algemeen */

@@ -1,9 +1,9 @@
-﻿@model RPG_IB2_WebApplication2.Models.ItemDetailViewModel
+﻿@model RPG_IB2_WebApplication2.Models.PersonageDetailViewModel
 @{
     Layout = null;
 }
 
-<div class="col-md-8">
+<div class="col-md-10">
     <h2>@Model.Naam</h2>
     <br />
     <table class="table" style="font-size:30px">
@@ -13,7 +13,7 @@
                     ID
                 </td>
                 <td>
-                    @Model.Id
+                    @Model.ID
                 </td>
             </tr>
             <tr>
@@ -26,14 +26,6 @@
             </tr>
             <tr>
                 <td>
-                    Prijs
-                </td>
-                <td>
-                    @Model.Prijs
-                </td>
-            </tr>
-            <tr>
-                <td>
                     HP
                 </td>
                 <td>
@@ -42,10 +34,18 @@
             </tr>
             <tr>
                 <td>
-                    Type
+                    Extra Damage
                 </td>
                 <td>
-                    @Model.Type
+                    @Model.Damage
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Prijs
+                </td>
+                <td>
+                    @Model.Prijs
                 </td>
             </tr>
         </tbody>

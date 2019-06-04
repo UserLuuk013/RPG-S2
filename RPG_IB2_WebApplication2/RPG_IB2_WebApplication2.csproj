@@ -20,6 +20,9 @@
     <Content Update="Views\Game\Gamemenu.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Personage\PersonagePartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Personage\PersonageDetail.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

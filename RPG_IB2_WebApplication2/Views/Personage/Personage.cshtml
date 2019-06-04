@@ -1,45 +1,48 @@
 ﻿@{
     ViewData["Title"] = "Personage";
 }
-<p style="font-size:30px">
-    Personage
-</p>
-<p style="font-size:20px">
-    XP speler: @Model.XP
-</p>
-<div class="bg-info">
-    <div>
-        <div>Naam: @Model.SpelerPersonage.Naam</div>
+<div class="row">
+    <div class="col-md-6">
+        <p style="font-size:30px">
+            Personage
+        </p>
+        <p style="font-size:20px">
+            @Model.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP" />
+        </p>
+        <div class="bg-dark">
+            <div>
+                <div>@Model.SpelerPersonage.Naam</div>
+            </div>
+            <img src="data:image/png;base64, @Model.SpelerPersonage.Foto" alt="@Model.SpelerPersonage.AlternateText" />
+            <div>
+                <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @Model.SpelerPersonage.ID)" class="buttonsRPGZoom" title="Details" />
+            </div>
+        </div>
+        <br />
+        <p style="font-size:20px">
+            Volgende Upgrade
+        </p>
+        @foreach (var item in Model.ShopPersonages)
+        {
+            <div class="bg-dark">
+                <div>
+                    <div>@item.Naam</div>
+                </div>
+                <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
+                <div>
+                    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @item.ID)" class="buttonsRPGZoom" title="Details" />
+                    <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @item.ID)" class="buttonsRPGZoom" title="Upgrade" />
+                </div>
+            </div>
+        }
+        <br />
+        <img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
     </div>
-    <img src="data:image/png;base64, @Model.SpelerPersonage.Foto" alt="@Model.SpelerPersonage.AlternateText" />
-    <div>
-        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @Model.SpelerPersonage.ID)" class="buttonsRPGZoom" title="Details" />
+    <div class="col-md-6">
+        <div id="changespace" />
     </div>
 </div>
-<br />
-<p style="font-size:20px">
-    Volgende Upgrade
-</p>
-@foreach (var item in Model.ShopPersonages)
-{
-    <div class="bg-info">
-        <div>
-            <div>Naam: @item.Naam</div>
-        </div>
-        <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
-        <div>
-            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="Detail(x = @item.ID)" class="buttonsRPGZoom" title="Details" />
-            <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @item.ID)" class="buttonsRPGZoom" title="Upgrade" />
-        </div>
-    </div>
-}
-<br />
-<img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
 
-@if (User.IsInRole("Admin"))
-{
-
-}
 @if (ViewBag.XP != null)
 {
     <script type="text/javascript">
@@ -52,12 +55,6 @@
 <script>
     function Terug() {
         window.location.href = "/Game/Gamewereld"
-    }
-    function Detail(x) {
-        if (x == undefined) {
-            x = 0;
-        }
-        window.location.href = "/Personage/PersonageDetail/" + x;
     }
     function Upgrade(y) {
         if (y == undefined) {

@@ -12,3 +12,13 @@ function ShowItemDetails(itemID) {
         }
     });
 };
+
+function ShowPersonageDetails(personageID) {
+    $.ajax({
+        url: "/Personage/GetPersonageByID",
+        data: { 'personageID': personageID },
+        success: function (data) {
+            $("#changespace").html(data);
+        }
+    });
+};
