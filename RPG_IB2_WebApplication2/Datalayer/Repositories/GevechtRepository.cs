@@ -14,14 +14,6 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             this.context = context;
         }
-        public bool VoegGevechtToe(Gevecht gevecht)
-        {
-            return context.VoegGevechtToe(gevecht);
-        }
-        public bool VerwijderGevecht(Gevecht gevecht)
-        {
-            return context.VerwijderGevecht(gevecht);
-        }
         public bool GevechtBeëindigd(int xp, int geld, int userId)
         {
             return context.GevechtBeëindigd(xp, geld, userId);

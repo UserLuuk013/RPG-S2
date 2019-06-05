@@ -28,7 +28,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Shop()
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             List<Item> playeritems = itemrepo.GetPlayerItemsById(speler.ID);
             List<Item> shopitems = shoprepo.GetShopItems(speler.ID);
             Shop shop = equipDomein.VulShop(playeritems, shopitems, speler);
@@ -44,7 +44,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult KoopItem(int id)
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             Item item = itemrepo.GetItemById(id);
             if (speler.Geld < item.Prijs)
             {
@@ -60,7 +60,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult VerkoopItem(int id)
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             Item item = itemrepo.GetItemById(id);
             speler.Geld += item.Prijs;
             shoprepo.VerkoopItem(item.ID, item.Type, speler.Geld, speler.ID);

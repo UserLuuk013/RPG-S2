@@ -21,10 +21,6 @@ namespace RPG_IB2_WebApplication2.Controllers
         private readonly ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
         private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
         private readonly ItemViewModelConverter cvt = new ItemViewModelConverter();
-        public ItemController()
-        {
-
-        }
         public IActionResult Index()
         {
             List<Item> items = itemrepo.GetAllItems();

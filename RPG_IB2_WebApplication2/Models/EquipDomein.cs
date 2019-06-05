@@ -6,6 +6,7 @@ using RPG_IB2_WebApplication2.Datalayer.MSSQLContexts;
 using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,6 +68,46 @@ namespace RPG_IB2_WebApplication2.Models
             personageshop.SpelerPersonage = spelerpersonage;
             personageshop.ShopPersonages = shoppersonages;
             return personageshop;
+        }
+        public List<Item> VulItems(SqlDataReader myReader, List<Item> items)
+        {
+            Item item = new Item();
+
+            item.Naam = Convert.ToString(myReader["Naam"]);
+            item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+            item.HP = Convert.ToInt32(myReader["HP"]);
+            item.ID = Convert.ToInt32(myReader["ID-Item"]);
+            item.Type = Convert.ToString(myReader["Type"]);
+
+            items.Add(item);
+            return items;
+        }
+        public Personage VulPersonage(SqlDataReader myReader, Personage personage)
+        {
+            personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+            personage.Naam = Convert.ToString(myReader["Naam"]);
+            personage.HP = Convert.ToInt32(myReader["HP"]);
+            personage.Damage = Convert.ToInt32(myReader["Damage"]);
+            personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
+            personage.Foto = Convert.ToString(myReader["Foto"]);
+            personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+
+            return personage;
+        }
+        public List<Personage> VulPersonages(SqlDataReader myReader, List<Personage> personages)
+        {
+            Personage personage = new Personage();
+
+            personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
+            personage.Naam = Convert.ToString(myReader["Naam"]);
+            personage.HP = Convert.ToInt32(myReader["HP"]);
+            personage.Damage = Convert.ToInt32(myReader["Damage"]);
+            personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
+            personage.Foto = Convert.ToString(myReader["Foto"]);
+            personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+
+            personages.Add(personage);
+            return personages;
         }
     }
 }

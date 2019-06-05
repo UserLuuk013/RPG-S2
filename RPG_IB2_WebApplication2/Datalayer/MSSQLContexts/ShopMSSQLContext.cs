@@ -1,5 +1,6 @@
 ﻿using RPG_IB2.Datalayer.Interfaces;
 using RPG_IB2.Models;
+using RPG_IB2_WebApplication2.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,17 +12,10 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
 {
     class ShopMSSQLContext : DataConnection, IShopContext
     {
+        private EquipDomein equipDomein;
         public ShopMSSQLContext()
         {
-            //
-        }
-        public bool VoegShopToe(Shop shop)
-        {
-            return false;
-        }
-        public bool VerwijderShop(Shop shop)
-        {
-            return false;
+            equipDomein = new EquipDomein();
         }
         public List<Item> GetShopItems(int userId)
         {
@@ -33,16 +27,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Item item = new Item();
-
-                    item.Naam = Convert.ToString(myReader["Naam"]);
-                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    item.HP = Convert.ToInt32(myReader["HP"]);
-                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
-                    item.Type = Convert.ToString(myReader["Type"]);
-
-
-                    items.Add(item);
+                    items = equipDomein.VulItems(myReader, items);
                 }
             }
             return items;
@@ -82,8 +67,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     Console.WriteLine(x);
                     return false;
                 }
-            }
-            
+            }   
         }
         public bool VerkoopItem(int idItem, string type, int geld, int userId)
         {
@@ -121,7 +105,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     return false;
                 }
             }
-            
         }
     }
 }

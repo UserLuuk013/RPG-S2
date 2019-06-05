@@ -15,14 +15,6 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             this.context = context;
         }
-        public bool VoegShopToe(Shop shop)
-        {
-            return context.VoegShopToe(shop);
-        }
-        public bool VerwijderShop(Shop shop)
-        {
-            return context.VerwijderShop(shop);
-        }
         public List<Item> GetShopItems(int userId)
         {
             return context.GetShopItems(userId);

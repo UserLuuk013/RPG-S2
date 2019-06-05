@@ -11,21 +11,10 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
 {
     class PersonageMSSQLContext : DataConnection, IPersonageContext
     {
+        private EquipDomein equipDomein;
         public PersonageMSSQLContext()
         {
-            //
-        }
-        public int VoegPersonageToe(Personage personage)
-        {
-            return 0;
-        }
-        public bool UpdatePersonage(Personage personage)
-        {
-            return false;
-        }
-        public bool VerwijderPersonage(Personage personage)
-        {
-            return false;
+            equipDomein = new EquipDomein();
         }
         public List<Personage> GetAllPersonages()
         {
@@ -36,17 +25,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Personage personage = new Personage();
-
-                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-                    personage.Naam = Convert.ToString(myReader["Naam"]);
-                    personage.HP = Convert.ToInt32(myReader["HP"]);
-                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
-                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    personage.Foto = Convert.ToString(myReader["Foto"]);
-                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
-
-                    personages.Add(personage);
+                    personages = equipDomein.VulPersonages(myReader, personages);
                 }
             }
             return personages;
@@ -60,13 +39,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-                    personage.Naam = Convert.ToString(myReader["Naam"]);
-                    personage.HP = Convert.ToInt32(myReader["HP"]);
-                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
-                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    personage.Foto = Convert.ToString(myReader["Foto"]);
-                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+                    personage = equipDomein.VulPersonage(myReader, personage);
                 }
             }
             return personage;
@@ -96,13 +69,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-                    personage.Naam = Convert.ToString(myReader["Naam"]);
-                    personage.HP = Convert.ToInt32(myReader["HP"]);
-                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
-                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    personage.Foto = Convert.ToString(myReader["Foto"]);
-                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
+                    personage = equipDomein.VulPersonage(myReader, personage);
                 }
             }
             return personage;
@@ -117,17 +84,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Personage personage = new Personage();
-
-                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-                    personage.Naam = Convert.ToString(myReader["Naam"]);
-                    personage.HP = Convert.ToInt32(myReader["HP"]);
-                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
-                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    personage.Foto = Convert.ToString(myReader["Foto"]);
-                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
-
-                    personages.Add(personage);
+                    personages = equipDomein.VulPersonages(myReader, personages);
                 }
             }
             return personages;
@@ -141,17 +98,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Personage personage = new Personage();
-
-                    personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-                    personage.Naam = Convert.ToString(myReader["Naam"]);
-                    personage.HP = Convert.ToInt32(myReader["HP"]);
-                    personage.Damage = Convert.ToInt32(myReader["Damage"]);
-                    personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    personage.Foto = Convert.ToString(myReader["Foto"]);
-                    personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
-
-                    personages.Add(personage);
+                    personages = equipDomein.VulPersonages(myReader, personages);
                 }
             }
             return personages;

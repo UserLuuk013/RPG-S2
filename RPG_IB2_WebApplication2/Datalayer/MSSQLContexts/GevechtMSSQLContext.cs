@@ -14,14 +14,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         {
             //
         }
-        public bool VoegGevechtToe(Gevecht gevecht)
-        {
-            return false;
-        }
-        public bool VerwijderGevecht(Gevecht gevecht)
-        {
-            return false;
-        }
         public bool GevechtBeëindigd(int xp, int geld, int userId)
         {
             try

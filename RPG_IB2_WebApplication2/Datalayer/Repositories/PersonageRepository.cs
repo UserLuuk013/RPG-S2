@@ -14,18 +14,6 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             this.context = context;
         }
-        public int VoegPersonageToe(Personage personage)
-        {
-            return context.VoegPersonageToe(personage);
-        }
-        public bool UpdatePersonage(Personage personage)
-        {
-            return context.UpdatePersonage(personage);
-        }
-        public bool VerwijderPersonage(Personage personage)
-        {
-            return context.VerwijderPersonage(personage);
-        }
         public List<Personage> GetAllPersonages()
         {
             return context.GetAllPersonages();

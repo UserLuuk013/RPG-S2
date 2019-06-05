@@ -14,14 +14,6 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             this.context = context;
         }
-        public bool VoegCPUToe(CPU cpu)
-        {
-            return context.VoegCPUToe(cpu);
-        }
-        public bool VerwijderCPU(CPU cpu)
-        {
-            return context.VerwijderCPU(cpu);
-        }
         public CPU GetCPUById(int id)
         {
             return context.GetCPUById(id);

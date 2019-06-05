@@ -6,14 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using RPG_IB2.Models;
 using System.Data.SqlClient;
+using RPG_IB2_WebApplication2.Models;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
     class ItemMSSQLContext : DataConnection, IItemContext
     {
+        private EquipDomein equipDomein;
         public ItemMSSQLContext()
         {
-            //
+            equipDomein = new EquipDomein();
         }
         public int VoegItemToe(Item item)
         {
@@ -64,26 +66,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                 return false;
             }
         }
-        public bool UpgradeWapens(int wapenDamage)
-        {
-            try
-            {
-                for (int i = 1; i < 7; i++)
-                {
-                    SqlCommand myCommand = SetCommandProcedure("UpgradeWapens");
-                    myCommand.Parameters.AddWithValue("@WapenDamage", wapenDamage);
-                    myCommand.Parameters.AddWithValue("@IDItem", i);
-                    myCommand.ExecuteNonQuery();
-                }
-                return true;
-            }
-            catch (Exception x)
-            {
-                Console.WriteLine(x);
-                return false;
-            }
-            
-        }
         public Item GetItemById(int id)
         {
             SqlCommand myCommand = SetCommandProcedure("GetItemById");
@@ -111,16 +93,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Item item = new Item();
-
-                    item.Naam = Convert.ToString(myReader["Naam"]);
-                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    item.HP = Convert.ToInt32(myReader["HP"]);
-                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
-                    item.Type = Convert.ToString(myReader["Type"]);
-
-
-                    items.Add(item);
+                    items = equipDomein.VulItems(myReader, items);
                 }
             }
             return items;
@@ -135,15 +108,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Item item = new Item();
-
-                    item.Naam = Convert.ToString(myReader["Naam"]);
-                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    item.HP = Convert.ToInt32(myReader["HP"]);
-                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
-                    item.Type = Convert.ToString(myReader["Type"]);
-
-                    items.Add(item);
+                    items = equipDomein.VulItems(myReader, items);
                 }
             }
             return items;
@@ -158,15 +123,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    Item item = new Item();
-
-                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
-                    item.Naam = Convert.ToString(myReader["Naam"]);
-                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-                    item.HP = Convert.ToInt32(myReader["HP"]);
-                    item.Type = Convert.ToString(myReader["Type"]);
-
-                    items.Add(item);
+                    items = equipDomein.VulItems(myReader, items);
                 }
             }
             return items;

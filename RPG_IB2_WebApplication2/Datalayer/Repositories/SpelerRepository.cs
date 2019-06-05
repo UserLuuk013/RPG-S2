@@ -15,17 +15,9 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             this.context = context;
         }
-        public bool VoegSpelerToe(Speler speler)
+        public Speler GetSpelerByID(int spelerId)
         {
-            return context.VoegSpelerToe(speler);
-        }
-        public bool VerwijderSpeler(Speler speler)
-        {
-            return context.VerwijderSpeler(speler);
-        }
-        public Speler GetSpeler(int spelerId)
-        {
-            return context.GetSpeler(spelerId);
+            return context.GetSpelerByID(spelerId);
         }
         public bool NieuwSpel(int spelerId)
         {

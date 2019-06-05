@@ -27,10 +27,6 @@ namespace RPG_IB2.Datalayer.Repositories
         {
             return context.VerwijderItem(item);
         }
-        public bool UpgradeWapens(int wapenDamage)
-        {
-            return context.UpgradeWapens(wapenDamage);
-        }
         public Item GetItemById(int id)
         {
             return context.GetItemById(id);

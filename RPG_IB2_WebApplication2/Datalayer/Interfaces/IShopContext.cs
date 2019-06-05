@@ -9,8 +9,6 @@ namespace RPG_IB2.Datalayer.Interfaces
 {
     public interface IShopContext
     {
-        bool VoegShopToe(Shop shop);
-        bool VerwijderShop(Shop shop);
         List<Item> GetShopItems(int userId);
         bool KoopItem(int idItem, string type, int geld, int userId);
         bool VerkoopItem(int idItem, string type, int geld, int userId);

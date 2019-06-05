@@ -14,14 +14,6 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         {
             //
         }
-        public bool VoegCPUToe(CPU cpu)
-        {
-            return false;
-        }
-        public bool VerwijderCPU(CPU cpu)
-        {
-            return false;
-        }
         public CPU GetCPUById(int id)
         {
             SqlCommand myCommand = SetCommandProcedure("GetCPUById");

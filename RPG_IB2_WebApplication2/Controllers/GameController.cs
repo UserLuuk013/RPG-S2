@@ -63,7 +63,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Gamewereld()
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             List<CPU> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);
@@ -73,14 +73,6 @@ namespace RPG_IB2_WebApplication2.Controllers
                 HttpContext.Session.SetString("Beloningen", "");
             } 
             return View(vm);
-        }
-        public IActionResult Gevechtwereld(int id)
-        {
-            return RedirectToAction("Gevechtwereld", "Gevecht", id);
-        }
-        public IActionResult PersonageShop()
-        {
-            return View();
         }
     }
 }

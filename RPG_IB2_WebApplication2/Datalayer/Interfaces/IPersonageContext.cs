@@ -8,9 +8,6 @@ namespace RPG_IB2_WebApplication2.Datalayer.Interfaces
 {
     public interface IPersonageContext
     {
-        int VoegPersonageToe(Personage personage);
-        bool UpdatePersonage(Personage personage);
-        bool VerwijderPersonage(Personage personage);
         List<Personage> GetAllPersonages();
         Personage GetPersonageById(int id);
         bool SelecteerPersonage(int id, int userId);

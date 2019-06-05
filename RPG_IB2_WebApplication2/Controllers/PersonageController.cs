@@ -28,7 +28,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Personage()
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             Personage spelerpersonage = personagerepo.GetPersonageBySpelerId(speler.ID);
             List<Personage> shoppersonages = personagerepo.GetPersonagesBySpelerId(speler.ID);
             PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, shoppersonages, speler);
@@ -44,7 +44,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult UpgradePersonage(int id)
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            Speler speler = spelerrepo.GetSpeler(userId);
+            Speler speler = spelerrepo.GetSpelerByID(userId);
             Personage personage = personagerepo.GetPersonageById(id);
             if (speler.XP < personage.Prijs)
             {

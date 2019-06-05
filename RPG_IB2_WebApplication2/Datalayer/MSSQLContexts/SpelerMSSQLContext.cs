@@ -15,15 +15,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         {
             //
         }
-        public bool VoegSpelerToe(Speler speler)
-        {
-            return false;
-        }
-        public bool VerwijderSpeler(Speler speler)
-        {
-            return false;
-        }
-        public Speler GetSpeler(int spelerId)
+        public Speler GetSpelerByID(int spelerId)
         {
             SqlCommand myCommand = SetCommandProcedure("GetSpeler");
             myCommand.Parameters.AddWithValue("@IDAccount", spelerId);

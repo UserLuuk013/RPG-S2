@@ -37,7 +37,7 @@ namespace RPG_IB2_WebApplication2.Controllers
 
             if (HttpContext.Session.GetInt32("StartGame") == null || HttpContext.Session.GetInt32("StartGame") == 0)
             {
-                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(spelerrepo.GetSpeler(userId)));
+                HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(spelerrepo.GetSpelerByID(userId)));
                 HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(cpurepo.GetCPUById(id)));
                 HttpContext.Session.SetString("Personage", JsonConvert.SerializeObject(personagerepo.GetPersonageBySpelerId(userId)));
                 HttpContext.Session.SetString("SpelerAanZet", Convert.ToString(true));
