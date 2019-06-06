@@ -26,7 +26,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
         {
             Item item = new Item();
             item.Prijs = 500;
-            if (idItem != 0)
+            if (idItem != 0 && type != "" && userId != 0)
             {
                 if (geld >= item.Prijs)
                 {
@@ -44,7 +44,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
         }
         public bool VerkoopItem(int idItem, string type, int geld, int userId)
         {
-            if (idItem != 0)
+            if (idItem != 0 && type != "" && userId != 0)
             {
                 return true;
             }

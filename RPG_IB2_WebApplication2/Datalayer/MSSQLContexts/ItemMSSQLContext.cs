@@ -15,7 +15,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         private EquipDomein equipDomein;
         public ItemMSSQLContext()
         {
-            equipDomein = new EquipDomein();
+            //
         }
         public int VoegItemToe(Item item)
         {
@@ -93,6 +93,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
+                    equipDomein = new EquipDomein();
                     items = equipDomein.VulItems(myReader, items);
                 }
             }
@@ -108,6 +109,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
+                    equipDomein = new EquipDomein();
                     items = equipDomein.VulItems(myReader, items);
                 }
             }
@@ -123,6 +125,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
+                    equipDomein = new EquipDomein();
                     items = equipDomein.VulItems(myReader, items);
                 }
             }

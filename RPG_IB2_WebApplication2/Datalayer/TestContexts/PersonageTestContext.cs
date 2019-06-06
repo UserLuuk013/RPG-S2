@@ -61,14 +61,22 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
         {
             Personage personage = new Personage();
             personage.Prijs = 1000;
-            if (personage.Prijs <= spelerXP)
+            if (personageId != 0 && userId != 0)
             {
-                return true;
+                if (personage.Prijs <= spelerXP)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
             }
+            
         }
     }
 }

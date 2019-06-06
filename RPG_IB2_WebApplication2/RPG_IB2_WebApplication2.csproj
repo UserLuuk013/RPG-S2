@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Game\Gamemenu.cshtml">
+    <Content Update="Views\Game\GameMenu.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Personage\PersonagePartial.cshtml">

@@ -28,9 +28,16 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
         }
         public bool Registreren(User user)
         {
-            if (user.UserName != null && user.Email != null && user.Password != null)
+            if (user.UserName != null || user.UserName != "" && user.Email != null && user.Password != null)
             {
-                return true;
+                if (user.Email.Contains("@") && user.Email.Contains(".") && user.Password.Any(char.IsUpper) && user.Password.Any(char.IsLower) && user.Password.Any(c => char.IsDigit(c)))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

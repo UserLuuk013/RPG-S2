@@ -15,7 +15,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         private EquipDomein equipDomein;
         public ShopMSSQLContext()
         {
-            equipDomein = new EquipDomein();
+            //
         }
         public List<Item> GetShopItems(int userId)
         {
@@ -27,6 +27,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
+                    equipDomein = new EquipDomein();
                     items = equipDomein.VulItems(myReader, items);
                 }
             }
