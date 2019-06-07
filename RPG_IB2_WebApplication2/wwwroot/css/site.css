@@ -137,3 +137,17 @@ body {
     -webkit-transform: scale(1.5);
     transform: scale(1.5);
 }
+
+.flex-container {
+    display: flex;
+    align-items: center;
+
+}
+
+/*.flex-container > div {
+    width: 100px;
+    height: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}*/

@@ -31,7 +31,10 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult GameMenu()
         {
-            return View();
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Personage personage = personagerepo.GetPersonageBySpelerId(userId);
+            PersonageDetailViewModel vm = personagecvt.ViewModelFromPersonage(personage);
+            return View(vm);
         }
         public IActionResult NewGame()
         {

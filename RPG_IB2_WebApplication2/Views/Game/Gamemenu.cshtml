@@ -5,9 +5,21 @@
 <p class="font-weight-bold">GameMenu</p>
 <br />
 <br />
-<a asp-controller="Game" asp-action="NewGame">
-    <input type="submit" value="New Game" class="btn btn-default" />
-</a>
-<a asp-controller="Game" asp-action="Gamewereld">
-    <input type="submit" value="Load Game" class="btn btn-default" />
-</a>
+<div class="gamemenuButtons">
+    Nieuw Spel <br /> <img src="~/images/NieuwSpelRPG.png" alt="NieuwSpelRPG" onclick="NieuwSpel()" class="buttonsRPGZoom" title="NieuwSpel" />
+</div>
+@if (Model.ID != 0)
+{
+    <div class="gamemenuButtons">
+        Laad Spel <br /> <img src="~/images/LaadSpelRPG.png" alt="LaadSpelRPG" onclick="LaadSpel()" class="buttonsRPGZoom" title="LaadSpel" />
+    </div>
+}
+
+<script>
+    function NieuwSpel() {
+        window.location.href = "/Game/NewGame"
+    }
+    function LaadSpel() {
+        window.location.href = "/Game/Gamewereld"
+    }
+</script>
