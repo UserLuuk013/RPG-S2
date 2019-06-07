@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
-    class GevechtMSSQLContext : DataConnection, IGevechtContext
+    class GevechtMssqlContext : DataConnection, IGevechtContext
     {
-        public GevechtMSSQLContext()
+        public GevechtMssqlContext()
         {
             //
         }

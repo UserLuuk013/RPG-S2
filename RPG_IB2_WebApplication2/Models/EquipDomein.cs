@@ -18,8 +18,8 @@ namespace RPG_IB2_WebApplication2.Models
         private readonly PersonageRepository personagerepo;
         public EquipDomein()
         {
-            itemrepo = new ItemRepository(new ItemMSSQLContext());
-            personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+            itemrepo = new ItemRepository(new ItemMssqlContext());
+            personagerepo = new PersonageRepository(new PersonageMssqlContext());
         }
         public Speler VulSpeler(Speler speler)
         {
@@ -28,29 +28,29 @@ namespace RPG_IB2_WebApplication2.Models
             speler.Personage = personagerepo.GetPersonageBySpelerId(speler.ID);
             return speler;
         }
-        public CPU VulCPU(CPU cpu)
+        public Cpu VulCPU(Cpu cpu)
         {
             cpu.Wapen = itemrepo.GetCPUItemsById(cpu.ID)[0];
             cpu.Potion = itemrepo.GetCPUItemsById(cpu.ID)[1];
             return cpu;
         }
-        public List<CPU> VulCPUs(List<CPU> cpus)
+        public List<Cpu> VulCPUs(List<Cpu> cpus)
         {
-            foreach (CPU cpu in cpus)
+            foreach (Cpu cpu in cpus)
             {
                 cpu.Wapen = itemrepo.GetCPUItemsById(cpu.ID)[0];
                 cpu.Potion = itemrepo.GetCPUItemsById(cpu.ID)[1];
             }
             return cpus;
         }
-        public Game VulGame(Speler speler, List<CPU> cpus)
+        public Game VulGame(Speler speler, List<Cpu> cpus)
         {
             Game game = new Game();
             game.Speler = VulSpeler(speler);
             game.CPUs = VulCPUs(cpus);
             return game;
         }
-        public Gevecht VulGevecht(Speler speler, CPU cpu)
+        public Gevecht VulGevecht(Speler speler, Cpu cpu)
         {
             Gevecht gevecht = new Gevecht();
             gevecht.Speler = VulSpeler(speler);
@@ -73,46 +73,6 @@ namespace RPG_IB2_WebApplication2.Models
             personageshop.SpelerPersonage = spelerpersonage;
             personageshop.ShopPersonages = shoppersonages;
             return personageshop;
-        }
-        public List<Item> VulItems(SqlDataReader myReader, List<Item> items)
-        {
-            Item item = new Item();
-
-            item.Naam = Convert.ToString(myReader["Naam"]);
-            item.Prijs = Convert.ToInt32(myReader["Prijs"]);
-            item.HP = Convert.ToInt32(myReader["HP"]);
-            item.ID = Convert.ToInt32(myReader["ID-Item"]);
-            item.Type = Convert.ToString(myReader["Type"]);
-
-            items.Add(item);
-            return items;
-        }
-        public Personage VulPersonage(SqlDataReader myReader, Personage personage)
-        {
-            personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-            personage.Naam = Convert.ToString(myReader["Naam"]);
-            personage.HP = Convert.ToInt32(myReader["HP"]);
-            personage.Damage = Convert.ToInt32(myReader["Damage"]);
-            personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-            personage.Foto = Convert.ToString(myReader["Foto"]);
-            personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
-
-            return personage;
-        }
-        public List<Personage> VulPersonages(SqlDataReader myReader, List<Personage> personages)
-        {
-            Personage personage = new Personage();
-
-            personage.ID = Convert.ToInt32(myReader["ID-Personage"]);
-            personage.Naam = Convert.ToString(myReader["Naam"]);
-            personage.HP = Convert.ToInt32(myReader["HP"]);
-            personage.Damage = Convert.ToInt32(myReader["Damage"]);
-            personage.Prijs = Convert.ToInt32(myReader["Prijs"]);
-            personage.Foto = Convert.ToString(myReader["Foto"]);
-            personage.AlternateText = Convert.ToString(myReader["AlternateText"]);
-
-            personages.Add(personage);
-            return personages;
         }
     }
 }

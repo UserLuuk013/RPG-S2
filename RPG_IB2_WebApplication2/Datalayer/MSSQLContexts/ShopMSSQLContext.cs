@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
-    class ShopMSSQLContext : DataConnection, IShopContext
+    class ShopMssqlContext : DataConnection, IShopContext
     {
-        private EquipDomein equipDomein;
-        public ShopMSSQLContext()
+        public ShopMssqlContext()
         {
             //
         }
@@ -27,8 +26,15 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    equipDomein = new EquipDomein();
-                    items = equipDomein.VulItems(myReader, items);
+                    Item item = new Item();
+
+                    item.Naam = Convert.ToString(myReader["Naam"]);
+                    item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+                    item.HP = Convert.ToInt32(myReader["HP"]);
+                    item.ID = Convert.ToInt32(myReader["ID-Item"]);
+                    item.Type = Convert.ToString(myReader["Type"]);
+
+                    items.Add(item);
                 }
             }
             return items;

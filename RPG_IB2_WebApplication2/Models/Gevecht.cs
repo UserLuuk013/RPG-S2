@@ -9,7 +9,7 @@ namespace RPG_IB2
     public class Gevecht
     {
         public Speler Speler { get; set; }
-        public CPU CPU { get; set; }
+        public Cpu CPU { get; set; }
         public int Level { get; set; }
         public string Datum { get; set; }
         public string Tijd { get; set; }

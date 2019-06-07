@@ -7,7 +7,7 @@ using RPG_IB2.Models;
 
 namespace RPG_IB2
 {
-    public class CPU
+    public class Cpu
     {
         public int ID { get; set; }
         public string Naam { get; set; }

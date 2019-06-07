@@ -19,9 +19,9 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class GameController : Controller
     {
-        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
-        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        private readonly CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMssqlContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMssqlContext());
+        private readonly CPURepository cpurepo = new CPURepository(new CpuMssqlContext());
         private readonly PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();
         private readonly GameViewModelConverter gamecvt = new GameViewModelConverter();
         private readonly EquipDomein equipDomein;
@@ -35,7 +35,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult NewGame()
         {
-            List<Personage> personages = personagerepo.GetAllStartPersonages();
+            List<Personage> personages = personagerepo.GetStartPersonages();
             PersonageViewModel vm = new PersonageViewModel()
             {
                 Personages = new List<PersonageDetailViewModel>()
@@ -64,7 +64,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
-            List<CPU> cpus = cpurepo.GetAllCPUs();
+            List<Cpu> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);
             if (HttpContext.Session.GetString("Beloningen") != null)

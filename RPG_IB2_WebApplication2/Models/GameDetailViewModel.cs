@@ -9,6 +9,6 @@ namespace RPG_IB2_WebApplication2.Models
     public class GameDetailViewModel
     {
         public Speler Speler { get; set; }
-        public List<CPU> CPUs { get; set; }
+        public List<Cpu> CPUs { get; set; }
     }
 }

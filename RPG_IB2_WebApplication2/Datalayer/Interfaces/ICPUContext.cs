@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2.Datalayer.Interfaces
 {
-    interface ICPUContext
+    interface ICpuContext
     {
-        CPU GetCPUById(int id);
-        List<CPU> GetAllCPUs();
+        Cpu GetCPUById(int id);
+        List<Cpu> GetAllCPUs();
     }
 }

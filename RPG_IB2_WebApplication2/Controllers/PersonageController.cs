@@ -16,8 +16,8 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class PersonageController : Controller
     {
-        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMssqlContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMssqlContext());
         private readonly EquipDomein equipDomein;
         private readonly PersonageShopViewModelConverter personageshopcvt = new PersonageShopViewModelConverter();
         private readonly PersonageViewModelConverter personagecvt = new PersonageViewModelConverter();

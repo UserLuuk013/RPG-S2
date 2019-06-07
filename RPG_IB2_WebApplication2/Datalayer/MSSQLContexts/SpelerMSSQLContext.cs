@@ -9,9 +9,9 @@ using RPG_IB2.Models;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
-    class SpelerMSSQLContext : DataConnection, ISpelerContext
+    class SpelerMssqlContext : DataConnection, ISpelerContext
     {
-        public SpelerMSSQLContext()
+        public SpelerMssqlContext()
         {
             //
         }

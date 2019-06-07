@@ -16,9 +16,9 @@ namespace RPG_IB2_WebApplication2.Controllers
 {
     public class ShopController : Controller
     {
-        private readonly ShopRepository shoprepo = new ShopRepository(new ShopMSSQLContext());
-        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        private readonly ItemRepository itemrepo = new ItemRepository(new ItemMSSQLContext());
+        private readonly ShopRepository shoprepo = new ShopRepository(new ShopMssqlContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMssqlContext());
+        private readonly ItemRepository itemrepo = new ItemRepository(new ItemMssqlContext());
         private readonly EquipDomein equipDomein;
         private readonly ShopViewModelConverter shopcvt = new ShopViewModelConverter();
         public ShopController()

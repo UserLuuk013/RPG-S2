@@ -13,7 +13,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.Interfaces
         bool SelecteerPersonage(int id, int userId);
         Personage GetPersonageBySpelerId(int spelerId);
         List<Personage> GetPersonagesBySpelerId(int spelerId);
-        List<Personage> GetAllStartPersonages();
+        List<Personage> GetStartPersonages();
         bool UpgradePersonage(int personageId, int spelerXP, int userId);
     }
 }

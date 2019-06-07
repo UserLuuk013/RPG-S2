@@ -52,7 +52,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
             List<Personage> personages = new List<Personage>();
             return personages;
         }
-        public List<Personage> GetAllStartPersonages()
+        public List<Personage> GetStartPersonages()
         {
             List<Personage> personages = new List<Personage>();
             return personages;

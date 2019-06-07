@@ -19,10 +19,10 @@ namespace RPG_IB2_WebApplication2.Controllers
     public class GevechtController : Controller
     {
         private readonly EquipDomein equipDomein;
-        private readonly GevechtRepository gevechtrepo = new GevechtRepository(new GevechtMSSQLContext());
-        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMSSQLContext());
-        private readonly CPURepository cpurepo = new CPURepository(new CPUMSSQLContext());
-        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMSSQLContext());
+        private readonly GevechtRepository gevechtrepo = new GevechtRepository(new GevechtMssqlContext());
+        private readonly SpelerRepository spelerrepo = new SpelerRepository(new SpelerMssqlContext());
+        private readonly CPURepository cpurepo = new CPURepository(new CpuMssqlContext());
+        private readonly PersonageRepository personagerepo = new PersonageRepository(new PersonageMssqlContext());
         private readonly GevechtViewModelConverter gevechtcvt = new GevechtViewModelConverter();
         public GevechtController()
         {
@@ -49,7 +49,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             }
             
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             Gevecht gevecht = equipDomein.VulGevecht(speler, cpu);
             HttpContext.Session.SetString("Speler", JsonConvert.SerializeObject(gevecht.Speler));
             HttpContext.Session.SetString("CPU", JsonConvert.SerializeObject(gevecht.CPU));
@@ -99,7 +99,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Aanval()
         {
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             Personage personage = JsonConvert.DeserializeObject<Personage>(HttpContext.Session.GetString("Personage"));
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
             {
@@ -125,7 +125,7 @@ namespace RPG_IB2_WebApplication2.Controllers
             int rndsuperaanval = rnd.Next(1, 5);
 
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             Personage personage = JsonConvert.DeserializeObject<Personage>(HttpContext.Session.GetString("Personage"));
 
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")))
@@ -164,7 +164,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Verdediging()
         {
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             bool potionSpelerGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionSpelerGebruikt"));
             bool potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
             if (Convert.ToBoolean(HttpContext.Session.GetString("SpelerAanZet")) && !potionSpelerGebruikt)
@@ -191,7 +191,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult ControlerenGevecht()
         {
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             if (speler.HP <= 0)
             {
                 HttpContext.Session.SetString("spelerLevend", Convert.ToString(false));
@@ -250,7 +250,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         //niet het geval is gaat de CPU in de aanval.
         public IActionResult GevechtKeuzeCPU()
         {
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             bool potionCPUGebruikt = Convert.ToBoolean(HttpContext.Session.GetString("potionCPUGebruikt"));
             if (cpu.HP <= 5 && !potionCPUGebruikt)
             {
@@ -266,7 +266,7 @@ namespace RPG_IB2_WebApplication2.Controllers
         //groter dan 10 is voert de CPU de superaanval uit. Als dit niet het geval is voert de CPU de normale aanval uit.
         public IActionResult AanvalKeuzeCPU()
         {
-            CPU cpu = JsonConvert.DeserializeObject<CPU>(HttpContext.Session.GetString("CPU"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             if (cpu.HP >= 10)
             {
                 return RedirectToAction("Superaanval");

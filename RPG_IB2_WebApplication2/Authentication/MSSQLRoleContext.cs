@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2_WebApplication2.Authentication
 {
-    public class MSSQLRoleContext : IRoleStore<Role>
+    public class MssqlRoleContext : IRoleStore<Role>
     {
         private readonly string _connectionString;
-        public MSSQLRoleContext(IConfiguration configuration)
+        public MssqlRoleContext(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }

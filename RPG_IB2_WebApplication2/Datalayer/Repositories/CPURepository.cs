@@ -9,16 +9,16 @@ namespace RPG_IB2.Datalayer.Repositories
 {
     class CPURepository
     {
-        private readonly ICPUContext context;
-        public CPURepository(ICPUContext context)
+        private readonly ICpuContext context;
+        public CPURepository(ICpuContext context)
         {
             this.context = context;
         }
-        public CPU GetCPUById(int id)
+        public Cpu GetCPUById(int id)
         {
             return context.GetCPUById(id);
         }
-        public List<CPU> GetAllCPUs()
+        public List<Cpu> GetAllCPUs()
         {
             return context.GetAllCPUs();
         }

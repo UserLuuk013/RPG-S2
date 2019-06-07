@@ -10,10 +10,9 @@ using RPG_IB2_WebApplication2.Models;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
-    class ItemMSSQLContext : DataConnection, IItemContext
+    class ItemMssqlContext : DataConnection, IItemContext
     {
-        private EquipDomein equipDomein;
-        public ItemMSSQLContext()
+        public ItemMssqlContext()
         {
             //
         }
@@ -93,8 +92,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    equipDomein = new EquipDomein();
-                    items = equipDomein.VulItems(myReader, items);
+                    items = VulItems(myReader, items);
                 }
             }
             return items;
@@ -109,8 +107,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    equipDomein = new EquipDomein();
-                    items = equipDomein.VulItems(myReader, items);
+                    items = VulItems(myReader, items);
                 }
             }
             return items;
@@ -125,10 +122,22 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             {
                 while (myReader.Read())
                 {
-                    equipDomein = new EquipDomein();
-                    items = equipDomein.VulItems(myReader, items);
+                    items = VulItems(myReader, items);
                 }
             }
+            return items;
+        }
+        public List<Item> VulItems(SqlDataReader myReader, List<Item> items)
+        {
+            Item item = new Item();
+
+            item.Naam = Convert.ToString(myReader["Naam"]);
+            item.Prijs = Convert.ToInt32(myReader["Prijs"]);
+            item.HP = Convert.ToInt32(myReader["HP"]);
+            item.ID = Convert.ToInt32(myReader["ID-Item"]);
+            item.Type = Convert.ToString(myReader["Type"]);
+
+            items.Add(item);
             return items;
         }
     }

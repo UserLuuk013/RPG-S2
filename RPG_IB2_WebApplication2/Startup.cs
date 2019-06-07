@@ -28,8 +28,8 @@ namespace RPG_IB2_WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserStore<User>, MSSQLUserContext>();
-            services.AddTransient<IRoleStore<Role>, MSSQLRoleContext>();
+            services.AddTransient<IUserStore<User>, MssqlUserContext>();
+            services.AddTransient<IRoleStore<Role>, MssqlRoleContext>();
             services.AddIdentity<User, Role>().AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

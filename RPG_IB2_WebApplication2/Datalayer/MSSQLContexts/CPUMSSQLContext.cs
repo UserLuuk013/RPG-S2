@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace RPG_IB2.Datalayer.MSSQLContexts
 {
-    class CPUMSSQLContext : DataConnection, ICPUContext
+    class CpuMssqlContext : DataConnection, ICpuContext
     {
-        public CPUMSSQLContext()
+        public CpuMssqlContext()
         {
             //
         }
-        public CPU GetCPUById(int id)
+        public Cpu GetCPUById(int id)
         {
             SqlCommand myCommand = SetCommandProcedure("GetCPUById");
             myCommand.Parameters.AddWithValue("@IDCPU", id);
-            CPU cpu = new CPU();
+            Cpu cpu = new Cpu();
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {
                 while (myReader.Read())
@@ -31,16 +31,16 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
             }
             return cpu;
         }
-        public List<CPU> GetAllCPUs()
+        public List<Cpu> GetAllCPUs()
         {
-            List<CPU> cpus = new List<CPU>();
+            List<Cpu> cpus = new List<Cpu>();
 
             SqlCommand myCommand = SetCommandProcedure("GetAllCPUs");
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {
                 while (myReader.Read())
                 {
-                    CPU cpu = new CPU();
+                    Cpu cpu = new Cpu();
 
                     cpu.ID = Convert.ToInt32(myReader["ID-CPU"]);
                     cpu.Naam = Convert.ToString(myReader["Naam"]);
