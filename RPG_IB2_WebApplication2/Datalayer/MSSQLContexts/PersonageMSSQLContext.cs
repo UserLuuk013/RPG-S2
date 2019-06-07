@@ -73,26 +73,25 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             }
             return personage;
         }
-        public List<Personage> GetPersonagesBySpelerId(int spelerId)
+        public Personage GetNextUpgradePersonageBySpelerId(int spelerId)
         {
-            List<Personage> personages = new List<Personage>();
-
-            SqlCommand myCommand = SetCommandProcedure("GetPersonagesBySpelerId");
+            SqlCommand myCommand = SetCommandProcedure("GetNextUpgradePersonageBySpelerId");
             myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
+            Personage personage = new Personage();
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {
                 while (myReader.Read())
                 {
-                    personages = VulPersonages(myReader, personages);
+                    personage = VulPersonage(myReader, personage);
                 }
             }
-            return personages;
+            return personage;
         }
         public List<Personage> GetStartPersonages()
         {
             List<Personage> personages = new List<Personage>();
 
-            SqlCommand myCommand = SetCommandProcedure("GetAllStartPersonages");
+            SqlCommand myCommand = SetCommandProcedure("GetStartPersonages");
             using (SqlDataReader myReader = ExecuteReader(myCommand))
             {
                 while (myReader.Read())

@@ -226,21 +226,23 @@ namespace RPG_IB2_WebApplication2.Controllers
             bool spelerLevend = Convert.ToBoolean(HttpContext.Session.GetString("spelerLevend"));
             bool cpuLevend = Convert.ToBoolean(HttpContext.Session.GetString("cpuLevend"));
             Speler speler = JsonConvert.DeserializeObject<Speler>(HttpContext.Session.GetString("Speler"));
+            Cpu cpu = JsonConvert.DeserializeObject<Cpu>(HttpContext.Session.GetString("CPU"));
             if (spelerLevend && !cpuLevend)
             {
-                speler.Geld += 100;
-                speler.XP += 50;
+                speler.Geld += cpu.Geld;
+                speler.XP += cpu.XP;
                 gevechtrepo.GevechtBeëindigd(speler.XP, speler.Geld, speler.ID);
-                HttpContext.Session.SetString("Beloningen", "GEWONNEN! Je hebt " + 100 + " geld en " + 50 + " XP verdiend!");
+                HttpContext.Session.SetString("Beloningen", "GEWONNEN! Je hebt " + cpu.Geld + " geld en " + cpu.XP + " XP verdiend!");
             }
             else if (!spelerLevend && cpuLevend)
             {
-                speler.Geld += 50;
-                speler.XP += 25;
+                speler.Geld += cpu.Geld / 2;
+                speler.XP += cpu.XP / 2;
                 gevechtrepo.GevechtBeëindigd(speler.XP, speler.Geld, speler.ID);
-                HttpContext.Session.SetString("Beloningen", "Verloren! Je hebt " + 50 + " geld en " + 25 + " XP verdiend!");
+                HttpContext.Session.SetString("Beloningen", "VERLOREN! Je hebt " + (cpu.Geld / 2) + " geld en " + (cpu.XP / 2) + " XP verdiend!");
             }
             HttpContext.Session.SetInt32("StartGame", 0);
+            HttpContext.Session.SetInt32("superAanval", 0);
             HttpContext.Session.SetString("gevechtBeëindigd", Convert.ToString(false));
             return RedirectToAction("Gamewereld", "Game");
         }

@@ -22,19 +22,16 @@
         <p style="font-size:20px">
             Volgende Upgrade
         </p>
-        @foreach (var item in Model.ShopPersonages)
-        {
-            <div class="bg-dark">
-                <div>
-                    <div>@item.Naam</div>
-                </div>
-                <img src="data:image/png;base64, @item.Foto" alt="@item.AlternateText" />
-                <div>
-                    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @item.ID)" class="buttonsRPGZoom" title="Details" />
-                    <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @item.ID)" class="buttonsRPGZoom" title="Upgrade" />
-                </div>
+        <div class="bg-dark">
+            <div>
+                <div>@Model.VolgendeUpgrade.Naam</div>
             </div>
-        }
+            <img src="data:image/png;base64, @Model.VolgendeUpgrade.Foto" alt="@Model.VolgendeUpgrade.AlternateText" />
+            <div>
+                <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Details" />
+                <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Upgrade" />
+            </div>
+        </div>
         <br />
         <img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
     </div>

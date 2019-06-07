@@ -47,10 +47,10 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
             Personage personage = new Personage();
             return personage;
         }
-        public List<Personage> GetPersonagesBySpelerId(int spelerId)
+        public Personage GetNextUpgradePersonageBySpelerId(int spelerId)
         {
-            List<Personage> personages = new List<Personage>();
-            return personages;
+            Personage personage = new Personage();
+            return personage;
         }
         public List<Personage> GetStartPersonages()
         {

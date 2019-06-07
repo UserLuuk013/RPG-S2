@@ -15,5 +15,7 @@ namespace RPG_IB2
         public string Foto { get; set; }
         public Item Wapen { get; set; }
         public Item Potion { get; set; }
+        public int XP { get; set; }
+        public int Geld { get; set; }
     }
 }

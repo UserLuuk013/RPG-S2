@@ -30,8 +30,8 @@ namespace RPG_IB2_WebApplication2.Controllers
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             Personage spelerpersonage = personagerepo.GetPersonageBySpelerId(speler.ID);
-            List<Personage> shoppersonages = personagerepo.GetPersonagesBySpelerId(speler.ID);
-            PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, shoppersonages, speler);
+            Personage volgendeupgrade = personagerepo.GetNextPersonageUpgradeBySpelerId(speler.ID);
+            PersonageShop personageshop = equipDomein.VulPersonageShop(spelerpersonage, volgendeupgrade, speler);
             PersonageShopDetailViewModel vm = personageshopcvt.ViewModelFromPersonageShop(personageshop);
 
             if (HttpContext.Session.GetInt32("XP") == 1)

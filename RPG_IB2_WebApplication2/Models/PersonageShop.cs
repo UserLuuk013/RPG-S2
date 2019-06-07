@@ -9,6 +9,6 @@ namespace RPG_IB2_WebApplication2.Models
     {
         public int XP { get; set; }
         public Personage SpelerPersonage { get; set; }
-        public List<Personage> ShopPersonages { get; set; }
+        public Personage VolgendeUpgrade { get; set; }
     }
 }

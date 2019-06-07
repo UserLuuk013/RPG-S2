@@ -62,15 +62,19 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult Gamewereld()
         {
+            if (HttpContext.Session.GetString("Beloningen") == null)
+            {
+                HttpContext.Session.SetString("Beloningen", "0");
+            }
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             List<Cpu> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);
-            if (HttpContext.Session.GetString("Beloningen") != null)
+            if (HttpContext.Session.GetString("Beloningen") != "0")
             {
                 ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
-                HttpContext.Session.SetString("Beloningen", "");
+                HttpContext.Session.SetString("Beloningen", "0");
             } 
             return View(vm);
         }

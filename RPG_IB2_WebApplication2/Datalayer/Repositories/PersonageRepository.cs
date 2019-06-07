@@ -30,9 +30,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetPersonageBySpelerId(spelerId);
         }
-        public List<Personage> GetPersonagesBySpelerId(int spelerId)
+        public Personage GetNextPersonageUpgradeBySpelerId(int spelerId)
         {
-            return context.GetPersonagesBySpelerId(spelerId);
+            return context.GetNextUpgradePersonageBySpelerId(spelerId);
         }
         public List<Personage> GetStartPersonages()
         {

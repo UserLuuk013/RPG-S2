@@ -66,12 +66,12 @@ namespace RPG_IB2_WebApplication2.Models
             shop.Geld = speler.Geld;
             return shop;
         }
-        public PersonageShop VulPersonageShop(Personage spelerpersonage, List<Personage> shoppersonages, Speler speler)
+        public PersonageShop VulPersonageShop(Personage spelerpersonage, Personage volgendeupgrade, Speler speler)
         {
             PersonageShop personageshop = new PersonageShop();
             personageshop.XP = speler.XP;
             personageshop.SpelerPersonage = spelerpersonage;
-            personageshop.ShopPersonages = shoppersonages;
+            personageshop.VolgendeUpgrade = volgendeupgrade;
             return personageshop;
         }
     }

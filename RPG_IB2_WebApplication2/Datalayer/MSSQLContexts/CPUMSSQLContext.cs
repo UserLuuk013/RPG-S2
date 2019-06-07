@@ -27,6 +27,8 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     cpu.Naam = Convert.ToString(myReader["Naam"]);
                     cpu.HP = Convert.ToInt32(myReader["HP"]);
                     cpu.Foto = Convert.ToString(myReader["Foto"]);
+                    cpu.XP = Convert.ToInt32(myReader["XP"]);
+                    cpu.Geld = Convert.ToInt32(myReader["Geld"]);
                 }
             }
             return cpu;
@@ -46,6 +48,8 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
                     cpu.Naam = Convert.ToString(myReader["Naam"]);
                     cpu.HP = Convert.ToInt32(myReader["HP"]);
                     cpu.Foto = Convert.ToString(myReader["Foto"]);
+                    cpu.XP = Convert.ToInt32(myReader["XP"]);
+                    cpu.Geld = Convert.ToInt32(myReader["Geld"]);
 
                     cpus.Add(cpu);
                 }

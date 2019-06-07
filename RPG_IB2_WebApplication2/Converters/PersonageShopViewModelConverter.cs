@@ -14,7 +14,7 @@ namespace RPG_IB2_WebApplication2.Converters
             {
                 XP = vm.XP,
                 SpelerPersonage = vm.SpelerPersonage,
-                ShopPersonages = vm.ShopPersonages
+                VolgendeUpgrade = vm.VolgendeUpgrade
             };
             return p;
         }
@@ -24,7 +24,7 @@ namespace RPG_IB2_WebApplication2.Converters
             {
                 XP = p.XP,
                 SpelerPersonage = p.SpelerPersonage,
-                ShopPersonages = p.ShopPersonages
+                VolgendeUpgrade = p.VolgendeUpgrade
             };
             return vm;
         }

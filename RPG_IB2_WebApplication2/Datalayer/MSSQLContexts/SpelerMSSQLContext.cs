@@ -17,7 +17,7 @@ namespace RPG_IB2.Datalayer.MSSQLContexts
         }
         public Speler GetSpelerByID(int spelerId)
         {
-            SqlCommand myCommand = SetCommandProcedure("GetSpeler");
+            SqlCommand myCommand = SetCommandProcedure("GetSpelerById");
             myCommand.Parameters.AddWithValue("@IDAccount", spelerId);
             Speler speler = new Speler();
             using (SqlDataReader myReader = ExecuteReader(myCommand))
