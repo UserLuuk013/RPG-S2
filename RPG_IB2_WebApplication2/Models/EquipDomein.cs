@@ -56,6 +56,12 @@ namespace RPG_IB2_WebApplication2.Models
             gevecht.Speler = VulSpeler(speler);
             gevecht.CPU = VulCPU(cpu);
             gevecht.SpelerAanZet = true;
+            gevecht.PotionSpelerGebruikt = false;
+            gevecht.PotionCPUGebruikt = false;
+            gevecht.SpelerLevend = true;
+            gevecht.CPULevend = true;
+            gevecht.GameGestart = true;
+
             return gevecht;
         }
         public Shop VulShop(List<Item> playeritems, List<Item> shopitems, Speler speler)

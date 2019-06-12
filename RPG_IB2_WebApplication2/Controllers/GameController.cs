@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RPG_IB2;
 using RPG_IB2.Datalayer.Interfaces;
 using RPG_IB2.Datalayer.MSSQLContexts;
@@ -32,6 +33,9 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult GameMenu()
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+            Gevecht gevecht = new Gevecht();
+            gevecht.GameGestart = false;
+            HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
             Personage personage = personagerepo.GetPersonageBySpelerId(userId);
             PersonageDetailViewModel vm = personagecvt.ViewModelFromPersonage(personage);
             return View(vm);
@@ -65,19 +69,24 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult Gamewereld()
         {
-            if (HttpContext.Session.GetString("Beloningen") == null)
+            if (HttpContext.Session.GetString("Gevecht") == null)
             {
-                HttpContext.Session.SetString("Beloningen", "0");
+                Gevecht gevecht = new Gevecht();
+                gevecht.Beloningen = "";
+                HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
             }
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             List<Cpu> cpus = cpurepo.GetAllCPUs();
             Game game = equipDomein.VulGame(speler, cpus);
             GameDetailViewModel vm = gamecvt.ViewModelFromGame(game);
-            if (HttpContext.Session.GetString("Beloningen") != "0")
+
+            if (JsonConvert.DeserializeObject<Gevecht>(HttpContext.Session.GetString("Gevecht")).Beloningen != "")
             {
-                ViewBag.Beloningen = HttpContext.Session.GetString("Beloningen");
-                HttpContext.Session.SetString("Beloningen", "0");
+                Gevecht gevecht = JsonConvert.DeserializeObject<Gevecht>(HttpContext.Session.GetString("Gevecht"));
+                ViewBag.Beloningen = gevecht.Beloningen;
+                gevecht.Beloningen = "";
+                HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
             } 
             return View(vm);
         }

@@ -2,18 +2,20 @@
     ViewData["Title"] = "Game Menu";
 }
 
-<p class="font-weight-bold">GameMenu</p>
+<p class="titelGamemenu">GameMenu</p>
 <br />
-<br />
-<div class="gamemenuButtons">
-    Nieuw Spel <br /> <img src="~/images/NieuwSpelRPG.png" alt="NieuwSpelRPG" onclick="NieuwSpel()" class="buttonsRPGZoom" title="NieuwSpel" />
-</div>
-@if (Model.ID != 0)
-{
-    <div class="gamemenuButtons">
-        Laad Spel <br /> <img src="~/images/LaadSpelRPG.png" alt="LaadSpelRPG" onclick="LaadSpel()" class="buttonsRPGZoom" title="LaadSpel" />
-    </div>
-}
+<div id="bgGamemenu"></div>
+    <p class="newGameButton">
+        Nieuw Spel <br /> <br /> <img src="~/images/NieuwSpelRPG.png" alt="NieuwSpelRPG" onclick="NieuwSpel()" class="buttonsRPGZoom" title="NieuwSpel" />
+        &nbsp; Laad een nieuw spel in en werk je een weg omhoog door te vechten tegen tegenstanders!
+    </p>
+    @if (Model.ID != 0)
+    {
+        <p class="loadGameButton">
+            Laad Spel <br /> <br /> <img src="~/images/LaadSpelRPG.png" alt="LaadSpelRPG" onclick="LaadSpel()" class="buttonsRPGZoom" title="LaadSpel" />
+            &nbsp; Laad je laatst opgeslagen spel in en ga verder waar je gebleven was!
+        </p>
+    }
 
 <script>
     function NieuwSpel() {
