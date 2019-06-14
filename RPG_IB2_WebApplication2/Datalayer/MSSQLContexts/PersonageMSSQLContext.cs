@@ -101,7 +101,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
             }
             return personages;
         }
-        public bool UpgradePersonage(int personageId, int spelerXP, int userId)
+        public bool UpgradePersonage(int personageId, int spelerXP, int userId, int personageHP)
         {
             try
             {
@@ -109,6 +109,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.MSSQLContexts
                 myCommand.Parameters.AddWithValue("@IDPersonage", personageId);
                 myCommand.Parameters.AddWithValue("@XP", spelerXP);
                 myCommand.Parameters.AddWithValue("@IDAccount", userId);
+                myCommand.Parameters.AddWithValue("@PersonageHP", personageHP);
                 myCommand.ExecuteNonQuery();
                 return true;
             }

@@ -59,13 +59,18 @@ namespace RPG_IB2_WebApplication2.Controllers
         }
         public IActionResult StartGame(int id)
         {
-            if (HttpContext.Session.GetInt32("personageId") == null)
-            {
-                HttpContext.Session.SetInt32("personageId", id);
+            if (id != 0 && id <= 10)
+            {                
+                int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
+                personagerepo.SelecteerPersonage(id, userId);
+                return RedirectToAction("Gamewereld");
             }
-            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
-            personagerepo.SelecteerPersonage((int)HttpContext.Session.GetInt32("personageId"), userId);
-            return RedirectToAction("Gamewereld");
+            else
+            {
+                TempData["Error"] = "Ongeldig personage geselecteerd.";
+                return RedirectToAction("NewGame");
+            }
+            
         }
         public IActionResult Gamewereld()
         {

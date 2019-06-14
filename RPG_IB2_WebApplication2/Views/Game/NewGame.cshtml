@@ -1,32 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Game Page";
 }
-
-<p class="font-weight-bold">Selecteer Personage</p>
-<br />
-<br />
-@foreach (var item in Model.Personages)
+@if (TempData["Error"] != null)
 {
-<div class="bg-dark">
-    <div>
-        <p>Naam: @item.Naam</p>
-        <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" />
+    <p class="alert alert-danger" id="successMessage">@TempData["Error"]</p>
+}
+    <div class="row">
+        <div class="col-md-6">
+            <p class="font-weight-bold" style="font-size: 30px">Selecteer Personage</p>
+            <br />
+            @foreach (var item in Model.Personages)
+            {
+                <div class="bg-dark">
+                    <div>
+                        <p>Naam: @item.Naam</p>
+                        <img src="data:image/png;base64, @item.Foto" alt="@item.Naam" />
+                    </div>
+                    <img src="~/images/VolgendeBeurtRPG.png" alt="StartRPG" onclick="Start(x = @item.ID)" class="buttonsRPGZoom" title="Selecteer en Start" />
+                    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @item.ID)" class="buttonsRPGZoom" title="PersonageDetails" />
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div><a asp-controller="Game" asp-action="UpdatePersonage" asp-route-id="@item.ID">Edit</a></div>
+                        <div><a asp-controller="Game" asp-action="DeletePersonage" asp-route-id="@item.ID">Delete</a></div>
+                    }
+                </div>
+                <br />
+            }
+            <br />
+            <br />
+            @if (User.IsInRole("Admin"))
+            {
+                <div>
+                    <a asp-controller="Personage" asp-action="CreatePersonage">Create new Personage</a>
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            <div id="changespace" />
+        </div>
     </div>
-    <div><a asp-controller="Game" asp-action="StartGame" asp-route-id="@item.ID">Selecteer en Start</a></div>
-    <div><a asp-controller="Personage" asp-action="PersonageDetail" asp-route-id="@item.ID">Personage details</a></div>
-    @if (User.IsInRole("Admin"))
-    {
-        <div><a asp-controller="Game" asp-action="UpdatePersonage" asp-route-id="@item.ID">Edit</a></div>
-        <div><a asp-controller="Game" asp-action="DeletePersonage" asp-route-id="@item.ID">Delete</a></div>
+    <script>
+        function Start(x) {
+            if (x == undefined) {
+                x = 0;
+            }
+            window.location.href = "/Game/StartGame/" + x;
     }
-</div>
-    <br />
-}
-<br />
-<br />
-@if (User.IsInRole("Admin"))
-{
-<div>
-    <a asp-controller="Personage" asp-action="CreatePersonage">Create new Personage</a>
-</div>
-}
+    </script>

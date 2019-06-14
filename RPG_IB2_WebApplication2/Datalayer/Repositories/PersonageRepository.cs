@@ -38,9 +38,9 @@ namespace RPG_IB2_WebApplication2.Datalayer.Repositories
         {
             return context.GetStartPersonages();
         }
-        public bool UpgradePersonage(int personageId, int spelerXP, int userId)
+        public bool UpgradePersonage(int personageId, int spelerXP, int userId, int personageHP)
         {
-            return context.UpgradePersonage(personageId, spelerXP, userId);
+            return context.UpgradePersonage(personageId, spelerXP, userId, personageHP);
         }
     }
 }

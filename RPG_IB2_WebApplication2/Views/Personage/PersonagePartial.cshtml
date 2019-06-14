@@ -10,14 +10,6 @@
         <tbody>
             <tr>
                 <td>
-                    ID
-                </td>
-                <td>
-                    @Model.ID
-                </td>
-            </tr>
-            <tr>
-                <td>
                     Naam
                 </td>
                 <td>
@@ -32,22 +24,25 @@
                     @Model.HP
                 </td>
             </tr>
-            <tr>
-                <td>
-                    Extra Damage
-                </td>
-                <td>
-                    @Model.Damage
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Prijs
-                </td>
-                <td>
-                    @Model.Prijs
-                </td>
-            </tr>
+            @if (Model.ID > 10)
+            {
+                <tr>
+                    <td>
+                        Extra Damage
+                    </td>
+                    <td>
+                        @Model.Damage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Prijs
+                    </td>
+                    <td>
+                        @Model.Prijs
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

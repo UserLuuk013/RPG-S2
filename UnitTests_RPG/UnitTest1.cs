@@ -1,7 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RPG_IB2.Datalayer.Repositories;
-using RPG_IB2.Models;
-using RPG_IB2_WebApplication2.Converters;
 using RPG_IB2_WebApplication2.Datalayer.Repositories;
 using RPG_IB2_WebApplication2.Datalayer.TestContexts;
 using RPG_IB2_WebApplication2.Models;
@@ -14,14 +12,12 @@ namespace UnitTests_RPG
         private ShopRepository shoprepo;
         private PersonageRepository personagerepo;
         private AccountTestContext accountTestContext;
-        private ItemViewModelConverter itemcvt;
         [TestInitialize]
         public void TestInitialize()
         {
             shoprepo = new ShopRepository(new ShopTestContext());
             personagerepo = new PersonageRepository(new PersonageTestContext());
             accountTestContext = new AccountTestContext();
-            itemcvt = new ItemViewModelConverter();
         }
         //TestCases 01 en 02
         //Deze TestMethod test of het gevecht nog steeds bezig is of al voorbij is. Als de HP van Speler
@@ -78,10 +74,10 @@ namespace UnitTests_RPG
         [TestMethod]
         public void UpgradePersonage()
         {
-            bool x = personagerepo.UpgradePersonage(1, 1500, 1);
-            bool y = personagerepo.UpgradePersonage(0, 1500, 1);
-            bool z = personagerepo.UpgradePersonage(1, 500, 1);
-            bool w = personagerepo.UpgradePersonage(1, 1500, 0);
+            bool x = personagerepo.UpgradePersonage(1, 1500, 1, 22);
+            bool y = personagerepo.UpgradePersonage(0, 1500, 1, 22);
+            bool z = personagerepo.UpgradePersonage(1, 500, 1, 22);
+            bool w = personagerepo.UpgradePersonage(1, 1500, 0, 22);
             Assert.AreEqual(true, x);
             Assert.AreEqual(false, y);
             Assert.AreEqual(false, z);

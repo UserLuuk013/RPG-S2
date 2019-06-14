@@ -14,6 +14,6 @@ namespace RPG_IB2_WebApplication2.Datalayer.Interfaces
         Personage GetPersonageBySpelerId(int spelerId);
         Personage GetNextUpgradePersonageBySpelerId(int spelerId);
         List<Personage> GetStartPersonages();
-        bool UpgradePersonage(int personageId, int spelerXP, int userId);
+        bool UpgradePersonage(int personageId, int spelerXP, int userId, int personageHP);
     }
 }

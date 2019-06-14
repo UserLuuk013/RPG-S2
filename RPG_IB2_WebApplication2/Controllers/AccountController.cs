@@ -96,7 +96,7 @@ namespace RPG_IB2_WebApplication2.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     HttpContext.Session.SetInt32("CurrentUserID", _userManager.FindByEmailAsync(model.Email).Result.Id);
-                    return RedirectToAction(returnUrl);
+                    return RedirectToAction("Login");
                 }
                 ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
             }

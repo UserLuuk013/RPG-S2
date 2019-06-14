@@ -46,14 +46,21 @@ namespace RPG_IB2_WebApplication2.Controllers
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             Item item = itemrepo.GetItemById(id);
-            if (speler.Geld < item.Prijs)
+            if (item.ID == item.ID && item.Type == item.Type && speler.Geld == speler.Geld && speler.ID == speler.ID)
             {
-                HttpContext.Session.SetInt32("Geld", 1);
+                if (speler.Geld < item.Prijs)
+                {
+                    HttpContext.Session.SetInt32("Geld", 1);
+                }
+                else
+                {
+                    speler.Geld -= item.Prijs;
+                    shoprepo.KoopItem(item.ID, item.Type, speler.Geld, speler.ID);
+                }
             }
             else
             {
-                speler.Geld -= item.Prijs;
-                shoprepo.KoopItem(item.ID, item.Type, speler.Geld, speler.ID);
+                TempData["Error"] = "Ongeldige waarden aankoop item.";
             }
             return RedirectToAction("Shop");
         }
@@ -62,8 +69,15 @@ namespace RPG_IB2_WebApplication2.Controllers
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             Item item = itemrepo.GetItemById(id);
-            speler.Geld += item.Prijs;
-            shoprepo.VerkoopItem(item.ID, item.Type, speler.Geld, speler.ID);
+            if (item.ID == item.ID && item.Type == item.Type && speler.Geld == speler.Geld && speler.ID == speler.ID)
+            {
+                speler.Geld += item.Prijs;
+                shoprepo.VerkoopItem(item.ID, item.Type, speler.Geld, speler.ID);
+            }
+            else
+            {
+                TempData["Error"] = "Ongeldige waardan verkoop item.";
+            }
             return RedirectToAction("Shop");
         }
     }

@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Shop";
 }
+@if (TempData["Error"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["Error"]</p>
+}
 <div class="row">
     <div class="col-md-6">
         <p style="font-size:30px">
@@ -16,24 +20,25 @@
         @foreach (var item in Model.PlayerItems)
         {
             <div>
-                <div>@item.Naam
+                <div>
+                    @item.Naam
                 @if (item.ID != 7)
                 {
-                    <img src="~/images/AanvalRPG.png" width="30" height="30"/>
+                    <img src="~/images/AanvalRPG.png" width="30" height="30" />
                 }
                 else
                 {
-                    <img src="~/images/VerdedigingRPG.png" widht="30" height="25"/>
+                    <img src="~/images/VerdedigingRPG.png" widht="30" height="25" />
                 }
-                </div>
             </div>
-            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
-            @if (item.ID != 1 && item.ID != 7)
-            {
-                <img src="~/images/ShopRPG.png" alt="VerkoopItemRPG" onclick="VerkoopItem(z = @item.ID)" class="buttonsRPGZoom" title="VerkoopItem" />
-            }
-            <br />
+        </div>
+        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
+        @if (item.ID != 1 && item.ID != 7)
+        {
+            <img src="~/images/ShopRPG.png" alt="VerkoopItemRPG" onclick="VerkoopItem(z = @item.ID)" class="buttonsRPGZoom" title="VerkoopItem" />
         }
+        <br />
+    }
         <br />
         <br />
         <p style="font-size:20px">
@@ -42,21 +47,22 @@
         @foreach (var item in Model.ShopItems)
         {
             <div>
-                <div>@item.Naam
+                <div>
+                    @item.Naam
                 @if (item.ID != 7)
                 {
-                    <img src="~/images/AanvalRPG.png" width="30" height="30"/>
+                    <img src="~/images/AanvalRPG.png" width="30" height="30" />
                 }
                 else
                 {
-                    <img src="~/images/VerdedigingRPG.png" widht="30" height="25"/>
+                    <img src="~/images/VerdedigingRPG.png" widht="30" height="25" />
                 }
-                </div>
             </div>
-            <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
-            <img src="~/images/ShopRPG.png" alt="KoopItemRPG" onclick="KoopItem(y = @item.ID)" class="buttonsRPGZoom" title="KoopItem" />
-            <br />
-        }
+        </div>
+        <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowItemDetails(itemID = @item.ID)" class="buttonsRPGZoom" title="Details" />
+        <img src="~/images/ShopRPG.png" alt="KoopItemRPG" onclick="KoopItem(y = @item.ID)" class="buttonsRPGZoom" title="KoopItem" />
+        <br />
+    }
         <br />
         <img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
     </div>

@@ -57,7 +57,7 @@ namespace RPG_IB2_WebApplication2.Datalayer.TestContexts
             List<Personage> personages = new List<Personage>();
             return personages;
         }
-        public bool UpgradePersonage(int personageId, int spelerXP, int userId)
+        public bool UpgradePersonage(int personageId, int spelerXP, int userId, int personageHP)
         {
             Personage personage = new Personage();
             personage.Prijs = 1000;

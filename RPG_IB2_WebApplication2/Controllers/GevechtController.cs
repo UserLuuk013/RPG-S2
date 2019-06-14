@@ -197,24 +197,36 @@ namespace RPG_IB2_WebApplication2.Controllers
         public IActionResult Beloningen()
         {
             Gevecht gevecht = JsonConvert.DeserializeObject<Gevecht>(HttpContext.Session.GetString("Gevecht"));
-            if (gevecht.SpelerLevend && !gevecht.CPULevend)
+            if (gevecht.CPU.Geld == gevecht.CPU.Geld && gevecht.CPU.XP == gevecht.CPU.XP)
             {
-                gevecht.Speler.Geld += gevecht.CPU.Geld;
-                gevecht.Speler.XP += gevecht.CPU.XP;
-                gevechtrepo.GevechtBeëindigd(gevecht.Speler.XP, gevecht.Speler.Geld, gevecht.Speler.ID);
-                gevecht.Beloningen = "GEWONNNEN! Je hebt " + gevecht.CPU.Geld + " geld en " + gevecht.CPU.XP + " XP verdiend!";
+                if (gevecht.SpelerLevend && !gevecht.CPULevend)
+                {
+
+                    gevecht.Speler.Geld += gevecht.CPU.Geld;
+                    gevecht.Speler.XP += gevecht.CPU.XP;
+                    gevechtrepo.GevechtBeëindigd(gevecht.Speler.XP, gevecht.Speler.Geld, gevecht.Speler.ID);
+                    gevecht.Beloningen = "GEWONNNEN! Je hebt " + gevecht.CPU.Geld + " geld en " + gevecht.CPU.XP + " XP verdiend!";
+                }
+                else if (!gevecht.SpelerLevend && gevecht.CPULevend)
+                {
+                    gevecht.Speler.Geld += gevecht.CPU.Geld / 2;
+                    gevecht.Speler.XP += gevecht.CPU.XP / 2;
+                    gevechtrepo.GevechtBeëindigd(gevecht.Speler.XP, gevecht.Speler.Geld, gevecht.Speler.ID);
+                    gevecht.Beloningen = "VERLOREN! Je hebt " + (gevecht.CPU.Geld / 2) + " geld en " + (gevecht.CPU.XP / 2) + " XP verdiend!";
+                }
+                gevecht.GameGestart = false;
+                gevecht.SuperAanval = Gevecht.Superaanval.Geen;
+                HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
+                return RedirectToAction("Gamewereld", "Game");
             }
-            else if (!gevecht.SpelerLevend && gevecht.CPULevend)
+            else
             {
-                gevecht.Speler.Geld += gevecht.CPU.Geld / 2;
-                gevecht.Speler.XP += gevecht.CPU.XP / 2;
-                gevechtrepo.GevechtBeëindigd(gevecht.Speler.XP, gevecht.Speler.Geld, gevecht.Speler.ID);
-                gevecht.Beloningen = "VERLOREN! Je hebt " + (gevecht.CPU.Geld / 2) + " geld en " + (gevecht.CPU.XP / 2) + "XP verdiend!";
+                TempData["Error"] = "Ongeldige beloningen!";
+                gevecht.GameGestart = false;
+                gevecht.SuperAanval = Gevecht.Superaanval.Geen;
+                HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
+                return RedirectToAction("Gevechtwereld");
             }
-            gevecht.GameGestart = false;
-            gevecht.SuperAanval = Gevecht.Superaanval.Geen;
-            HttpContext.Session.SetString("Gevecht", JsonConvert.SerializeObject(gevecht));
-            return RedirectToAction("Gamewereld", "Game");
         }
 
         //In deze methode vindt de gevechtkeuze van de CPU plaats. Dit gebeurt op basis van het HP van de CPU en de boolean PotionCPUGebruikt.

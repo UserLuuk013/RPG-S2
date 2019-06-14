@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Personage";
 }
+@if (TempData["Error"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["Error"]</p>
+}
 <div class="row">
     <div class="col-md-6">
         <p style="font-size:30px">
@@ -8,6 +12,9 @@
         </p>
         <p style="font-size:20px">
             @Model.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP" />
+        </p>
+        <p style="font-size:20px">
+            Huidige Personage
         </p>
         <div class="bg-dark">
             <div>
@@ -19,20 +26,23 @@
             </div>
         </div>
         <br />
-        <p style="font-size:20px">
-            Volgende Upgrade
-        </p>
-        <div class="bg-dark">
-            <div>
-                <div>@Model.VolgendeUpgrade.Naam</div>
+        @if (Model.SpelerPersonage.ID < 21)
+        {
+            <p style="font-size:20px">
+                Volgende Upgrade
+            </p>
+            <div class="bg-dark">
+                <div>
+                    <div>@Model.VolgendeUpgrade.Naam</div>
+                </div>
+                <img src="data:image/png;base64, @Model.VolgendeUpgrade.Foto" alt="@Model.VolgendeUpgrade.AlternateText" />
+                <div>
+                    <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Details" />
+                    <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Upgrade" />
+                </div>
             </div>
-            <img src="data:image/png;base64, @Model.VolgendeUpgrade.Foto" alt="@Model.VolgendeUpgrade.AlternateText" />
-            <div>
-                <img src="~/images/ItemDetails.png" alt="DetailsRPG" onclick="ShowPersonageDetails(personageID = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Details" />
-                <img src="~/images/UpgradeRPG.png" alt="UpgradeRPG" onclick="Upgrade(y = @Model.VolgendeUpgrade.ID)" class="buttonsRPGZoom" title="Upgrade" />
-            </div>
-        </div>
-        <br />
+            <br />
+        }
         <img src="~/images/TerugRPG.png" alt="TerugRPG" onclick="Terug()" class="buttonsRPGZoom" title="Terug" />
     </div>
     <div class="col-md-6">

@@ -3,14 +3,13 @@
 }
 <p class="font-weight-bold" style="font-size:50px">Gamewereld</p>
 <p class="spelerGegevens">
-    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" title="@Model.Speler.Personage.Naam"/>
+    <img src="data:image/png;base64, @Model.Speler.Personage.Foto" alt="@Model.Speler.Personage.Naam" title="@Model.Speler.Personage.Naam" />
     @Model.Speler.Naam
-    @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP"/>
+    @Model.Speler.XP<img src="~/images/XPRPG.png" alt="XPRPG" title="XP" />
     @Model.Speler.Geld<img src="~/images/GeldRPG.png" alt="GeldRPG" title="Geld" />
-    <img src="~/images/InstellingenRPG.png" alt="InstellingenRPG" class="buttonsRPGZoom" title="Instellingen"/>
-    <img src="~/images/SpelbeschrijvingRPG.png" alt="SpelbeschrijvingRPG" class="buttonsRPGZoom" title="Spelbeschrijving"/>
-    <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" class="buttonsRPGZoom" title="Shop"/>
-    <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()" class="buttonsRPGZoom" title="Personage"/>
+    <img src="~/images/SpelbeschrijvingRPG.png" alt="SpelbeschrijvingRPG" id="myBtn" onclick="OpenModal()" class="buttonsRPGZoom" title="Spelbeschrijving" />
+    <img src="~/images/ShopRPG.png" alt="ShopRPG" onclick="Shop()" class="buttonsRPGZoom" title="Shop" />
+    <img src="~/images/PersonageRPG.png" alt="PersonageRPG" onclick="Personage()" class="buttonsRPGZoom" title="Personage" />
 </p>
 
 <div id="bgGamewereld">
@@ -30,26 +29,156 @@
         <img src="data:image/png;base64, @Model.CPUs[4].Foto" alt="@Model.CPUs[4].Naam" onclick="Gevecht(x = @Model.CPUs[4].ID)" title="@Model.CPUs[4].Naam" class="gameCPUs" />
     </p>
 </div>
-    @if (ViewBag.Beloningen != null)
-    {
-        <script type="text/javascript">
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div style="color:black">
+            <h1>Kingdom Warriors Spelbeschrijving</h1>
+            <p>
+                Het doel van het spel is als Kingdom Warrior alle tegenstanders te verslaan
+                en zo sterk mogelijk te worden door items te kopen en jouw personage te
+                upgraden naar het hoogste niveau!
+            </p>
+            <h2 style="color:black">Gamewereld</h2>
+            <p>
+                <img src="~/images/Spelbeschrijving1.png" />
+                <br /> Linksboven in de Gamewereld vind je de XP en het geld van de speler.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving2.png" />
+                <br /> Klik op een van de tegenstanders (op de Map) om een gevecht te beginnen.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving3.png" />
+                <br />Rechtsboven in de Gamewereld vind je de volgende icoontjes (v.l.n.r.):
+                Spelbeschrijving, Shop en Personage. Je kunt voor informatie over Kingdom Warriors
+                terecht bij de Spelbeschrijving. Voor de aankoop en verkoop van items kun je
+                terecht bij de Shop en voor de upgrade van de Personage kun je terecht bij
+                Personage.
+            </p>
+            <h2 style="color:black">Shop</h2>
+            <p>
+                <img src="~/images/Spelbeschrijving4.png" />
+                <br />In de Shop vind je bovenaan het venster het geld van de huidige speler.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving5.png" />
+                <br />Vervolgens kom je uit bij de player items. Standaard zijn dit een wapen (knife) en een
+                potion (healpot). Als het wapen niet meer de Knife is kun je deze met het groene icoontje
+                verkopen tegen geld. Het rode icoontje geeft de details van het geselecteerde item.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving6.png" />
+                <br />Na de player items kom je uit bij de shop items. Hier heb je de keuze uit meerdere wapens.
+                Deze wapens hebben elk hun eigen prijs en damage (deze damage wordt meer na de upgrade van Personage.
+                Zie Personage voor meer informatie). Dit keer kun je met het groene icoontje een wapen kopen. Het rode
+                icoontje geeft nog steeds de details van het geselecteerde item.
+            </p>
+            <h2 style="color:black">Personage</h2>
+            <p>
+                <img src="~/images/Spelbeschrijving8.png" />
+                <br />In het Personage gedeelte vind je bovenaan het venster de XP van de huidige speler.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving9.png" />
+                <br />Ook vind je de Huidige Personage vand de speler. Je hebt hier weer het rode icoontje die de speler
+                van extra informatie kan voorzien over de personage.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving10.png" />
+                <br />Daarna vind je de Volgende Upgrade van de Personage van de speler. Als je op het sterretje klikt kan je
+                de personage upgraden naar het volgende niveau. Zodra de speler dit doet verhoogt de speler hiermee niet alleen
+                de HP van de speler zelf, maar ook de damage van de wapens. Het rode icoontje geeft extra informatie over de
+                volgende upgrade van de personage.
+            </p>
+            <h2 style="color:black">Gevecht</h2>
+            <p>
+                <img src="~/images/Spelbeschrijving11.png" />
+                <br />Als je een gevecht begint zie je aan de linkerkant van het scherm de speler staan met de huidige HP. Deze
+                kan geüpdate worden na een van de 3 gevechtacties.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving12.png" />
+                <br />Aan de rechterkant van het scherm vind je de tegenstander met de huidige HP. Ook deze kan geüpdate worden na
+                een van de 3 gevechtacties.
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving13.png" />
+                <br /> Onderaan het scherm vind je de 3 gevechtacties (deze zijn enkel zichtbaar als de Speler aan zet is).
+                <br /> Aanval (links): De speler valt de CPU (normaal) aan met zijn huidige wapen.
+                <br /> Superaanval (midden): De speler heeft een 1 op 4 kans op met zijn huidige wapen 2x zoveel schade aan te richten
+                als normaal.
+                <br /> Verdediging (rechts): De speler krijgt 10 HP erbij na gebruik. Let op: De Healpot is slechts een keer beschikbaar
+                per gevecht!
+            </p>
+            <p>
+                <img src="~/images/Spelbeschrijving14.png" />
+                <br /> Als de Speler zijn beurt heeft gehad verdwijnen de bovenstaande drie gevechtacties en komt het groene icoontje in
+                beeld. Dit betekent dat de CPU aan de beurt is. Als de Speler op dit icoontje klikt voert de CPU zijn beurt uit en gaat de
+                beurt weer over naar de Speler.
+            </p>
+            <h2 style="color:black">Algemeen</h2>
+            <p>
+                <img src="~/images/Spelbeschrijving7.png" />
+                <br /> Onderaan het scherm van onder andere de Shop en Personage vind je deze knop. Deze leidt de Speler terug naar de vorige
+                pagina.
+            </p>
+        </div>
+    </div>
+
+</div>
+@if (ViewBag.Beloningen != null)
+{
+    <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Beloningen");
         };
-        </script>
+    </script>
+}
+
+<script>
+    function Gevecht(x) {
+        if (x == undefined) {
+            x = 0;
+        }
+        window.location.href = "/Gevecht/Gevechtwereld/" + x;
+    }
+    function Personage() {
+        window.location.href = "/Personage/Personage"
+    }
+    function Shop() {
+        window.location.href = "/Shop/Shop"
     }
 
-    <script>
-        function Gevecht(x) {
-            if (x == undefined) {
-                x = 0;
+    function OpenModal() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-            window.location.href = "/Gevecht/Gevechtwereld/" + x;
         }
-        function Personage() {
-            window.location.href = "/Personage/Personage"
-        }
-        function Shop() {
-            window.location.href = "/Shop/Shop"
-        }
-    </script>
+    }
+</script>

@@ -46,16 +46,24 @@ namespace RPG_IB2_WebApplication2.Controllers
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("CurrentUserID"));
             Speler speler = spelerrepo.GetSpelerByID(userId);
             Personage personage = personagerepo.GetPersonageById(id);
-            if (speler.XP < personage.Prijs)
+            if (personage.ID == personage.ID && speler.XP == speler.XP && personage.Prijs == personage.Prijs && speler.ID == speler.ID)
             {
-                HttpContext.Session.SetInt32("XP", 1);
+                if (speler.XP < personage.Prijs)
+                {
+                    HttpContext.Session.SetInt32("XP", 1);
+                }
+                else
+                {
+                    speler.XP -= personage.Prijs;
+                    personagerepo.UpgradePersonage(personage.ID, speler.XP, speler.ID, personage.HP);
+                }
             }
             else
             {
-                speler.XP -= personage.Prijs;
-                personagerepo.UpgradePersonage(personage.ID, speler.XP, userId);
+                TempData["Error"] = "Ongeldige waarden upgrade Personage";
             }
             return RedirectToAction("Personage");
+
         }
         public IActionResult PersonageDetail(int id)
         {
