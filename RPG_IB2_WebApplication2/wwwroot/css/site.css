@@ -43,33 +43,33 @@ body {
 }
 
 .gameTegenstander1 {
-    position: absolute;
-    top: 920px;
-    left: 680px;
+    position: relative;
+    top: 650px;
+    left: 570px;
 }
 
 .gameTegenstander2 {
-    top: 650px;
-    left: 920px;
-    position: absolute;
+    top: 270px;
+    left: 820px;
+    position: relative;
 }
 
 .gameTegenstander3 {
-    top: 360px;
-    left: 855px;
-    position: absolute;
+    top: -100px;
+    left: 790px;
+    position: relative;
 }
 
 .gameTegenstander4 {
-    top: 365px;
-    left: 490px;
-    position: absolute;
+    top: -280px;
+    left: 550px;
+    position: relative;
 }
 
 .gameTegenstander5 {
-    top: 440px;
-    left: 135px;
-    position: absolute;
+    top: -250px;
+    left: 20px;
+    position: relative;
 }
 
 #bgGamewereld {
